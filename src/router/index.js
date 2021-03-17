@@ -87,6 +87,15 @@ const routes = [
         component: () => import('../views/ADL.vue')
     },
     {
+        path: '/form/iadl',
+        name: 'IADL',
+        meta: {
+            title: 'IADL',
+            requiresAuth: true,
+        },
+        component: () => import('../views/IADL.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
