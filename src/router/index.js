@@ -51,6 +51,15 @@ const routes = [
         component: () => import('../views/Charlson.vue')
     },
     {
+        path: '/form/minicog',
+        name: 'MiniCog',
+        meta: {
+            title: 'Mini Cog',
+            requiresAuth: true,
+        },
+        component: () => import('../views/MiniCog.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
