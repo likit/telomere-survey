@@ -75,7 +75,7 @@
     </b-steps>
     <div class="buttons is-centered">
       <button class="button is-light" @click="$router.back()">Back</button>
-      <router-link :to="{ name: 'MNA' }" class="button is-success">Next</router-link>
+      <router-link :to="{ name: '9Q' }" class="button is-success">Next</router-link>
     </div>
   </div>
 </section>
