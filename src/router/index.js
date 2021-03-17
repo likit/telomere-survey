@@ -33,6 +33,15 @@ const routes = [
         component: () => import('../views/FormMain.vue')
     },
     {
+        path: '/form/personal',
+        name: 'Personal',
+        meta: {
+            title: 'Personal Data Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Personal.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')

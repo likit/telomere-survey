@@ -6,8 +6,8 @@
       <b-datepicker icon="calendar-today" :locale="undefined" :inline="true"></b-datepicker>
     </b-field>
     <div class="buttons is-centered">
-      <b-button type="is-warning" @click="nextPage">Cancel</b-button>
-      <b-button type="is-primary">Start</b-button>
+      <b-button type="is-warning">Cancel</b-button>
+      <b-button type="is-primary" @click="nextPage">Start</b-button>
     </div>
   </div>
 </section>
