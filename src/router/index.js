@@ -69,6 +69,15 @@ const routes = [
         component: () => import('../views/Clock.vue')
     },
     {
+        path: '/form/mna',
+        name: 'MNA',
+        meta: {
+            title: 'MNA',
+            requiresAuth: true,
+        },
+        component: () => import('../views/MNA.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
