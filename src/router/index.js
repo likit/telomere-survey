@@ -60,6 +60,15 @@ const routes = [
         component: () => import('../views/MiniCog.vue')
     },
     {
+        path: '/form/clock',
+        name: 'Clock',
+        meta: {
+            title: 'Clock Drawing',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Clock.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')

@@ -28,6 +28,10 @@
         </b-field>
       </b-step-item>
     </b-steps>
+    <div class="buttons is-centered">
+      <button class="button is-light" @click="$router.back()">Back</button>
+      <router-link :to="{ name: 'Clock' }" class="button is-success">Next</router-link>
+    </div>
   </div>
 </section>
 </template>
