@@ -24,6 +24,15 @@ const routes = [
         component: () => import('../views/Profile.vue')
     },
     {
+        path: '/form',
+        name: 'FormMain',
+        meta: {
+            title: 'Form Main Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/FormMain.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
