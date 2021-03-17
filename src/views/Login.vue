@@ -15,7 +15,7 @@
             </b-field>
             <div class="field">
               <div class="buttons is-centered">
-                <button class="button is-link is-medium" @click="login">Go</button>
+                <button class="button is-link is-medium" :disabled="isFormEmpty" @click="login">Submit</button>
                 <button class="button is-danger is-medium">Cancel</button>
               </div>
             </div>
@@ -36,6 +36,11 @@ export default {
     return {
       password: '',
       email: ''
+    }
+  },
+  computed: {
+    isFormEmpty: function() {
+      return this.password === '' || this.email === '';
     }
   },
   methods: {
