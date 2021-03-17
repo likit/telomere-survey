@@ -16,6 +16,9 @@
             </span>
       </b-upload>
     </b-field>
+    <b-field label="รวมคะแนน">
+      <b-numberinput v-model="score"></b-numberinput>
+    </b-field>
     <br>
     <div class="buttons is-centered">
       <button class="button is-light" @click="$router.back()">Back</button>
@@ -30,7 +33,8 @@ export default {
   name: "Clock",
   data() {
     return {
-      file: null
+      file: null,
+      score: 0
     }
   }
 }
