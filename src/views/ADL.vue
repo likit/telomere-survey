@@ -6,7 +6,7 @@
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="5" label="กิจวัตรประจำวัน (ADL)" :clickable="true">
+      <b-step-item step="6" label="กิจวัตรประจำวัน (ADL)" :clickable="true">
         <b-field label="Feeding (รับประทานอาหารเมื่อเตรียมสำรับไว้ให้เรียบร้อย)">
           <b-radio native-value="0" v-model="one">ไม่สามารถตักอาหารเข้าปากได้ ต้องมีคนป้อนให้</b-radio>
         </b-field>

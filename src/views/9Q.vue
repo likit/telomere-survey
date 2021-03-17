@@ -6,7 +6,7 @@
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="7" label="แบบประเมินภาวะเศร้า (9Q)" :clickable="true">
+      <b-step-item step="8" label="แบบประเมินภาวะเศร้า (9Q)" :clickable="true">
         <b-field label="เบื่อไม่สนใจไม่อยากทำอะไร">
           <b-radio native-value="0" v-model="one">ไม่มีเลย</b-radio>
           <b-radio native-value="1" v-model="one">เป็นบางวัน 1-7 วัน</b-radio>
@@ -66,7 +66,7 @@
     </b-steps>
     <div class="buttons is-centered">
       <button class="button is-light" @click="$router.back()">Back</button>
-      <router-link :to="{ name: 'MNA' }" class="button is-success">Next</router-link>
+      <router-link :to="{ name: 'Kihon' }" class="button is-success">Next</router-link>
     </div>
   </div>
 </section>

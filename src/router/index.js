@@ -105,6 +105,15 @@ const routes = [
         component: () => import('../views/9Q.vue')
     },
     {
+        path: '/form/kihon',
+        name: 'Kihon',
+        meta: {
+            title: 'Kihon',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Kihon.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')

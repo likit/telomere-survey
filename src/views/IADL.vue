@@ -6,7 +6,7 @@
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="6" label="กิจวัตรประจำวันอันซับซ้อน (IADL)" :clickable="true">
+      <b-step-item step="7" label="กิจวัตรประจำวันอันซับซ้อน (IADL)" :clickable="true">
         <b-field label="ในกรณีที่ท่านมีโทรศัพท์ ท่านสามารถใช้โทรศัพท์ได้เองหรือไม่">
           <b-radio native-value="0" v-model="one">ไม่สามารถใช้โทรศัพท์ได้เลย</b-radio>
         </b-field>
