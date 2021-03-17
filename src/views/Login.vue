@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { auth } from "../firebase";
+
 export default {
   name: "Login",
   data() {
@@ -38,7 +40,31 @@ export default {
   },
   methods: {
     login: function() {
+      let self = this
       console.log('trying to log in..')
+      auth.signInWithEmailAndPassword(self.email, self.password).then((data)=>{
+        console.log(data)
+        self.$buefy.dialog.alert({
+          title: 'Login Status',
+          message: 'You have logged in successfully.',
+          type: 'is-success',
+          hasIcon: true,
+          icon: 'check_circle',
+          ariaRole: 'alertdialog',
+          ariaModal: true,
+          onConfirm: () => self.$router.push({name: 'MainPage'})
+        })
+      }).catch(() => {
+        self.$buefy.dialog.alert({
+          title: 'Login Status',
+          message: 'Log in failed. Please check your user name and password or the internet connection.',
+          type: 'is-danger',
+          icon: 'highlight_off',
+          hasIcon: true,
+          ariaRole: 'alertdialog',
+          ariaModal: true,
+        })
+      })
     }
   }
 }

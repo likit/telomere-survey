@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        name: 'main',
+        name: 'MainPage',
         meta: {
             title: 'Main Page',
             requiresAuth: true,
