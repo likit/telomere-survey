@@ -42,6 +42,15 @@ const routes = [
         component: () => import('../views/Personal.vue')
     },
     {
+        path: '/form/charlson',
+        name: 'Charlson',
+        meta: {
+            title: 'Charlson Comorbidity Index',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Charlson.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
