@@ -78,6 +78,15 @@ const routes = [
         component: () => import('../views/MNA.vue')
     },
     {
+        path: '/form/adl',
+        name: 'ADL',
+        meta: {
+            title: 'ADL',
+            requiresAuth: true,
+        },
+        component: () => import('../views/ADL.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
