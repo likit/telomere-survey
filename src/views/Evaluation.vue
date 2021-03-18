@@ -22,6 +22,7 @@
           <b-radio v-model="hand" native-value="ถนัดแขนขวา">ถนัดแขนขวา</b-radio>
         </b-field>
         <div class="notification">
+          <b-icon pack="fas" icon="thumbs-up" v-if="hand=='ถนัดแขนซ้าย'" size="is-large" type="is-success"></b-icon>
           <b-field label="แขนซ้าย">
             <b-input type="number" placeholder="ครั้งที่ 1 (กก.)"></b-input>
           </b-field>
@@ -33,6 +34,7 @@
           </b-field>
         </div>
         <div class="notification">
+          <b-icon pack="fas" icon="thumbs-up" v-if="hand=='ถนัดแขนขวา'" type="is-success" size="is-large"></b-icon>
           <b-field label="แขนขวา">
             <b-input type="number" placeholder="ครั้งที่ 1 (กก.)"></b-input>
           </b-field>
@@ -46,6 +48,7 @@
         <b-field label="Quadriceps strength">
         </b-field>
         <div class="notification">
+          <b-icon pack="fas" icon="thumbs-up" v-if="hand=='ถนัดแขนซ้าย'" size="is-large" type="is-success"></b-icon>
           <b-field label="แขนซ้าย">
             <b-input type="number" placeholder="ครั้งที่ 1 (กก.)"></b-input>
           </b-field>
@@ -57,6 +60,7 @@
           </b-field>
         </div>
         <div class="notification">
+          <b-icon pack="fas" icon="thumbs-up" v-if="hand=='ถนัดแขนขวา'" type="is-success" size="is-large"></b-icon>
           <b-field label="แขนขวา">
             <b-input type="number" placeholder="ครั้งที่ 1 (กก.)"></b-input>
           </b-field>

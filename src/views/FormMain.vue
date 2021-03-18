@@ -2,12 +2,14 @@
 <section class="section">
   <div class="container">
     <h1 class="title has-text-centered">แบบฟอร์มบันทึกข้อมูล (CASE REPORT FORM)</h1>
-    <b-field label="วันที่เก็บข้อมูล">
-      <b-datepicker icon="calendar-today" :locale="undefined" :inline="true"></b-datepicker>
-    </b-field>
-    <div class="buttons is-centered">
-      <b-button type="is-warning">Cancel</b-button>
-      <b-button type="is-primary" @click="nextPage">Start</b-button>
+    <div class="has-text-centered">
+      <b-field label="วันที่เก็บข้อมูล">
+        <b-datepicker icon="calendar-today" :locale="undefined" :inline="true"></b-datepicker>
+      </b-field>
+      <div class="buttons is-centered">
+        <b-button type="is-light">Cancel</b-button>
+        <b-button type="is-success" @click="nextPage">Start</b-button>
+      </div>
     </div>
   </div>
 </section>

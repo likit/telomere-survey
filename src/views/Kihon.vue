@@ -145,7 +145,7 @@
 
 <script>
 export default {
-  name: "ADL",
+  name: "Kihon",
   data() {
     return {
       one: "0",

@@ -84,7 +84,7 @@
 
 <script>
 export default {
-  name: "ADL",
+  name: "IADL",
   data() {
     return {
       one: "2",

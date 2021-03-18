@@ -7,7 +7,6 @@
       mobile-mode="minimalist"
       >
       <b-step-item step="1" label="ข้อมูลส่วนบุคคล" :clickable="true">
-        <h1 class="title has-text-centered">ข้อมูลส่วนบุคคล</h1>
         <b-field label="อายุ">
           <b-numberinput :value="age"></b-numberinput>
         </b-field>
