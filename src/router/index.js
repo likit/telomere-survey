@@ -132,6 +132,15 @@ const routes = [
         component: () => import('../views/GPAQ.vue')
     },
     {
+        path: '/form/exhaustion',
+        name: 'Exhaustion',
+        meta: {
+            title: 'Exhaustion',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Exhaustion.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
