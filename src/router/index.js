@@ -114,6 +114,15 @@ const routes = [
         component: () => import('../views/Kihon.vue')
     },
     {
+        path: '/form/eq-5d-5l',
+        name: 'EQ-5D-5L',
+        meta: {
+            title: 'EQ-5D-5L',
+            requiresAuth: true,
+        },
+        component: () => import('../views/EQ-5D-5L.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
