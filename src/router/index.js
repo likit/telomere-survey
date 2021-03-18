@@ -141,6 +141,15 @@ const routes = [
         component: () => import('../views/Exhaustion.vue')
     },
     {
+        path: '/form/evaluation',
+        name: 'Evaluation',
+        meta: {
+            title: 'Evaluation',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Evaluation.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
