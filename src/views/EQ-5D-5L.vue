@@ -92,7 +92,7 @@
     </b-steps>
     <div class="buttons is-centered">
       <button class="button is-light" @click="$router.back()">Back</button>
-      <router-link :to="{ name: 'IADL' }" class="button is-success">Next</router-link>
+      <router-link :to="{ name: 'GPAQ' }" class="button is-success">Next</router-link>
     </div>
   </div>
 </section>
@@ -101,7 +101,7 @@
 
 <script>
 export default {
-  name: "ADL",
+  name: "EQ-5D-5L",
   data() {
     return {
       one: "1",

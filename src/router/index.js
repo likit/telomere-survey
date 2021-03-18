@@ -123,6 +123,15 @@ const routes = [
         component: () => import('../views/EQ-5D-5L.vue')
     },
     {
+        path: '/form/gpaq',
+        name: 'GPAQ',
+        meta: {
+            title: 'GPAQ',
+            requiresAuth: true,
+        },
+        component: () => import('../views/GPAQ.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
