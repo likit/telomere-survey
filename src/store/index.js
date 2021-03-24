@@ -6,6 +6,8 @@ Vue.use(Vuex)
 function initializeForm() {
     return {
         record: {
+            code: null,
+            recordDate: new Date(),
             sarcf: {
                 one: null,
                 two: null,

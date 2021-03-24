@@ -9,6 +9,9 @@
       <b-navbar-item href="#">
         Home
       </b-navbar-item>
+      <b-navbar-item>
+        รหัสวิจัย {{ form.record.code }}
+      </b-navbar-item>
       <b-navbar-dropdown label="Form">
         <b-navbar-item :to="{ name: 'FormMain'}" tag="router-link">
           หน้าแรก
@@ -19,14 +22,22 @@
         <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
           แบบบันทึกการประเมิน
         </b-navbar-item>
+        <b-navbar-item :to="{ name: 'SARCF' }" tag="router-link">
+          แบบประเมิน SARC-F
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
   </b-navbar>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
-  name: "navigation"
+  name: "navigation",
+  computed: {
+    ...mapState(['form']),
+  }
 }
 </script>
 
