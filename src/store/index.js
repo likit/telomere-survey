@@ -41,6 +41,10 @@ function initializeForm() {
                 score: 0,
                 diseases: [],
             },
+            minicog: {
+                items: [],
+                score: null
+            },
             sarcf: {
                 one: null,
                 two: null,
@@ -66,6 +70,20 @@ export default new Vuex.Store({
                 state.form.record.charlson.score -= parseInt(params.score)
                 state.form.record.charlson.diseases.splice(idx, 1)
             }
+        },
+        updateMiniCogItems(state, item) {
+            let idx = state.form.record.minicog.items.indexOf(item)
+            if (idx == -1) {
+                state.form.record.minicog.items.push(item)
+            } else {
+                state.form.record.minicog.items.splice(idx, 1)
+            }
+            if (state.form.record.minicog.items.length == 3) {
+                state.form.record.minicog.score = 1
+            } else {
+                state.form.record.minicog.score = 0
+            }
+            console.log(state.form.record.minicog.items, state.form.record.minicog.score)
         }
     }
 })

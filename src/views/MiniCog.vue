@@ -38,23 +38,17 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import {mapState} from "vuex";
+
 export default {
   name: "MiniCog",
   components: {Navigation},
-  data() {
-    return {
-      items: [],
-    }
+  computed: {
+    ...mapState(['form'])
   },
   methods: {
     updateScore: function (event, item) {
-      if (event) {
-        this.items.push(item)
-      } else {
-        let idx = this.items.indexOf(item)
-        this.items.splice(idx, 1)
-      }
-      console.log(this.items)
+      this.$store.commit('updateMiniCogItems', item)
     }
   }
 }
