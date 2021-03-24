@@ -31,11 +31,29 @@
         <b-navbar-item :to="{ name: 'MNA'}" tag="router-link">
           แบบประเมินภาวะโภชนาการ
         </b-navbar-item>
-        <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
-          แบบบันทึกการประเมิน
+        <b-navbar-item :to="{ name: 'ADL'}" tag="router-link">
+          ADL
+        </b-navbar-item>
+        <b-navbar-item :to="{ name: 'IADL'}" tag="router-link">
+          IADL
+        </b-navbar-item>
+        <b-navbar-item :to="{ name: '9Q'}" tag="router-link">
+          9Q
+        </b-navbar-item>
+        <b-navbar-item :to="{ name: 'EQ-5D-5L'}" tag="router-link">
+          EQ-5D-5L
+        </b-navbar-item>
+        <b-navbar-item :to="{ name: 'GPAQ'}" tag="router-link">
+          GPAQ
+        </b-navbar-item>
+        <b-navbar-item :to="{ name: 'Exhaustion'}" tag="router-link">
+          Exhaustion
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'SARCF' }" tag="router-link">
           แบบประเมิน SARC-F
+        </b-navbar-item>
+        <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
+          แบบบันทึกการประเมิน
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>
