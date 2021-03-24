@@ -94,9 +94,12 @@ export default {
   computed: {
     ...mapState(['form']),
     score: function() {
-      let total = this.form.record.iadl.one + this.form.record.iadl.two +
-          this.form.record.iadl.three + this.form.record.iadl.four +
-          this.form.record.iadl.five + this.form.record.iadl.six
+      let total = parseInt(this.form.record.iadl.one) +
+          parseInt(this.form.record.iadl.two) +
+          parseInt(this.form.record.iadl.three) +
+          parseInt(this.form.record.iadl.four) +
+          parseInt(this.form.record.iadl.five) +
+          parseInt(this.form.record.iadl.six)
       if (isNaN(total)) {
         return "N/A"
       } else {

@@ -131,11 +131,11 @@ export default {
   computed: {
     ...mapState(['form']),
     score: function() {
-      let total = this.form.record.adl.one + this.form.record.adl.two +
-          this.form.record.adl.three + this.form.record.adl.four +
-          this.form.record.adl.five + this.form.record.adl.six +
-          this.form.record.adl.seven + this.form.record.adl.eight +
-          this.form.record.adl.nine + this.form.record.adl.ten
+      let total = parseInt(this.form.record.adl.one) + parseInt(this.form.record.adl.two) +
+          parseInt(this.form.record.adl.three) + parseInt(this.form.record.adl.four) +
+          parseInt(this.form.record.adl.five) + parseInt(this.form.record.adl.six) +
+          parseInt(this.form.record.adl.seven) + parseInt(this.form.record.adl.eight) +
+          parseInt(this.form.record.adl.nine) + parseInt(this.form.record.adl.ten)
       if (isNaN(total)) {
         return "N/A"
       } else {

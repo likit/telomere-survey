@@ -77,29 +77,19 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import {mapState} from "vuex";
+
 export default {
   name: "Form9Q",
   components: {Navigation},
-  data() {
-    return {
-      one: "0",
-      two: "0",
-      three: "0",
-      four: "0",
-      five: "0",
-      six: "0",
-      seven: "0",
-      eight: "0",
-      nine: "0"
-    }
-  },
   computed: {
+    ...mapState(['form']),
     score: function() {
-      return parseInt(this.one) + parseInt(this.two) +
-          parseInt(this.three) + parseInt(this.four) +
-          parseInt(this.five) + parseInt(this.six) +
-          parseInt(this.seven) + parseInt(this.eight) +
-          parseInt(this.nine)
+      return parseInt(this.form.record.form9q.one) + parseInt(this.form.record.form9q.two) +
+          parseInt(this.form.record.form9q.three) + parseInt(this.form.record.form9q.four) +
+          parseInt(this.form.record.form9q.five) + parseInt(this.form.record.form9q.six) +
+          parseInt(this.form.record.form9q.seven) + parseInt(this.form.record.form9q.eight) +
+          parseInt(this.form.record.form9q.nine)
     }
   }
 }
