@@ -1,12 +1,14 @@
 <template>
 <section class="section">
+  <Navigation></Navigation>
+  <br>
   <div class="container">
     <b-steps
         :rounded="true"
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="13" label="แบบบันทึกการประเมิน" :clickable="true">
+      <b-step-item step="14" label="แบบบันทึกการประเมิน" :clickable="true">
         <b-field label="Gait speed">
           Walk time เวลาที่ใช้ในการเดิน 6 เมตร
           <b-numberinput placeholder="ครั้งที่ 1" v-model="gait1"></b-numberinput>
@@ -81,6 +83,12 @@
         <b-field label="BMI">
           <b-input type="number" :readonly="true" :value="bmi.toFixed(2)"></b-input>
         </b-field>
+        <b-field label="Muscle mass">
+          <b-input type="number" :readonly="true" :value="muscleMass"></b-input>
+        </b-field>
+        <b-field label="Fat free mass">
+          <b-input type="number" :readonly="true" :value="fatFreeMass"></b-input>
+        </b-field>
       </b-step-item>
     </b-steps>
     <div class="buttons is-centered">
@@ -93,8 +101,10 @@
 </template>
 
 <script>
+import Navigation from "@/components/navigation";
 export default {
   name: "Evaluation",
+  components: {Navigation},
   data() {
     return {
       gait1: null,
@@ -102,6 +112,8 @@ export default {
       hand: null,
       weight: null,
       height: null,
+      muscleMass: null,
+      fatFreeMass: null
     }
   },
   computed: {

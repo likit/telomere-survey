@@ -1,5 +1,6 @@
 <template>
 <section class="section">
+  <Navigation></Navigation>
   <div class="container">
     <b-steps
         :rounded="true"
@@ -38,7 +39,7 @@
     </b-steps>
     <div class="buttons is-centered">
       <button class="button is-light" @click="$router.back()">Back</button>
-      <router-link :to="{ name: 'IADL' }" class="button is-success">Next</router-link>
+      <router-link :to="{ name: 'SARCF' }" class="button is-success">Next</router-link>
     </div>
   </div>
 </section>
@@ -46,8 +47,10 @@
 </template>
 
 <script>
+import Navigation from "@/components/navigation";
 export default {
   name: "ADL",
+  components: {Navigation},
   data() {
     return {
       one: "0",

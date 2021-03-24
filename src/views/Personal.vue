@@ -1,5 +1,7 @@
 <template>
 <section class="section">
+  <Navigation></Navigation>
+  <br>
   <div class="container">
     <b-steps
       :rounded="true"
@@ -9,6 +11,12 @@
       <b-step-item step="1" label="ข้อมูลส่วนบุคคล" :clickable="true">
         <b-field label="อายุ">
           <b-numberinput :value="age"></b-numberinput>
+        </b-field>
+        <b-field label="น้ำหนัก">
+          <b-input type="number" placeholder="กก." v-model="weight"></b-input>
+        </b-field>
+        <b-field label="ส่วนสูง">
+          <b-input type="number" placeholder="ซม." v-model="height"></b-input>
         </b-field>
         <b-field label="เพศ">
           <b-radio native-value="ชาย" v-model="gender">
@@ -304,11 +312,15 @@
 </template>
 
 <script>
+import Navigation from "@/components/navigation";
 export default {
   name: "Personal",
+  components: {Navigation},
   data() {
     return {
       age: 65,
+      height: null,
+      weight: null,
       gender: null,
       maritalStatus: null,
       address: null,

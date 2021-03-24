@@ -1,5 +1,7 @@
 <template>
 <section class="section">
+  <Navigation></Navigation>
+  <br>
   <div class="container">
     <b-steps
         :rounded="true"
@@ -38,8 +40,10 @@
 </template>
 
 <script>
+import Navigation from "@/components/navigation";
 export default {
   name: "Clock",
+  components: {Navigation},
   data() {
     return {
       file: null,

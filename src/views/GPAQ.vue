@@ -1,5 +1,7 @@
 <template>
 <section class="section">
+  <Navigation></Navigation>
+  <br>
   <div class="container">
     <b-steps
         :rounded="true"
@@ -122,7 +124,7 @@
     </b-steps>
     <div class="buttons is-centered">
       <button class="button is-light" @click="$router.back()">Back</button>
-      <router-link :to="{ name: 'Evaluation' }" class="button is-success">Next</router-link>
+      <router-link :to="{ name: 'Exhaustion' }" class="button is-success">Next</router-link>
     </div>
   </div>
 </section>
@@ -130,8 +132,10 @@
 </template>
 
 <script>
+import Navigation from "@/components/navigation";
 export default {
   name: "GPAQ",
+  components: {Navigation},
   data() {
     return {
       one: null,
