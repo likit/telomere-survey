@@ -28,6 +28,9 @@
         <b-navbar-item :to="{ name: 'Clock'}" tag="router-link">
           วาดรูปหน้าปัดนาฬิกา
         </b-navbar-item>
+        <b-navbar-item :to="{ name: 'MNA'}" tag="router-link">
+          แบบประเมินภาวะโภชนาการ
+        </b-navbar-item>
         <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
           แบบบันทึกการประเมิน
         </b-navbar-item>

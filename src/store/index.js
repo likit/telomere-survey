@@ -49,6 +49,14 @@ function initializeForm() {
                 score: 0,
                 file: null,
             },
+            mna: {
+                one: null,
+                two: null,
+                three: null,
+                four: null,
+                five: null,
+                six: null,
+            },
             sarcf: {
                 one: null,
                 two: null,
