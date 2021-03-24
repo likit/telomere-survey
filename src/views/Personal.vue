@@ -9,6 +9,15 @@
       mobile-mode="minimalist"
       >
       <b-step-item step="1" label="ข้อมูลส่วนบุคคล" :clickable="true">
+        <b-field label="ชื่อ">
+          <b-input placeholder="ชื่อ" v-model="form.record.personal.firstname"></b-input>
+        </b-field>
+        <b-field label="นามสกุล">
+          <b-input placeholder="นามสกุล" v-model="form.record.personal.lastname"></b-input>
+        </b-field>
+        <b-field label="หมายเลขบัตรประชาชน">
+          <b-input placeholder="หมายเลขบัตรประชาชน" v-model="form.record.personal.id"></b-input>
+        </b-field>
         <b-field label="อายุ">
           <b-numberinput :value="form.record.personal.age"></b-numberinput>
         </b-field>

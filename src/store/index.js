@@ -9,6 +9,9 @@ function initializeForm() {
             code: null,
             recordDate: new Date(),
             personal: {
+                id: null,
+                firstname: null,
+                lastname: null,
                 height: null,
                 weight: null,
                 gender: null,
