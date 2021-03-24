@@ -9,31 +9,31 @@
     >
       <b-step-item step="12" label="Self-report exhaustion" :clickable="true">
         <b-field label="ฉันรู้สึกว่าทุก ๆ สิ่งที่ฉันกระทำต้องฝืนใจทำ">
-          <b-radio native-value="0" v-model="one">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
+          <b-radio native-value=0 v-model="form.record.exhaustion.one">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="1" v-model="one">นาน ๆ ครั้งน้อยกว่า 1-2 วัน/สัปดาห์</b-radio>
+          <b-radio native-value=1 v-model="form.record.exhaustion.one">นาน ๆ ครั้งน้อยกว่า 1-2 วัน/สัปดาห์</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="2" v-model="one">ค่อนข้างบ่อย น้อยกว่า 3-4 วัน/สัปดาห์</b-radio>
+          <b-radio native-value=2 v-model="form.record.exhaustion.one">ค่อนข้างบ่อย น้อยกว่า 3-4 วัน/สัปดาห์</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="3" v-model="one">บ่อยครั้ง น้อยกว่า 5-7 วัน/สัปดาห์</b-radio>
+          <b-radio native-value=3 v-model="form.record.exhaustion.one">บ่อยครั้ง น้อยกว่า 5-7 วัน/สัปดาห์</b-radio>
         </b-field>
-        <span class="tag is-light is-success">คะแนน {{ one }}</span>
+        <span class="tag is-light is-success">คะแนน {{ form.record.exhaustion.one }}</span>
         <b-field label="ฉันรู้สึกท้อถอยในชีวิต">
-          <b-radio native-value="0" v-model="two">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
+          <b-radio native-value=0 v-model="form.record.exhaustion.two">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="1" v-model="two">นาน ๆ ครั้งน้อยกว่า 1-2 วัน/สัปดาห์</b-radio>
+          <b-radio native-value=1 v-model="form.record.exhaustion.two">นาน ๆ ครั้งน้อยกว่า 1-2 วัน/สัปดาห์</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="2" v-model="two">ค่อนข้างบ่อย น้อยกว่า 3-4 วัน/สัปดาห์</b-radio>
+          <b-radio native-value=2 v-model="form.record.exhaustion.two">ค่อนข้างบ่อย น้อยกว่า 3-4 วัน/สัปดาห์</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="3" v-model="two">บ่อยครั้ง น้อยกว่า 5-7 วัน/สัปดาห์</b-radio>
+          <b-radio native-value=3 v-model="form.record.exhaustion.two">บ่อยครั้ง น้อยกว่า 5-7 วัน/สัปดาห์</b-radio>
         </b-field>
-        <span class="tag is-light is-success">คะแนน {{ two }}</span>
+        <span class="tag is-light is-success">คะแนน {{ form.record.exhaustion.two }}</span>
         <h1 class="title has-text-centered is-size-4">คะแนนรวม {{ score }}</h1>
       </b-step-item>
     </b-steps>
@@ -48,18 +48,20 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import {mapState} from "vuex";
+
 export default {
-  name: "ADL",
+  name: "Exhaustion",
   components: {Navigation},
-  data() {
-    return {
-      one: "0",
-      two: "0",
-    }
-  },
   computed: {
+    ...mapState(['form']),
     score: function() {
-      return parseInt(this.one) + parseInt(this.two)
+      let total = this.form.record.exhaustion.one + this.form.record.exhaustion.two
+      if (isNaN(total)) {
+        return "N/A"
+      } else {
+        return total
+      }
     }
   }
 }

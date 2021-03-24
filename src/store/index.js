@@ -57,6 +57,97 @@ function initializeForm() {
                 five: null,
                 six: null,
             },
+            adl: {
+                one: null,
+                two: null,
+                three: null,
+                four: null,
+                five: null,
+                six: null,
+                seven: null,
+                eight: null,
+                nine: null,
+                ten: null,
+            },
+            iadl: {
+                one: null,
+                two: null,
+                three: null,
+                four: null,
+                five: null,
+                six: null,
+            },
+            eq5d5l: {
+                one: null,
+                two: null,
+                three: null,
+                four: null,
+                five: null,
+            },
+            gpaq: {
+                p1: null,
+                p2: null,
+                p3: {
+                    minutes: null,
+                    hours: null
+                },
+                p4: null,
+                p5: null,
+                p6: {
+                    minutes: null,
+                    hours: null
+                },
+                p7: null,
+                p8: null,
+                p9: {
+                    minutes: null,
+                    hours: null
+                },
+                p10: null,
+                p11: null,
+                p12: {
+                    minutes: null,
+                    hours: null
+                },
+                p13: null,
+                p14: null,
+                p15: {
+                    minutes: null,
+                    hours: null
+                },
+                sedentary: null,
+            },
+            kihon: {
+                one: null,
+                two: null,
+                three: null,
+                four: null,
+                five: null,
+                six: null,
+                seven: null,
+                eight: null,
+                nine: null,
+                ten: null,
+                eleven: null,
+                twelve: null,
+                thirteen: null,
+                forteen: null,
+                fifteen: null,
+                sixteen: null,
+                seventeen: null,
+                eighteen: null,
+                nineteen: null,
+                twenty: null,
+                twentyone: null,
+                twentytwo: null,
+                twentythree: null,
+                twentyfour: null,
+                twentyfive: null,
+            },
+            exhaustion: {
+                one: null,
+                two: null
+            },
             sarcf: {
                 one: null,
                 two: null,
