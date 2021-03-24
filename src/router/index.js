@@ -150,6 +150,15 @@ const routes = [
         component: () => import('../views/Evaluation.vue')
     },
     {
+        path: '/form/sarcf',
+        name: 'SARCF',
+        meta: {
+            title: 'SARCF',
+            requiresAuth: true,
+        },
+        component: () => import('../views/SARCF.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
