@@ -117,6 +117,17 @@ function initializeForm() {
                 },
                 sedentary: null,
             },
+            form9q: {
+                one: null,
+                two: null,
+                three: null,
+                four: null,
+                five: null,
+                six: null,
+                seven: null,
+                eight: null,
+                nine: null,
+            },
             kihon: {
                 one: null,
                 two: null,
