@@ -104,7 +104,7 @@
         </div>
         <div class="notification is-light is-primary">
           <b-field label="คะแนนรวม">
-            <b-input v-model="score"></b-input>
+            <b-input v-model="form.record.charlson.score"></b-input>
           </b-field>
         </div>
         <div class="notification is-light is-warning">
@@ -128,25 +128,18 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import {mapState} from 'vuex';
 export default {
   name: "Charlson",
   components: {Navigation},
-  data() {
-    return {
-      score: 0,
-      diseases: [],
-    }
+  computed: {
+    ...mapState(['form']),
   },
   methods: {
     updateScore: function (event, score, disease) {
-      if (event) {
-        this.score += score
-        this.diseases.push(disease)
-      } else {
-        this.score -= score
-        let idx = this.diseases.indexOf(disease)
-        this.diseases.splice(idx, 1)
-      }
+      let self = this
+      this.$store.commit('updateCharlsonDisease', {disease: disease, score: score})
+      console.log(self.form.record.charlson)
     }
   }
 }

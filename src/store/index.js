@@ -37,6 +37,10 @@ function initializeForm() {
                     }
                 }
             },
+            charlson: {
+                score: 0,
+                diseases: [],
+            },
             sarcf: {
                 one: null,
                 two: null,
@@ -51,5 +55,17 @@ function initializeForm() {
 export default new Vuex.Store({
     state: {
         form: initializeForm(),
+    },
+    mutations: {
+        updateCharlsonDisease (state, params) {
+            let idx = state.form.record.charlson.diseases.indexOf(params.disease)
+            if (idx == -1) {
+                state.form.record.charlson.score += parseInt(params.score)
+                state.form.record.charlson.diseases.push(params.disease)
+            } else {
+                state.form.record.charlson.score -= parseInt(params.score)
+                state.form.record.charlson.diseases.splice(idx, 1)
+            }
+        }
     }
 })

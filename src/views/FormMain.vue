@@ -5,7 +5,7 @@
   <div class="container">
     <h1 class="title has-text-centered">แบบฟอร์มบันทึกข้อมูล (CASE REPORT FORM)</h1>
     <div class="has-text-centered">
-      <b-field label="รหัสวิจัย">
+      <b-field label="รหัสวิจัย" type="is-danger">
         <b-input v-model="form.record.code"></b-input>
       </b-field>
       <b-field label="วันที่เก็บข้อมูล">

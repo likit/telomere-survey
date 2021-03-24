@@ -19,6 +19,9 @@
         <b-navbar-item :to="{ name: 'Personal'}" tag="router-link">
           ข้อมูลส่วนตัว
         </b-navbar-item>
+        <b-navbar-item :to="{ name: 'Charlson'}" tag="router-link">
+          ดัชนีโรคร่วมชาร์ลสัน
+        </b-navbar-item>
         <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
           แบบบันทึกการประเมิน
         </b-navbar-item>
