@@ -137,9 +137,7 @@ export default {
   },
   methods: {
     updateScore: function (event, score, disease) {
-      let self = this
       this.$store.commit('updateCharlsonDisease', {disease: disease, score: score})
-      console.log(self.form.record.charlson)
     }
   }
 }
