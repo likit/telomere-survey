@@ -15,18 +15,18 @@
           </label>
           <br>
           <b-field class="file is-primary" :class="{'has-name': !!file}">
-            <b-upload v-model="file" class="file-label">
+            <b-upload v-model="form.record.clock.file" class="file-label">
               <span class="file-cta">
                   <b-icon class="file-icon" icon="upload"></b-icon>
                   <span class="file-label">Click to upload</span>
               </span>
-              <span class="file-name" v-if="file">
-                  {{ file.name }}
+              <span class="file-name" v-if="form.record.clock.file">
+                  {{ form.record.clock.file.name }}
               </span>
             </b-upload>
           </b-field>
           <b-field label="รวมคะแนน">
-            <b-numberinput v-model="score"></b-numberinput>
+            <b-numberinput v-model="form.record.clock.score"></b-numberinput>
           </b-field>
         </div>
       <div class="buttons is-centered">
@@ -41,14 +41,13 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import {mapState} from "vuex"
+
 export default {
   name: "Clock",
   components: {Navigation},
-  data() {
-    return {
-      file: null,
-      score: 0
-    }
+  computed: {
+    ...mapState(['form'])
   }
 }
 </script>

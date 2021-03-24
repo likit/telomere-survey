@@ -22,6 +22,12 @@
         <b-navbar-item :to="{ name: 'Charlson'}" tag="router-link">
           ดัชนีโรคร่วมชาร์ลสัน
         </b-navbar-item>
+        <b-navbar-item :to="{ name: 'MiniCog'}" tag="router-link">
+          สมรรถภาพเบื้องต้น
+        </b-navbar-item>
+        <b-navbar-item :to="{ name: 'Clock'}" tag="router-link">
+          วาดรูปหน้าปัดนาฬิกา
+        </b-navbar-item>
         <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
           แบบบันทึกการประเมิน
         </b-navbar-item>

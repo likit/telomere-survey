@@ -45,6 +45,10 @@ function initializeForm() {
                 items: [],
                 score: null
             },
+            clock: {
+                score: 0,
+                file: null,
+            },
             sarcf: {
                 one: null,
                 two: null,
