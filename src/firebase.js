@@ -17,7 +17,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 const auth = firebase.auth()
+const db = firebase.firestore()
+const records = db.collection('records')
 export {
     firebase as fb,
+    db,
+    records,
     auth
 }
