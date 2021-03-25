@@ -19,7 +19,7 @@
           <b-input placeholder="หมายเลขบัตรประชาชน" v-model="form.record.personal.id"></b-input>
         </b-field>
         <b-field label="อายุ">
-          <b-numberinput :value="form.record.personal.age"></b-numberinput>
+          <b-numberinput v-model="form.record.personal.age"></b-numberinput>
         </b-field>
         <b-field label="น้ำหนัก">
           <b-input type="number" placeholder="กก." v-model="form.record.personal.weight"></b-input>
@@ -262,24 +262,24 @@
         </b-field>
         <label class="label">ประวัติการทำงาน</label>
         <b-field label="ก่อนการเกษียณอายุหรือก่อนอายุ 60 ปี">
-          <b-radio native-value="งานบ้าน" v-model="form.record.personal.job.jobAfterRetirement">งานบ้าน</b-radio>
-          <b-radio native-value="เกษตรกร" v-model="form.record.personal.job.jobAfterRetirement">เกษตรกร</b-radio>
+          <b-radio native-value="งานบ้าน" v-model="form.record.personal.job.jobBeforeRetirement">งานบ้าน</b-radio>
+          <b-radio native-value="เกษตรกร" v-model="form.record.personal.job.jobBeforeRetirement">เกษตรกร</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="รับจ้างแรงงาน" v-model="form.record.personal.job.jobAfterRetirement">รับจ้างแรงงาน</b-radio>
-          <b-radio native-value="รับจ้างสำนักงาน" v-model="form.record.personal.job.jobAfterRetirement">รับจ้างสำนักงาน</b-radio>
+          <b-radio native-value="รับจ้างแรงงาน" v-model="form.record.personal.job.jobBeforeRetirement">รับจ้างแรงงาน</b-radio>
+          <b-radio native-value="รับจ้างสำนักงาน" v-model="form.record.personal.job.jobBeforeRetirement">รับจ้างสำนักงาน</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="ข้าราชการ/รัฐวิสาหกิจ" v-model="form.record.personal.job.jobAfterRetirement">ข้าราชการ/รัฐวิสาหกิจ</b-radio>
-          <b-radio native-value="การเมือง" v-model="form.record.personal.job.jobAfterRetirement">การเมือง</b-radio>
+          <b-radio native-value="ข้าราชการ/รัฐวิสาหกิจ" v-model="form.record.personal.job.jobBeforeRetirement">ข้าราชการ/รัฐวิสาหกิจ</b-radio>
+          <b-radio native-value="การเมือง" v-model="form.record.personal.job.jobBeforeRetirement">การเมือง</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="ค้าขาย" v-model="form.record.personal.job.jobAfterRetirement">ค้าขาย</b-radio>
-          <b-radio native-value="ธุรกิจบริการ" v-model="form.record.personal.job.jobAfterRetirement">ธุรกิจบริการ</b-radio>
+          <b-radio native-value="ค้าขาย" v-model="form.record.personal.job.jobBeforeRetirement">ค้าขาย</b-radio>
+          <b-radio native-value="ธุรกิจบริการ" v-model="form.record.personal.job.jobBeforeRetirement">ธุรกิจบริการ</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="อยู่บ้านเฉย ๆ" v-model="form.record.personal.job.jobAfterRetirement">อยู่บ้านเฉย ๆ</b-radio>
-          <b-radio native-value="อื่น ๆ" v-model="form.record.personal.job.jobAfterRetirement">อื่น ๆ</b-radio>
+          <b-radio native-value="อยู่บ้านเฉย ๆ" v-model="form.record.personal.job.jobBeforeRetirement">อยู่บ้านเฉย ๆ</b-radio>
+          <b-radio native-value="อื่น ๆ" v-model="form.record.personal.job.jobBeforeRetirement">อื่น ๆ</b-radio>
         </b-field>
         <b-field label="หลังการเกษียณอายุหรือหลังอายุ 60 ปี">
           <b-radio native-value="งานบ้าน" v-model="form.record.personal.job.jobAfterRetirement">งานบ้าน</b-radio>
@@ -314,6 +314,12 @@
     </b-steps>
     <div class="buttons is-centered">
       <button class="button is-light" @click="$router.back()">Back</button>
+      <button class="button is-primary" @click="saveData">
+        <span class="icon">
+          <i class="far fa-save"></i>
+        </span>
+        <span>Save</span>
+      </button>
       <router-link :to="{name: 'Charlson'}" class="button is-success">Next</router-link>
     </div>
   </div>
@@ -330,6 +336,47 @@ export default {
   computed: {
     ...mapState(['form'])
   },
+  methods: {
+    saveData() {
+      let self = this
+      if (this.form.record.code == null) {
+        self.$buefy.dialog.alert({
+          title: 'Error!',
+          message: 'กรุณาระบุหมายเลขรหัสวิจัย',
+          type: 'is-danger',
+          hasIcon: true,
+          icon: 'times-circle',
+          iconPack: 'fa',
+          ariaRole: 'alertdialog',
+          ariaModal: true
+        })
+      } else {
+        this.$store.dispatch('saveForm').then(() => {
+          self.$buefy.dialog.alert({
+            title: 'Login Successful',
+            message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+            type: 'is-success',
+            hasIcon: true,
+            icon: 'check-circle',
+            iconPack: 'fa',
+            ariaRole: 'alertdialog',
+            ariaModal: true,
+          })
+        }).catch(() => {
+          self.$buefy.dialog.alert({
+            title: 'Error!',
+            message: 'โปรแกรมไม่สามารถบันทึกข้อมูลได้ โปรดลองใหม่อีกครั้ง',
+            type: 'is-danger',
+            hasIcon: true,
+            icon: 'times-circle',
+            iconPack: 'fa',
+            ariaRole: 'alertdialog',
+            ariaModal: true
+          })
+        })
+      }
+    }
+  }
 }
 </script>
 
