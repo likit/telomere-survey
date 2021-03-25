@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {auth, records} from '../firebase'
 
 Vue.use(Vuex)
 
 function initializeForm() {
     return {
         record: {
+            lastUpdate: [],
             code: null,
             recordDate: new Date(),
             personal: {
@@ -201,6 +203,27 @@ export default new Vuex.Store({
                 state.form.record.minicog.score = 0
             }
             console.log(state.form.record.minicog.items, state.form.record.minicog.score)
+        },
+        setLastUpdate(state) {
+            state.form.record.lastUpdate.push({
+                datetime: new Date(),
+                creator: auth.currentUser.email
+            })
+        }
+    },
+    actions: {
+        saveForm({commit, state}) {
+            commit('setLastUpdate')
+            records.where('code', '==', state.form.record.code).get().then((snapshot) => {
+                if (snapshot.empty) {
+                    if (state.form.record.code != null) {
+                        records.add(state.form.record)
+                    }
+                } else {
+                    let formData = snapshot.docs[0]
+                    records.doc(formData.id).set(state.form.record)
+                }
+            })
         }
     }
 })
