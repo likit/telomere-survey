@@ -151,10 +151,10 @@
         </b-field>
         <div v-if="form.record.personal.smoking=='ปัจจุบันยังสูบ'" class="notification is-warning is-light">
           <b-field label="เป็นบางครั้ง">
-            <b-input placeholder="จำนวนมวนต่อสัปดาห์"></b-input>
+            <b-input placeholder="จำนวนมวนต่อสัปดาห์" v-model="form.record.personal.currentSmokingPerWeek"></b-input>
           </b-field>
           <b-field label="สูบทุกวัน">
-            <b-input placeholder="จำนวนมวนต่อวัน"></b-input>
+            <b-input placeholder="จำนวนมวนต่อวัน" v-model="form.record.personal.currentSmokingPerDay"></b-input>
           </b-field>
           <br>
         </div>
@@ -163,13 +163,13 @@
         </b-field>
         <div v-if="form.record.personal.smoking=='เคยสูบ'" class="notification is-light is-success">
           <b-field label="จำนวนมวนที่เคยสูบ">
-            <b-input placeholder="จำนวนมวนต่อวัน"></b-input>
+            <b-input placeholder="จำนวนมวนต่อวัน" v-model="form.record.personal.smokingPerDay"></b-input>
           </b-field>
           <b-field label="เป็นเวลา (ปี)">
-            <b-numberinput></b-numberinput>
+            <b-numberinput v-model="form.record.personal.smokingYears"></b-numberinput>
           </b-field>
           <b-field label="เลิกมาเป็นเวลา (ปี)">
-            <b-numberinput></b-numberinput>
+            <b-numberinput v-model="form.record.personal.quitSmokingYears"></b-numberinput>
           </b-field>
         </div>
         <b-field label="ดื่มแอลกอฮอล์">
@@ -183,7 +183,7 @@
         </b-field>
         <div class="notification is-light" v-if="form.record.personal.alcohol=='ดื่มทุกวัน'">
           <b-field label="จำนวนแก้วต่อวัน">
-            <b-numberinput></b-numberinput>
+            <b-numberinput v-model="form.record.personal.currentDrinkPerDay"></b-numberinput>
           </b-field>
         </div>
         <b-field>
@@ -191,13 +191,13 @@
         </b-field>
         <div class="notification is-light" v-if="form.record.personal.alcohol=='เคยดื่ม'">
           <b-field label="จำนวนแก้วต่อวัน">
-            <b-numberinput></b-numberinput>
+            <b-numberinput v-model="form.record.personal.drinkPerDay"></b-numberinput>
           </b-field>
           <b-field label="เป็นเวลา (ปี)">
-            <b-numberinput></b-numberinput>
+            <b-numberinput v-model="form.record.personal.drinkYears"></b-numberinput>
           </b-field>
           <b-field label="เลิกมา (ปี)">
-            <b-numberinput></b-numberinput>
+            <b-numberinput v-model="form.record.personal.quitDrinkYears"></b-numberinput>
           </b-field>
         </div>
         <b-field label="โรคประจำตัว">
@@ -252,13 +252,15 @@
           <b-radio native-value="มี" v-model="form.record.personal.medication">มี</b-radio>
         </b-field>
         <b-field v-if="form.record.personal.medication=='มี'">
-          <b-numberinput placeholder="จำนวนกี่ชนิด"></b-numberinput>
+          <b-numberinput placeholder="จำนวนกี่ชนิด" v-model="form.record.personal.medicationTypes"></b-numberinput>
         </b-field>
         <b-field label="น้ำหนัก">
-          <b-numberinput placeholder="1 ปีย้อนหลัง"></b-numberinput>
+          <b-field label="1 ปีย้อนหลัง">
+            <b-numberinput placeholder="1 ปีย้อนหลัง" v-model="form.record.personal.pastYearWeight"></b-numberinput>
+          </b-field>
         </b-field>
-        <b-field>
-          <b-numberinput placeholder="ปัจจุบัน"></b-numberinput>
+        <b-field label="ปัจจุบัน">
+          <b-numberinput placeholder="ปัจจุบัน" v-model="form.record.personal.weight"></b-numberinput>
         </b-field>
         <label class="label">ประวัติการทำงาน</label>
         <b-field label="ก่อนการเกษียณอายุหรือก่อนอายุ 60 ปี">
@@ -302,10 +304,14 @@
           <b-radio native-value="อื่น ๆ" v-model="form.record.personal.job.jobAfterRetirement">อื่น ๆ</b-radio>
         </b-field>
         <b-field label="ยังทำงานอยู่">
-          <b-numberinput placeholder="ทำมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.duration"></b-numberinput>
+          <b-field label="ทำมาแล้วกี่ปี">
+            <b-numberinput placeholder="ทำมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.duration"></b-numberinput>
+          </b-field>
         </b-field>
         <b-field label="ทำงานอยู่">
-          <b-numberinput placeholder="หยุดมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.quit"></b-numberinput>
+          <b-field label="หยุดมาแล้วกี่ปี">
+            <b-numberinput placeholder="หยุดมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.quit"></b-numberinput>
+          </b-field>
         </b-field>
         <b-field label="เพราะ">
           <b-input placeholder="เหตุผลที่หยุดงาน" v-model="form.record.personal.job.currentJob.quitReason"></b-input>

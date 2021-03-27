@@ -46,7 +46,6 @@ export default {
   methods: {
     login: function() {
       let self = this
-      console.log('trying to log in..')
       auth.signInWithEmailAndPassword(self.email, self.password).then((data)=>{
         console.log(data)
         self.$buefy.dialog.alert({
@@ -57,7 +56,7 @@ export default {
           icon: 'check_circle',
           ariaRole: 'alertdialog',
           ariaModal: true,
-          onConfirm: () => self.$router.push({name: 'MainPage'})
+          onConfirm: () => self.$router.push({name: 'Province'})
         })
       }).catch(() => {
         self.$buefy.dialog.alert({

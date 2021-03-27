@@ -6,11 +6,14 @@
       </b-navbar-item>
     </template>
     <template #start>
-      <b-navbar-item href="#">
-        Home
+      <b-navbar-item :to="{ name: 'Province' }" tag="router-link">
+        จังหวัด
       </b-navbar-item>
-      <b-navbar-item>
+      <b-navbar-item :to="{ name: 'MainPage' }" tag="router-link">
         รหัสวิจัย {{ form.record.code }}
+      </b-navbar-item>
+      <b-navbar-item :to="{ name: 'RecordSearch' }" tag="router-link">
+        รายการทั้งหมด
       </b-navbar-item>
       <b-navbar-dropdown label="Form">
         <b-navbar-item :to="{ name: 'FormMain'}" tag="router-link">

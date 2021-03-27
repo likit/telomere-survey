@@ -7,6 +7,8 @@ Vue.use(Vuex)
 function initializeForm() {
     return {
         record: {
+            province: null,
+            creator: null,
             lastUpdate: [],
             code: null,
             recordDate: new Date(),
@@ -26,12 +28,23 @@ function initializeForm() {
                 club: null,
                 healthStatus: null,
                 smoking: null,
+                pastYearWeight: null,
+                currentSmokingPerDay: null,
+                currentSmokingPerWeek: null,
+                smokingPerDay: null,
+                smokingYears: null,
+                quitSmokingYears: null,
                 alcohol: null,
+                currentDrinkPerDay: null,
+                drinkPerDay: null,
+                drinkYears: null,
+                quitDrinkYears: null,
                 underlyingDis: null,
                 healthCoverage: null,
                 hospitalized: null,
                 fell: null,
                 medication: null,
+                medicationTypes: null,
                 job: {
                     jobBeforeRetirement: null,
                     jobAfterRetirement: null,
@@ -170,6 +183,16 @@ function initializeForm() {
                 three: null,
                 four: null,
                 five: null,
+            },
+            evaluation: {
+                gait1: null,
+                gait2: null,
+                hand: null,
+                leg: null,
+                weight: null,
+                height: null,
+                muscleMass: null,
+                fatFreeMass: null
             }
         }
     }
@@ -178,8 +201,15 @@ function initializeForm() {
 export default new Vuex.Store({
     state: {
         form: initializeForm(),
+        province: null,
     },
     mutations: {
+        setProvince(state, province) {
+            state.province = province
+        },
+        setFormProvince(state) {
+            state.form.province = state.province
+        },
         updateCharlsonDisease (state, params) {
             let idx = state.form.record.charlson.diseases.indexOf(params.disease)
             if (idx == -1) {
@@ -209,14 +239,26 @@ export default new Vuex.Store({
                 datetime: new Date(),
                 creator: auth.currentUser.email
             })
-        }
+        },
+        setUpRecord(state, record) {
+            state.form.record = record
+            state.form.record.recordDate = new Date(record.recordDate.toDate())
+            if (record.lastUpdate.datetime) {
+                state.form.record.lastUpdate.datetime = new Date(record.lastUpdate.datetime.toDate())
+            }
+        },
+        setCreator(state) {
+            state.form.creator = auth.currentUser.email
+        },
     },
     actions: {
         saveForm({commit, state}) {
             commit('setLastUpdate')
+            commit('setFormProvince')
             records.where('code', '==', state.form.record.code).get().then((snapshot) => {
                 if (snapshot.empty) {
                     if (state.form.record.code != null) {
+                        commit('setCreator')
                         records.add(state.form.record)
                     }
                 } else {
@@ -224,6 +266,9 @@ export default new Vuex.Store({
                     records.doc(formData.id).set(state.form.record)
                 }
             })
+        },
+        setRecord({commit}, record) {
+            commit('setUpRecord', record)
         }
     }
 })

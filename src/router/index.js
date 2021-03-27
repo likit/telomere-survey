@@ -159,6 +159,24 @@ const routes = [
         component: () => import('../views/SARCF.vue')
     },
     {
+        path: '/province',
+        name: 'Province',
+        meta: {
+            title: 'Province Selection',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Province.vue')
+    },
+    {
+        path: '/form/search',
+        name: 'RecordSearch',
+        meta: {
+            title: 'Record Search',
+            requiresAuth: true,
+        },
+        component: () => import('../views/RecordSearch.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')

@@ -11,6 +11,10 @@
       <b-field label="วันที่เก็บข้อมูล">
         <b-datepicker icon="calendar-today" :locale="undefined" :inline="true" v-model="form.record.recordDate"></b-datepicker>
       </b-field>
+      <h1 class="subtitle is-size-6"><strong>บันทึกเมื่อ</strong> {{ $store.state.form.record.recordDate.toLocaleString() }}</h1>
+      <h1 class="subtitle is-size-6" v-if="$store.state.form.record.lastUpdate.datetime">
+        <strong>แก้ไขล่าสุดเมื่อ</strong> {{ $store.state.form.record.lastUpdate.datetime.toLocaleString() }}
+      </h1>
       <div class="buttons is-centered">
         <b-button type="is-light" @click="$router.push({name: 'MainPage'})">Cancel</b-button>
         <button class="button is-primary" @click="saveData">
