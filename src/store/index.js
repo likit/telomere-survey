@@ -250,6 +250,9 @@ export default new Vuex.Store({
         setCreator(state) {
             state.form.creator = auth.currentUser.email
         },
+        setClockFileName(state, fileName) {
+            state.form.record.clock.file = fileName
+        }
     },
     actions: {
         saveForm({commit, state}) {
