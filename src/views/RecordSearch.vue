@@ -3,14 +3,31 @@
     <Navigation></Navigation>
     <br>
     <div class="container">
+      <div class="has-text-centered">
+        <h1 class="title">ณ จังหวัด{{ $store.state.province.name }}</h1>
+        <div class="buttons is-centered">
+          <button @click="addRecord" class="button is-light is-success">
+            <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span>
+            <span>เพิ่มรายการ</span>
+          </button>
+          <button @click="fetch(query)" class="button is-light">
+            <span class="icon">
+              <i class="fas fa-redo-alt"></i>
+            </span>
+            <span>refresh</span>
+          </button>
+        </div>
+      </div>
       <b-field label="Filter">
-        <b-radio native-value="all" v-model="createdBy">All</b-radio>
-        <b-radio native-value="yours" v-model="createdBy">Yours</b-radio>
+        <b-radio native-value="all" v-model="createdBy">ทั้งหมด</b-radio>
+        <b-radio native-value="yours" v-model="createdBy">สร้างโดยฉัน</b-radio>
       </b-field>
       <b-field label="Search">
         <b-input placeholder="research code" v-model="query" type="search" :expanded="true"></b-input>
         <p class="control">
-          <b-button class="button is-primary is-light" @click="fetch(query)">
+          <b-button class="button is-primary" @click="fetch(query)">
             <span class="icon">
               <i class="fas fa-search"></i>
             </span>
@@ -38,7 +55,7 @@
         </b-table-column>
         <b-table-column sortable v-slot="props">
           <div class="buttons">
-            <button @click="setRecord(props.row.code)" class="button is-success is-light">
+            <button @click="setRecord(props.row.code)" class="button is-primary is-light">
             <span class="icon">
               <i class="fas fa-pencil-alt"></i>
             </span>
@@ -85,6 +102,10 @@ export default {
     }
   },
   methods: {
+    addRecord: function() {
+      this.$store.commit('resetForm')
+      this.$router.push({name: 'FormMain'})
+    },
     setRecord: function(code) {
       let self = this
       records.where('code', '==', code).get().then((snapshot)=>{
@@ -95,17 +116,29 @@ export default {
       })
     },
     deleteRecord: function(id) {
-      records.doc(id).delete().then(()=> {
-        this.$buefy.toast.open({
-          message: 'The record has been deleted.',
-          type: 'is-success'})
-        this.items = this.items.filter((d)=>{
-          return d.id != id
-        })
-      }).catch(()=>this.$buefy.toast.open({
-        message: 'Oops, the error occurred.',
-        type: 'is-danger'
-      }))
+      this.$buefy.dialog.confirm({
+        type: 'is-warning',
+        title: 'ยืนยันการลบรายการ',
+        message: 'ท่านต้องการลบรายการนี้หรือไม่',
+        hasIcon: true,
+        icon: 'times-circle',
+        iconPack: 'fa',
+        ariaRole: 'alertdialog',
+        ariaModal: true,
+        onConfirm: ()=>{
+          records.doc(id).delete().then(()=> {
+            this.$buefy.toast.open({
+              message: 'The record has been deleted.',
+              type: 'is-success'})
+            this.items = this.items.filter((d)=>{
+              return d.id != id
+            })
+          }).catch(()=>this.$buefy.toast.open({
+            message: 'Oops, the error occurred.',
+            type: 'is-danger'
+          }))
+        }
+      })
     },
     fetchAll: function() {
       let self = this

@@ -47,7 +47,9 @@ function initializeForm() {
                 medicationTypes: null,
                 job: {
                     jobBeforeRetirement: null,
+                    jobBeforeRetirementOther: null,
                     jobAfterRetirement: null,
+                    jobAfterRetirementOther: null,
                     currentJob: {
                         duration: null,
                         quit: null,
@@ -204,6 +206,10 @@ export default new Vuex.Store({
         province: null,
     },
     mutations: {
+        resetForm(state) {
+            state.form = initializeForm()
+            state.form.record.province = state.province.name
+        },
         setProvince(state, province) {
             state.province = province
         },

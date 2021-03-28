@@ -92,7 +92,11 @@
       </b-step-item>
     </b-steps>
     <div class="buttons is-centered">
-      <button class="button is-light" @click="$router.back()">Back</button>
+      <button class="button is-light" @click="$router.back()">
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
@@ -116,10 +120,10 @@ export default {
   computed: {
     ...mapState(['form']),
     gait: function() {
-      return (this.form.record.evaluation.gait1 + this.form.record.evaluation.gait2)/2.0
+        return (this.form.record.evaluation.gait1 + this.form.record.evaluation.gait2)/2.0
     },
     bmi: function() {
-      return this.form.record.personal.weight/(this.form.record.personal.height*0.01)**2.0
+        return this.form.record.personal.weight/(this.form.record.personal.height*0.01)**2.0
     }
   },
   methods: {
@@ -138,26 +142,14 @@ export default {
         })
       } else {
         this.$store.dispatch('saveForm').then(() => {
-          self.$buefy.dialog.alert({
-            title: 'Login Successful',
+          self.$buefy.toast.open({
             message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
             type: 'is-success',
-            hasIcon: true,
-            icon: 'check-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true,
           })
         }).catch(() => {
-          self.$buefy.dialog.alert({
-            title: 'Error!',
+          self.$buefy.toast.open({
             message: 'โปรแกรมไม่สามารถบันทึกข้อมูลได้ โปรดลองใหม่อีกครั้ง',
             type: 'is-danger',
-            hasIcon: true,
-            icon: 'times-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true
           })
         })
       }

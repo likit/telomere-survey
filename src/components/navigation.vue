@@ -10,6 +10,9 @@
         จังหวัด
       </b-navbar-item>
       <b-navbar-item :to="{ name: 'MainPage' }" tag="router-link">
+        หน้าแรก
+      </b-navbar-item>
+      <b-navbar-item>
         รหัสวิจัย {{ form.record.code }}
       </b-navbar-item>
       <b-navbar-item :to="{ name: 'RecordSearch' }" tag="router-link">
@@ -26,13 +29,13 @@
           ดัชนีโรคร่วมชาร์ลสัน
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'MiniCog'}" tag="router-link">
-          สมรรถภาพเบื้องต้น
+          สมรรถภาพเบื้องต้น (Mini Cog)
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'Clock'}" tag="router-link">
           วาดรูปหน้าปัดนาฬิกา
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'MNA'}" tag="router-link">
-          แบบประเมินภาวะโภชนาการ
+          แบบประเมินภาวะโภชนาการ (MNA)
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'ADL'}" tag="router-link">
           ADL
@@ -50,13 +53,13 @@
           GPAQ
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'Exhaustion'}" tag="router-link">
-          Exhaustion
+          Self-report Exhaustion
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'SARCF' }" tag="router-link">
           แบบประเมิน SARC-F
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
-          แบบบันทึกการประเมิน
+          แบบบันทึกการประเมิน Gait speed, grip strength
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>

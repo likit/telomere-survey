@@ -59,31 +59,39 @@
           <b-radio native-value=2 v-model="form.record.mna.five">ไม่มีปัญหาทางประสาท</b-radio>
         </b-field>
         <span class="tag is-light is-success">คะแนน {{ form.record.mna.five }}</span>
-        <b-field label="ดัชนีมวลกาย">
-          <b-radio native-value=0 v-model="form.record.mna.six">BMI น้อยกว่า 19</b-radio>
+        <b-field v-bind:label="'ดัชนีมวลกาย (=' + bmi.toFixed(2) + ')'">
+          <b-radio :readonly="true" native-value=0 v-model="form.record.mna.six">BMI น้อยกว่า 19</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value=1 v-model="form.record.mna.six">BMI ตั้งแต่ 19 แต่น้อยกว่า 21</b-radio>
+          <b-radio :readonly="true" native-value=1 v-model="form.record.mna.six">BMI ตั้งแต่ 19 แต่น้อยกว่า 21</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value=2 v-model="form.record.mna.six">BMI ตั้งแต่ 21 แต่น้อยกว่า 23</b-radio>
+          <b-radio :readonly="true" native-value=2 v-model="form.record.mna.six">BMI ตั้งแต่ 21 แต่น้อยกว่า 23</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value=3 v-model="form.record.mna.six">BMI ตั้งแต่ 23 ขึ้นไป</b-radio>
+          <b-radio :readonly="true" native-value=3 v-model="form.record.mna.six">BMI ตั้งแต่ 23 ขึ้นไป</b-radio>
         </b-field>
         <span class="tag is-light is-success">คะแนน {{ form.record.mna.six }}</span>
         <h1 class="title has-text-centered is-size-4">คะแนนรวม {{ score }}</h1>
       </b-step-item>
     </b-steps>
     <div class="buttons is-centered">
-      <button class="button is-light" @click="$router.back()">Back</button>
+      <button class="button is-light" @click="$router.back()">
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{ name: 'ADL' }" class="button is-success">Next</router-link>
+      <router-link :to="{ name: 'ADL' }" class="button is-success">
+        <span class="icon">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </router-link>
     </div>
   </div>
 </section>
@@ -97,6 +105,9 @@ export default {
   components: {Navigation},
   computed: {
     ...mapState(['form']),
+    bmi: function() {
+      return this.form.record.personal.weight/(this.form.record.personal.height*0.01)**2.0
+    },
     score: function() {
       let total = parseInt(this.form.record.mna.one) + parseInt(this.form.record.mna.two) +
           parseInt(this.form.record.mna.three) + parseInt(this.form.record.mna.four) +
@@ -124,26 +135,14 @@ export default {
         })
       } else {
         this.$store.dispatch('saveForm').then(() => {
-          self.$buefy.dialog.alert({
-            title: 'Login Successful',
+          self.$buefy.toast.open({
             message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
             type: 'is-success',
-            hasIcon: true,
-            icon: 'check-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true,
           })
         }).catch(() => {
-          self.$buefy.dialog.alert({
-            title: 'Error!',
+          self.$buefy.toast.open({
             message: 'โปรแกรมไม่สามารถบันทึกข้อมูลได้ โปรดลองใหม่อีกครั้ง',
             type: 'is-danger',
-            hasIcon: true,
-            icon: 'times-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true
           })
         })
       }

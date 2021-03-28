@@ -4,6 +4,7 @@
   <br>
   <div class="container">
     <h1 class="title has-text-centered">แบบฟอร์มบันทึกข้อมูล (CASE REPORT FORM)</h1>
+    <h1 class="title has-text-centered is-size-4">ณ จังหวัด{{ $store.state.province.name }}</h1>
     <div class="has-text-centered">
       <b-field label="รหัสวิจัย" type="is-danger">
         <b-input v-model="form.record.code"></b-input>
@@ -16,14 +17,22 @@
         <strong>แก้ไขล่าสุดเมื่อ</strong> {{ $store.state.form.record.lastUpdate.datetime.toLocaleString() }}
       </h1>
       <div class="buttons is-centered">
-        <b-button type="is-light" @click="$router.push({name: 'MainPage'})">Cancel</b-button>
+        <b-button type="is-light" @click="$router.push({name: 'MainPage'})">
+          <span class="icon">
+            <i class="fas fa-chevron-left"></i>
+          </span>
+        </b-button>
         <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
           <span>Save</span>
         </button>
-        <b-button type="is-success" @click="nextPage">Start</b-button>
+        <b-button type="is-success" @click="nextPage">
+          <span class="icon">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+        </b-button>
       </div>
     </div>
   </div>
@@ -59,26 +68,14 @@ export default {
         })
       } else {
         this.$store.dispatch('saveForm').then(() => {
-          self.$buefy.dialog.alert({
-            title: 'Login Successful',
+          self.$buefy.toast.open({
             message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
             type: 'is-success',
-            hasIcon: true,
-            icon: 'check-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true,
           })
-        }).catch(() => {
+        }).catch((error) => {
           self.$buefy.dialog.alert({
-            title: 'Error!',
-            message: 'โปรแกรมไม่สามารถบันทึกข้อมูลได้ โปรดลองใหม่อีกครั้ง',
+            message: error.toString(),
             type: 'is-danger',
-            hasIcon: true,
-            icon: 'times-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true
           })
         })
       }

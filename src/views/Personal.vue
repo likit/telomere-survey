@@ -283,6 +283,9 @@
           <b-radio native-value="อยู่บ้านเฉย ๆ" v-model="form.record.personal.job.jobBeforeRetirement">อยู่บ้านเฉย ๆ</b-radio>
           <b-radio native-value="อื่น ๆ" v-model="form.record.personal.job.jobBeforeRetirement">อื่น ๆ</b-radio>
         </b-field>
+        <b-field label="งานอื่น ๆ" v-if="form.record.personal.job.jobBeforeRetirement=='อื่น ๆ'">
+          <b-input v-model="form.record.personal.job.jobBeforeRetirementOther"></b-input>
+        </b-field>
         <b-field label="หลังการเกษียณอายุหรือหลังอายุ 60 ปี">
           <b-radio native-value="งานบ้าน" v-model="form.record.personal.job.jobAfterRetirement">งานบ้าน</b-radio>
           <b-radio native-value="เกษตรกร" v-model="form.record.personal.job.jobAfterRetirement">เกษตรกร</b-radio>
@@ -303,6 +306,9 @@
           <b-radio native-value="อยู่บ้านเฉย ๆ" v-model="form.record.personal.job.jobAfterRetirement">อยู่บ้านเฉย ๆ</b-radio>
           <b-radio native-value="อื่น ๆ" v-model="form.record.personal.job.jobAfterRetirement">อื่น ๆ</b-radio>
         </b-field>
+        <b-field label="งานอื่น ๆ" v-if="form.record.personal.job.jobAfterRetirement=='อื่น ๆ'">
+          <b-input v-model="form.record.personal.job.jobAfterRetirementOther"></b-input>
+        </b-field>
         <b-field label="ยังทำงานอยู่">
           <b-field label="ทำมาแล้วกี่ปี">
             <b-numberinput placeholder="ทำมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.duration"></b-numberinput>
@@ -319,14 +325,22 @@
       </b-step-item>
     </b-steps>
     <div class="buttons is-centered">
-      <button class="button is-light" @click="$router.back()">Back</button>
+      <button class="button is-light" @click="$router.back()">
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{name: 'Charlson'}" class="button is-success">Next</router-link>
+      <router-link :to="{name: 'Charlson'}" class="button is-success">
+        <span class="icon">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </router-link>
     </div>
   </div>
 </section>
@@ -358,26 +372,14 @@ export default {
         })
       } else {
         this.$store.dispatch('saveForm').then(() => {
-          self.$buefy.dialog.alert({
-            title: 'Login Successful',
+          self.$buefy.toast.open({
             message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
             type: 'is-success',
-            hasIcon: true,
-            icon: 'check-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true,
           })
         }).catch(() => {
-          self.$buefy.dialog.alert({
-            title: 'Error!',
+          self.$buefy.toast.open({
             message: 'โปรแกรมไม่สามารถบันทึกข้อมูลได้ โปรดลองใหม่อีกครั้ง',
             type: 'is-danger',
-            hasIcon: true,
-            icon: 'times-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true
           })
         })
       }

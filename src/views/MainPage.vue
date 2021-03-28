@@ -23,24 +23,30 @@
         <p class="panel-heading">
           Menu
         </p>
+        <router-link class="panel-block" :to="{name: 'Province'}">
+          <span class="panel-icon">
+            <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+          </span>
+          พื้นที่
+        </router-link>
         <router-link class="panel-block" :to="{name: 'Profile'}">
           <span class="panel-icon">
             <i class="fas fa-user-alt" aria-hidden="true"></i>
           </span>
-          Profile
+          ข้อมูลนักวิจัย
         </router-link>
-        <router-link class="panel-block" :to="{ name: 'FormMain'}">
+        <p @click="addRecord" class="panel-block">
           <span class="panel-icon">
             <i class="fas fa-plus" aria-hidden="true"></i>
           </span>
-          New Record
-        </router-link>
-        <a class="panel-block">
+          เพิ่มรายการ
+        </p>
+        <router-link class="panel-block" :to="{ name: 'RecordSearch' }">
           <span class="panel-icon">
             <i class="fas fa-book" aria-hidden="true"></i>
           </span>
-          Records
-        </a>
+          รายการทั้งหมด
+        </router-link>
       </nav>
     </div>
   </div>
@@ -66,6 +72,11 @@ export default {
     this.user = auth.currentUser;
   },
   methods: {
+    addRecord: function () {
+      this.$store.commit('resetForm')
+      this.$router.push({ name: 'FormMain' })
+
+    },
     search: function() {
       this.$router.push({name: 'RecordSearch', params: { query: this.query}})
     }

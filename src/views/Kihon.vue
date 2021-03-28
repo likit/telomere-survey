@@ -137,14 +137,22 @@
       </b-step-item>
     </b-steps>
     <div class="buttons is-centered">
-      <button class="button is-light" @click="$router.back()">Back</button>
+      <button class="button is-light" @click="$router.back()">
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{ name: 'EQ-5D-5L' }" class="button is-success">Next</router-link>
+      <router-link :to="{ name: 'EQ-5D-5L' }" class="button is-success">
+        <span class="icon">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </router-link>
     </div>
   </div>
 </section>
@@ -184,26 +192,14 @@ export default {
         })
       } else {
         this.$store.dispatch('saveForm').then(() => {
-          self.$buefy.dialog.alert({
-            title: 'Login Successful',
+          self.$buefy.toast.open({
             message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
             type: 'is-success',
-            hasIcon: true,
-            icon: 'check-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true,
           })
         }).catch(() => {
-          self.$buefy.dialog.alert({
-            title: 'Error!',
+          self.$buefy.toast.open({
             message: 'โปรแกรมไม่สามารถบันทึกข้อมูลได้ โปรดลองใหม่อีกครั้ง',
             type: 'is-danger',
-            hasIcon: true,
-            icon: 'times-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true
           })
         })
       }

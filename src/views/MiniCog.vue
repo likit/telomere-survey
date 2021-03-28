@@ -69,7 +69,6 @@ export default {
   },
   mounted() {
     let self = this
-    console.log(this.form.record.minicog.items, 'mounted')
     this.form.record.minicog.items.forEach((d)=>{
       switch (d) {
         case "หลานสาว":
