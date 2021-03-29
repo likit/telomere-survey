@@ -213,6 +213,9 @@
           <b-radio native-value="โรคหัวใจ" v-model="form.record.personal.underlyingDis">โรคหัวใจ</b-radio>
         </b-field>
         <b-field>
+          <b-radio native-value="โรคหัวใจ" v-model="form.record.personal.underlyingDis">ความดันโลหิตสูง</b-radio>
+        </b-field>
+        <b-field>
           <b-radio native-value="โรคปอดอุดกั้นเรื้อรัง" v-model="form.record.personal.underlyingDis">โรคปอดอุดกั้นเรื้อรัง</b-radio>
         </b-field>
         <b-field>
