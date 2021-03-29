@@ -46,6 +46,9 @@
         <b-navbar-item :to="{ name: '9Q'}" tag="router-link">
           9Q
         </b-navbar-item>
+        <b-navbar-item :to="{ name: 'Kihon'}" tag="router-link">
+          Kihon
+        </b-navbar-item>
         <b-navbar-item :to="{ name: 'EQ-5D-5L'}" tag="router-link">
           EQ-5D-5L
         </b-navbar-item>

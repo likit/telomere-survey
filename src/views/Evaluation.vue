@@ -11,10 +11,10 @@
       <b-step-item step="14" label="แบบบันทึกการประเมิน" :clickable="true">
         <b-field label="Gait speed">
           Walk time เวลาที่ใช้ในการเดิน 6 เมตร
-          <b-numberinput placeholder="ครั้งที่ 1" v-model="form.record.evaluation.gait1"></b-numberinput>
+          <b-numberinput placeholder="ครั้งที่ 1" step="0.1" v-model="form.record.evaluation.gait1"></b-numberinput>
         </b-field>
         <b-field>
-          <b-numberinput placeholder="ครั้งที่ 2" v-model="form.record.evaluation.gait2"></b-numberinput>
+          <b-numberinput placeholder="ครั้งที่ 2" step="0.1" v-model="form.record.evaluation.gait2"></b-numberinput>
         </b-field>
         <b-field label="ค่าเฉลี่ย">
           <b-input :readonly="true" placeholder="เฉลี่ย" :value="gait.toFixed(2)"></b-input>
@@ -26,25 +26,31 @@
         <div class="notification">
           <b-icon pack="fas" icon="thumbs-up" v-if="form.record.evaluation.hand=='ถนัดแขนซ้าย'" size="is-large" type="is-success"></b-icon>
           <b-field label="แขนซ้าย">
-            <b-input type="number" placeholder="ครั้งที่ 1 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 1 (กก.)"
+              v-model="form.record.evaluation.gripLeft1"></b-input>
           </b-field>
           <b-field>
-            <b-input type="number" placeholder="ครั้งที่ 2 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 2 (กก.)"
+              v-model="form.record.evaluation.gripLeft2"></b-input>
           </b-field>
           <b-field>
-            <b-input type="number" placeholder="ครั้งที่ 3 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 3 (กก.)"
+              v-model="form.record.evaluation.gripLeft3"></b-input>
           </b-field>
         </div>
         <div class="notification">
           <b-icon pack="fas" icon="thumbs-up" v-if="form.record.evaluation.hand=='ถนัดแขนขวา'" type="is-success" size="is-large"></b-icon>
           <b-field label="แขนขวา">
-            <b-input type="number" placeholder="ครั้งที่ 1 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 1 (กก.)"
+              v-model="form.record.evaluation.gripRight1"></b-input>
           </b-field>
           <b-field>
-            <b-input type="number" placeholder="ครั้งที่ 2 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 2 (กก.)"
+              v-model="form.record.evaluation.gripRight2"></b-input>
           </b-field>
           <b-field>
-            <b-input type="number" placeholder="ครั้งที่ 3 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 3 (กก.)"
+              v-model="form.record.evaluation.gripRight3"></b-input>
           </b-field>
         </div>
         <b-field label="Quadriceps strength">
@@ -52,42 +58,48 @@
         <div class="notification">
           <b-icon pack="fas" icon="thumbs-up" v-if="form.record.evaluation.leg=='ถนัดขาซ้าย'" size="is-large" type="is-success"></b-icon>
           <b-field label="ขาซ้าย">
-            <b-input type="number" placeholder="ครั้งที่ 1 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 1 (กก.)"
+              v-model="form.record.evaluation.quadLeft1"></b-input>
           </b-field>
           <b-field>
-            <b-input type="number" placeholder="ครั้งที่ 2 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 2 (กก.)"
+              v-model="form.record.evaluation.quadLeft2"></b-input>
           </b-field>
           <b-field>
-            <b-input type="number" placeholder="ครั้งที่ 3 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 3 (กก.)"
+              v-model="form.record.evaluation.quadLeft3"></b-input>
           </b-field>
         </div>
         <div class="notification">
           <b-icon pack="fas" icon="thumbs-up" v-if="form.record.evaluation.leg=='ถนัดขาขวา'" type="is-success" size="is-large"></b-icon>
           <b-field label="ขาขวา">
-            <b-input type="number" placeholder="ครั้งที่ 1 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 1 (กก.)"
+              v-model="form.record.evaluation.quadRight1"></b-input>
           </b-field>
           <b-field>
-            <b-input type="number" placeholder="ครั้งที่ 2 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 2 (กก.)"
+              v-model="form.record.evaluation.quadRight2"></b-input>
           </b-field>
           <b-field>
-            <b-input type="number" placeholder="ครั้งที่ 3 (กก.)"></b-input>
+            <b-input type="number" step="0.1" placeholder="ครั้งที่ 3 (กก.)"
+              v-model="form.record.evaluation.quadRight3"></b-input>
           </b-field>
         </div>
         <b-field label="BIA"></b-field>
         <b-field label="น้ำหนัก">
-          <b-input type="number" placeholder="กก." v-model="form.record.personal.weight"></b-input>
+          <b-input type="number" step="0.1" placeholder="กก." v-model="form.record.personal.weight"></b-input>
         </b-field>
         <b-field label="ส่วนสูง">
-          <b-input type="number" placeholder="ซม." v-model="form.record.personal.height"></b-input>
+          <b-input type="number" step="0.1" placeholder="ซม." v-model="form.record.personal.height"></b-input>
         </b-field>
         <b-field label="BMI">
           <b-input type="number" :readonly="true" :value="bmi.toFixed(2)"></b-input>
         </b-field>
         <b-field label="Muscle mass">
-          <b-input type="number" :readonly="true" :value="form.record.evaluation.muscleMass"></b-input>
+          <b-input type="number" step="0.1" v-model="form.record.evaluation.muscleMass"></b-input>
         </b-field>
         <b-field label="Fat free mass">
-          <b-input type="number" :readonly="true" :value="form.record.evaluation.fatFreeMass"></b-input>
+          <b-input type="number" step="0.1" v-model="form.record.evaluation.fatFreeMass"></b-input>
         </b-field>
       </b-step-item>
     </b-steps>

@@ -19,7 +19,7 @@ function initializeForm() {
                 height: null,
                 weight: null,
                 gender: null,
-                age: 65,
+                age: null,
                 maritalStatus: null,
                 address: null,
                 education: null,
@@ -190,6 +190,18 @@ function initializeForm() {
                 gait1: null,
                 gait2: null,
                 hand: null,
+                gripLeft1: null,
+                gripLeft2: null,
+                gripLeft3: null,
+                gripRight1: null,
+                gripRight2: null,
+                gripRight3: null,
+                quadLeft1: null,
+                quadLeft2: null,
+                quadLeft3: null,
+                quadRight1: null,
+                quadRight2: null,
+                quadRight3: null,
                 leg: null,
                 weight: null,
                 height: null,
@@ -254,7 +266,7 @@ export default new Vuex.Store({
             }
         },
         setCreator(state) {
-            state.form.creator = auth.currentUser.email
+            state.form.record.creator = auth.currentUser.email
         },
         setClockFileName(state, fileName) {
             state.form.record.clock.file = fileName

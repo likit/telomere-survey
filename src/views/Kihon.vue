@@ -66,7 +66,7 @@
         </b-field>
         <b-field>
           <b-switch v-model="form.record.kihon.twelve">
-            ดัชนีมวลกายน้อยกว่า 18.5
+            ดัชนีมวลกายน้อยกว่า 18.5 <strong>(={{bmi}})</strong>
           </b-switch>
         </b-field>
         <b-field>
@@ -168,12 +168,27 @@ export default {
   components: {Navigation},
   computed: {
     ...mapState(['form']),
+    bmi: function() {
+      let currentBmi = this.form.record.personal.weight/(this.form.record.personal.height*0.01)**2
+      if (isNaN(currentBmi)) {
+        return "N/A"
+      } else {
+        return currentBmi.toFixed(2)
+      }
+    },
     score: function() {
       return parseInt(this.one) + parseInt(this.two) +
           parseInt(this.three) + parseInt(this.four) +
           parseInt(this.five) + parseInt(this.six) +
           parseInt(this.seven) + parseInt(this.eight) +
           parseInt(this.nine)
+    }
+  },
+  mounted() {
+    if (this.bmi < 18.5) {
+      this.form.record.kihon.twelve = true;
+    } else {
+      this.form.record.kihon.twelve = false;
     }
   },
   methods: {
