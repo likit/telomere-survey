@@ -185,6 +185,9 @@
           <b-field label="จำนวนแก้วต่อวัน">
             <b-numberinput v-model="form.record.personal.currentDrinkPerDay"></b-numberinput>
           </b-field>
+          <b-field label="จำนวนขวดต่อวัน">
+            <b-numberinput v-model="form.record.personal.currentDrinkPerDayBottle"></b-numberinput>
+          </b-field>
         </div>
         <b-field>
           <b-radio native-value="เคยดื่ม" v-model="form.record.personal.alcohol">เคยดื่ม</b-radio>
@@ -192,6 +195,9 @@
         <div class="notification is-light" v-if="form.record.personal.alcohol=='เคยดื่ม'">
           <b-field label="จำนวนแก้วต่อวัน">
             <b-numberinput v-model="form.record.personal.drinkPerDay"></b-numberinput>
+          </b-field>
+          <b-field label="จำนวนขวดต่อวัน">
+            <b-numberinput v-model="form.record.personal.drinkPerDayBottle"></b-numberinput>
           </b-field>
           <b-field label="เป็นเวลา (ปี)">
             <b-numberinput v-model="form.record.personal.drinkYears"></b-numberinput>
@@ -213,13 +219,17 @@
           <b-radio native-value="โรคหัวใจ" v-model="form.record.personal.underlyingDis">โรคหัวใจ</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value="โรคหัวใจ" v-model="form.record.personal.underlyingDis">ความดันโลหิตสูง</b-radio>
+          <b-radio native-value="โรคความดันโลหิตสูง" v-model="form.record.personal.underlyingDis">ความดันโลหิตสูง</b-radio>
         </b-field>
         <b-field>
           <b-radio native-value="โรคปอดอุดกั้นเรื้อรัง" v-model="form.record.personal.underlyingDis">โรคปอดอุดกั้นเรื้อรัง</b-radio>
         </b-field>
         <b-field>
           <b-radio native-value="อื่น ๆ" v-model="form.record.personal.underlyingDis">อื่น ๆ</b-radio>
+        </b-field>
+        <b-field label="โปรดระบุ">
+          <b-input v-model="form.record.personal.underlyingDisOther"
+            v-if="form.record.personal.underlyingDis=='อื่น ๆ'"></b-input>
         </b-field>
         <b-field label="หลักประกันสุขภาพ">
           <b-radio native-value="สิทธิรักษาสุขภาพถ้วนหน้า/30 บาท" v-model="form.record.personal.healthCoverage">สิทธิรักษาสุขภาพถ้วนหน้า / 30 บาท</b-radio>

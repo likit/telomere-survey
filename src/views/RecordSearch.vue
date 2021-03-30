@@ -37,6 +37,7 @@
       </b-field>
       <b-table :data="filteredItems"
                :paginated="true"
+               :default-sort="['code', 'firstname']"
                :debounce-search="1000">
         <b-table-column field="code" label="Code" sortable v-slot="props">
           {{ props.row.code }}

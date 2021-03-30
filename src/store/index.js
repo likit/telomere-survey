@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {auth, records} from '../firebase'
+import {ToastProgrammatic} from "buefy";
 
 Vue.use(Vuex)
 
@@ -36,10 +37,13 @@ function initializeForm() {
                 quitSmokingYears: null,
                 alcohol: null,
                 currentDrinkPerDay: null,
+                currentDrinkPerDayBottle: null,
                 drinkPerDay: null,
+                drinkPerDayBottle: null,
                 drinkYears: null,
                 quitDrinkYears: null,
                 underlyingDis: null,
+                underlyingDisOther: null,
                 healthCoverage: null,
                 hospitalized: null,
                 fell: null,
@@ -276,7 +280,9 @@ export default new Vuex.Store({
         saveForm({commit, state}) {
             commit('setLastUpdate')
             commit('setFormProvince')
-            records.where('code', '==', state.form.record.code).get().then((snapshot) => {
+            records.where('code', '==', state.form.record.code)
+                .where('province', '==', state.form.record.province)
+                .get().then((snapshot) => {
                 if (snapshot.empty) {
                     if (state.form.record.code != null) {
                         commit('setCreator')
@@ -284,7 +290,14 @@ export default new Vuex.Store({
                     }
                 } else {
                     let formData = snapshot.docs[0]
-                    records.doc(formData.id).set(state.form.record)
+                    if (state.form.record.lastUpdate.length > 1) {
+                        records.doc(formData.id).set(state.form.record)
+                    } else {
+                        ToastProgrammatic.open({
+                            type: 'is-warning',
+                            message: 'ไม่สามารถบันทึกได้เนื่องจากรหัสซ้ำในจังหวัดนี้'
+                        })
+                    }
                 }
             })
         },
