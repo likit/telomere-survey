@@ -137,17 +137,7 @@ export default {
             ariaModal: true
           })
         } else {
-          self.$store.dispatch('saveForm').then(() => {
-            self.$buefy.toast.open({
-              message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
-              type: 'is-success',
-            })
-          }).catch((error) => {
-            self.$buefy.toast.open({
-              message: error.toString(),
-              type: 'is-danger',
-            })
-          })
+          self.$store.dispatch('saveForm')
         }
       }
     }

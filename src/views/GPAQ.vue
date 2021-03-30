@@ -180,17 +180,7 @@ export default {
           ariaModal: true
         })
       } else {
-        this.$store.dispatch('saveForm').then(() => {
-          self.$buefy.toast.open({
-            message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
-            type: 'is-success',
-          })
-        }).catch(() => {
-          self.$buefy.toast.open({
-            message: 'โปรแกรมไม่สามารถบันทึกข้อมูลได้ โปรดลองใหม่อีกครั้ง',
-            type: 'is-danger',
-          })
-        })
+        this.$store.dispatch('saveForm')
       }
     }
   }
