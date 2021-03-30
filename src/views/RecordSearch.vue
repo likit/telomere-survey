@@ -78,6 +78,8 @@
 <script>
 import Navigation from "@/components/navigation";
 import {records, auth} from '../firebase';
+import {mapState} from "vuex";
+
 export default {
   name: "RecordSearch",
   components: {Navigation},
@@ -89,12 +91,13 @@ export default {
     }
   },
   computed: {
+    ...mapState(['province']),
     filteredItems: function() {
       let self = this
       let fltItems;
       fltItems = this.items.filter((d)=>{
-        if (self.createdBy != 'all') {
-          return d.creator == auth.currentUser.email
+        if (self.createdBy !== 'all') {
+          return d.creator === auth.currentUser.email
         } else {
           return true
         }
@@ -109,11 +112,15 @@ export default {
     },
     setRecord: function(code) {
       let self = this
-      records.where('code', '==', code).get().then((snapshot)=>{
-        let d = snapshot.docs[0]
-        this.$store.dispatch('setRecord', d.data()).then(()=>{
-          self.$router.push({ name: 'FormMain'})
-        })
+      records.where('code', '==', code)
+          .where('province', '==', self.province.name)
+          .get().then((snapshot) => {
+            if (!snapshot.empty) {
+              let d = snapshot.docs[0]
+              this.$store.dispatch('setRecord', d.data()).then(()=>{
+                self.$router.push({ name: 'FormMain'})
+              })
+            }
       })
     },
     deleteRecord: function(id) {

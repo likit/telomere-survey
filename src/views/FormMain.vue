@@ -7,7 +7,10 @@
     <h1 class="title has-text-centered is-size-4">ณ จังหวัด{{ $store.state.province.name }}</h1>
     <div class="has-text-centered">
       <b-field label="รหัสวิจัย" type="is-danger">
-        <b-input v-model="form.record.code"></b-input>
+        <b-input v-model="form.record.code" :readonly="currCode != null"></b-input>
+      </b-field>
+      <b-field label="ชื่อ" v-if="form.record.personal.firstname">
+        <b-input :value="fullname" :readonly="true"></b-input>
       </b-field>
       <b-field label="วันที่เก็บข้อมูล">
         <b-datepicker icon="calendar-today" :locale="undefined" :inline="true" v-model="form.record.recordDate"></b-datepicker>
@@ -47,7 +50,10 @@ export default {
   name: "FormMain",
   components: {Navigation},
   computed: {
-    ...mapState(['form']),
+    ...mapState(['form', 'currCode']),
+    fullname: function() {
+      return this.form.record.personal.firstname + ' ' + this.form.record.personal.lastname
+    }
   },
   methods: {
     nextPage: function() {
@@ -67,17 +73,7 @@ export default {
           ariaModal: true
         })
       } else {
-        this.$store.dispatch('saveForm').then(() => {
-          self.$buefy.toast.open({
-            message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
-            type: 'is-success',
-          })
-        }).catch((error) => {
-          self.$buefy.dialog.alert({
-            message: error.toString(),
-            type: 'is-danger',
-          })
-        })
+        this.$store.dispatch('saveForm')
       }
     }
   },

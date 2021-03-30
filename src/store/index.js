@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {auth, records} from '../firebase'
-import {ToastProgrammatic} from "buefy";
+import {DialogProgrammatic, ToastProgrammatic} from "buefy";
 
 Vue.use(Vuex)
 
@@ -220,11 +220,13 @@ export default new Vuex.Store({
     state: {
         form: initializeForm(),
         province: null,
+        currCode: null,
     },
     mutations: {
         resetForm(state) {
             state.form = initializeForm()
             state.form.record.province = state.province.name
+            state.currCode = null
         },
         setProvince(state, province) {
             state.province = province
@@ -263,6 +265,7 @@ export default new Vuex.Store({
             })
         },
         setUpRecord(state, record) {
+            state.currCode = record.code
             state.form.record = record
             state.form.record.recordDate = new Date(record.recordDate.toDate())
             if (record.lastUpdate.datetime) {
@@ -274,6 +277,9 @@ export default new Vuex.Store({
         },
         setClockFileName(state, fileName) {
             state.form.record.clock.file = fileName
+        },
+        setCurrCode(state, code) {
+            state.currCode = code
         }
     },
     actions: {
@@ -283,19 +289,64 @@ export default new Vuex.Store({
             records.where('code', '==', state.form.record.code)
                 .where('province', '==', state.form.record.province)
                 .get().then((snapshot) => {
+                    // if code does not exist, add the record and set the current code to
+                    // the record's one.
                 if (snapshot.empty) {
                     if (state.form.record.code != null) {
                         commit('setCreator')
-                        records.add(state.form.record)
+                        records.add(state.form.record).then(()=>{
+                            ToastProgrammatic.open({
+                                type: 'is-success',
+                                message: 'บันทึกข้อมูลเรียบร้อยแล้ว'
+                            })
+                            commit('setCurrCode', state.form.record.code)
+                        }).catch((error)=>{
+                            ToastProgrammatic.open({
+                                type: 'is-danger',
+                                message: error.toString()
+                            })
+                        })
                     }
                 } else {
+                    // if code exists, but not the same as current code or the current code is null
+                    // confirm whether the user wants to overwrite the record.
                     let formData = snapshot.docs[0]
-                    if (state.form.record.lastUpdate.length > 1) {
-                        records.doc(formData.id).set(state.form.record)
+                    if (state.currCode !== state.form.record.code || state.currCode == null) {
+                        DialogProgrammatic.confirm({
+                            title: 'รหัสซ้ำในพื้นที่',
+                            message: 'ท่านแน่ใจว่าจะบันทึกทับรายการที่มีอยู่แล้วหรือไม่',
+                            hasIcon: true,
+                            iconPack: 'fa',
+                            icon: 'times-circle',
+                            type: 'is-danger',
+                            onConfirm: ()=>{
+                                records.doc(formData.id).set(state.form.record).then(()=>{
+                                    ToastProgrammatic.open({
+                                        type: 'is-success',
+                                        message: 'บันทึกข้อมูลเรียบร้อยแล้ว'
+                                    })
+                                    //TODO: set current code
+                                }).catch((error)=>{
+                                    ToastProgrammatic.open({
+                                        type: 'is-danger',
+                                        message: error.toString()
+                                    })
+                                })
+                            }
+                        })
                     } else {
-                        ToastProgrammatic.open({
-                            type: 'is-warning',
-                            message: 'ไม่สามารถบันทึกได้เนื่องจากรหัสซ้ำในจังหวัดนี้'
+                        // if the code exists but it is the same as the current code,
+                        // update the record. No need to confirm.
+                        records.doc(formData.id).set(state.form.record).then(()=>{
+                            ToastProgrammatic.open({
+                                type: 'is-success',
+                                message: 'บันทึกข้อมูลเรียบร้อยแล้ว'
+                            })
+                        }).catch((error)=>{
+                            ToastProgrammatic.open({
+                                type: 'is-danger',
+                                message: error.toString()
+                            })
                         })
                     }
                 }
