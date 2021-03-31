@@ -46,8 +46,7 @@ export default {
   methods: {
     login: function() {
       let self = this
-      auth.signInWithEmailAndPassword(self.email, self.password).then((data)=>{
-        console.log(data)
+      auth.signInWithEmailAndPassword(self.email, self.password).then(()=>{
         self.$buefy.toast.open({
           message: 'You have logged in successfully.',
           type: 'is-success',

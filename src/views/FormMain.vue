@@ -17,13 +17,16 @@
       </b-field>
       <div class="notification is-light is-link">
         <span class="help is-info"><strong>บันทึกเมื่อ</strong> {{ $store.state.form.record.recordDate.toLocaleString() }}</span>
-        <span class="help is-info">
+        <span class="help is-info" v-if="user != null">
+          <strong>โดย</strong> {{ user.email }}
+        </span>
+        <span class="help is-info" v-else>
           <strong>โดย</strong> {{ form.record.creator }}
         </span>
         <span class="help is-link" v-if="form.record.lastUpdate.length > 0">
-          <strong>แก้ไขล่าสุดเมื่อ</strong> {{ form.record.lastUpdate[form.record.lastUpdate.length - 1].datetime.toDate().toLocaleString() }}
+          <strong>แก้ไขล่าสุดเมื่อ</strong> {{ lastEditAt }}
         </span>
-        <span class="help is-link">
+        <span class="help is-link" v-if="form.record.lastUpdate.length > 0">
           <strong>โดย</strong> {{ form.record.lastUpdate[form.record.lastUpdate.length - 1].creator }}
         </span>
       </div>
@@ -52,6 +55,7 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import { auth } from '../firebase';
 import {mapState} from 'vuex';
 
 export default {
@@ -61,7 +65,24 @@ export default {
     ...mapState(['form', 'currCode']),
     fullname: function() {
       return this.form.record.personal.firstname + ' ' + this.form.record.personal.lastname
+    },
+    lastEditAt: function() {
+      let dt = null;
+      try {
+        dt = this.form.record.lastUpdate[this.form.record.lastUpdate.length - 1].datetime.toDate().toLocaleString()
+      } catch (e) {
+        dt = this.form.record.lastUpdate[this.form.record.lastUpdate.length - 1].datetime.toLocaleString()
+      }
+      return dt
     }
+  },
+  data() {
+    return {
+      user: null
+    }
+  },
+  mounted() {
+    this.user = auth.currentUser
   },
   methods: {
     nextPage: function() {

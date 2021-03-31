@@ -6,7 +6,7 @@
       <h1 class="subtitle">โครงการวิจัยเรื่องระบบการจัดการโรคไม่ติดต่อเรื้อรังในกลุ่มผู้สูงอายุเปราะบางร่วมกับภาวะมวลกล้ามเนื้อน้อย</h1>
       <br>
       <h1 class="title is-size-4"><strong>พื้นที่</strong> {{ province.name }}</h1>
-      <h1 class="subtitle is-size-6"><strong>ผู้จัดเก็บข้อมูล</strong> {{ user.displayName }}</h1>
+      <h1 class="subtitle is-size-6" v-if="user != null"><strong>ผู้จัดเก็บข้อมูล</strong> {{ user.displayName }}</h1>
       <br>
       <b-field label="Search Records">
         <b-input placeholder="research code" v-model="query" type="search" :expanded="true"></b-input>
