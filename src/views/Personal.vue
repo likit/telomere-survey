@@ -243,14 +243,17 @@
         <b-field>
           <b-checkbox @input="updateHealthCoverage($event, 'อื่น ๆ')" v-model="c4">อื่น ๆ</b-checkbox>
         </b-field>
-        <b-field v-if="form.record.personal.healthCoverageOther=='อื่น ๆ'">
-          <b-input placeholder="โปรดระบุ"></b-input>
+        <b-field v-if="c4 === true">
+          <b-input placeholder="โปรดระบุ" v-model="form.record.personal.healthCoverageOther"></b-input>
         </b-field>
         <b-field label="ประวัติการเข้ารับการรักษาเป็นผู้ป่วยในโรงพยาบาลในระยะเวลา 1 ปี ที่ผ่านมา">
           <b-radio native-value="ไม่มี" v-model="form.record.personal.hospitalized">ไม่มี</b-radio>
         </b-field>
         <b-field>
           <b-radio native-value="มี" v-model="form.record.personal.hospitalized">มี</b-radio>
+        </b-field>
+        <b-field label="รายละเอียดเข้ารับการรักษา">
+          <b-input v-if="form.record.personal.hospitalized === 'มี'" v-model="form.record.personal.hospitalizationDetail"></b-input>
         </b-field>
         <b-field label="ประวัติการพลัดหกล้มในระยะ 1 ปีที่ผ่านมา">
           <b-radio native-value="ไม่มี" v-model="form.record.personal.fell">ไม่มี</b-radio>
@@ -461,6 +464,18 @@ export default {
           break;
       }
     })
+  },
+  watch: {
+    d6: function (newValue) {
+      if (newValue != true) {
+        this.form.record.personal.underlyingDisOther = null
+      }
+    },
+    c4: function (newValue) {
+      if (newValue != true) {
+        this.form.record.personal.healthCoverageOther = null
+      }
+    }
   }
 }
 </script>

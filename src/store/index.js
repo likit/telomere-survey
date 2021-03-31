@@ -49,6 +49,7 @@ function initializeForm() {
                 healthCoverageOther: null,
                 healthCoverages: [],
                 hospitalized: null,
+                hospitalizationDetail: null,
                 fell: null,
                 medication: null,
                 medicationTypes: null,
