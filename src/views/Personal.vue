@@ -475,7 +475,7 @@ export default {
       if (newValue != true) {
         this.form.record.personal.healthCoverageOther = null
       }
-    }
+    },
   }
 }
 </script>

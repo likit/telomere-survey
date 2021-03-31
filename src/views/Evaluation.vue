@@ -101,6 +101,9 @@
         <b-field label="Fat free mass">
           <b-input type="number" step="0.1" v-model="form.record.evaluation.fatFreeMass"></b-input>
         </b-field>
+        <b-field label="หมายเหตุ">
+          <b-input v-model="form.record.evaluation.note"></b-input>
+        </b-field>
       </b-step-item>
     </b-steps>
     <div class="buttons is-centered">

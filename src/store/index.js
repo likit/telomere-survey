@@ -214,7 +214,8 @@ function initializeForm() {
                 weight: null,
                 height: null,
                 muscleMass: null,
-                fatFreeMass: null
+                fatFreeMass: null,
+                note: null
             }
         }
     }
