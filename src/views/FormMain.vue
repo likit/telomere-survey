@@ -17,7 +17,7 @@
       </b-field>
       <div class="notification is-light is-link">
         <span class="help is-info"><strong>บันทึกเมื่อ</strong> {{ $store.state.form.record.recordDate.toLocaleString() }}</span>
-        <span class="help is-info" v-if="user != null">
+        <span class="help is-info" v-if="user != null && form.record.lastUpdate.length == 0">
           <strong>โดย</strong> {{ user.email }}
         </span>
         <span class="help is-info" v-else>
