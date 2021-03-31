@@ -46,6 +46,8 @@ function initializeForm() {
                 underlyingDisOther: null,
                 underlyingDiseases: [],
                 healthCoverage: null,
+                healthCoverageOther: null,
+                healthCoverages: [],
                 hospitalized: null,
                 fell: null,
                 medication: null,
@@ -241,6 +243,14 @@ export default new Vuex.Store({
                 state.form.record.personal.underlyingDiseases.push(disease)
             } else {
                 state.form.record.personal.underlyingDiseases.splice(idx, 1)
+            }
+        },
+        updateHealthCoverages (state, coverage) {
+            let idx = state.form.record.personal.healthCoverages.indexOf(coverage)
+            if (idx == -1) {
+                state.form.record.personal.healthCoverages.push(coverage)
+            } else {
+                state.form.record.personal.healthCoverages.splice(idx, 1)
             }
         },
         updateCharlsonDisease (state, params) {

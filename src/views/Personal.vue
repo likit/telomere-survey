@@ -229,21 +229,21 @@
         </b-field>
         <b-field label="โปรดระบุ">
           <b-input v-model="form.record.personal.underlyingDisOther"
-            v-if="form.record.personal.underlyingDis=='อื่น ๆ'"></b-input>
+            v-if="d6 === true"></b-input>
         </b-field>
         <b-field label="หลักประกันสุขภาพ">
-          <b-radio native-value="สิทธิรักษาสุขภาพถ้วนหน้า/30 บาท" v-model="form.record.personal.healthCoverage">สิทธิรักษาสุขภาพถ้วนหน้า / 30 บาท</b-radio>
+          <b-checkbox @input="updateHealthCoverage($event, 'สิทธิรักษาสุขภาพถ้วนหน้า/30 บาท')" v-model="c1">สิทธิรักษาสุขภาพถ้วนหน้า / 30 บาท</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="สิทธิข้าราชการ" v-model="form.record.personal.healthCoverage">สิทธิข้าราชการ</b-radio>
+          <b-checkbox @input="updateHealthCoverage($event, 'สิทธิข้าราชการ')" v-model="c2">สิทธิข้าราชการ</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="สิทธิประกันสังคม" v-model="form.record.personal.healthCoverage">สิทธิประกันสังคม</b-radio>
+          <b-checkbox @input="updateHealthCoverage($event, 'สิทธิประกันสังคม')" v-model="c3">สิทธิประกันสังคม</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="อื่น ๆ" v-model="form.record.personal.healthCoverage">อื่น ๆ</b-radio>
+          <b-checkbox @input="updateHealthCoverage($event, 'อื่น ๆ')" v-model="c4">อื่น ๆ</b-checkbox>
         </b-field>
-        <b-field v-if="form.record.personal.healthCoverage=='อื่น ๆ'">
+        <b-field v-if="form.record.personal.healthCoverageOther=='อื่น ๆ'">
           <b-input placeholder="โปรดระบุ"></b-input>
         </b-field>
         <b-field label="ประวัติการเข้ารับการรักษาเป็นผู้ป่วยในโรงพยาบาลในระยะเวลา 1 ปี ที่ผ่านมา">
@@ -375,6 +375,10 @@ export default {
       d4: null,
       d5: null,
       d6: null,
+      c1: null,
+      c2: null,
+      c3: null,
+      c4: null,
     }
   },
   computed: {
@@ -383,6 +387,9 @@ export default {
   methods: {
     updateDisease: function (event, disease) {
       this.$store.commit('updateUnderlyingDisease', disease)
+    },
+    updateHealthCoverage: function (event, coverage) {
+      this.$store.commit('updateHealthCoverages', coverage)
     },
     saveData() {
       let self = this
@@ -403,6 +410,27 @@ export default {
     }
   },
   mounted() {
+    if (this.form.record.personal.healthCoverage != null &&
+        this.form.record.personal.healthCoverages.indexOf(this.form.record.personal.healthCoverage) == -1) {
+      this.form.record.personal.healthCoverages.push(this.form.record.personal.healthCoverage)
+      this.form.record.personal.healthCoverage = null
+    }
+    this.form.record.personal.healthCoverages.forEach((c)=>{
+      switch (c) {
+        case "สิทธิรักษาสุขภาพถ้วนหน้า/30 บาท":
+          this.c1 = true
+          break;
+        case "สิทธิข้าราชการ":
+          this.c2 = true
+          break;
+        case "สิทธิประกันสังคม":
+          this.c3 = true
+          break;
+        case "อื่น ๆ":
+          this.c4 = true
+          break;
+      }
+    })
     if (this.form.record.personal.underlyingDis != null &&
       this.form.record.personal.underlyingDiseases.indexOf(this.form.record.personal.underlyingDis) == -1) {
       this.form.record.personal.underlyingDiseases.push(this.form.record.personal.underlyingDis)
