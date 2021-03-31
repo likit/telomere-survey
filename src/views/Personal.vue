@@ -207,25 +207,25 @@
           </b-field>
         </div>
         <b-field label="โรคประจำตัว">
-          <b-radio native-value="ไม่มี" v-model="form.record.personal.underlyingDis">ไม่มี</b-radio>
+          <b-checkbox @input="updateDisease($event, 'ไม่มี')" v-model="d0">ไม่มี</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="โรคเบาหวาน" v-model="form.record.personal.underlyingDis">โรคเบาหวาน</b-radio>
+          <b-checkbox @input="updateDisease($event, 'โรคเบาหวาน')" v-model="d1">โรคเบาหวาน</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="โรคไขมันในเลือดผิดปกติ" v-model="form.record.personal.underlyingDis">โรคไขมันในเลือดผิดปกติ</b-radio>
+          <b-checkbox @input="updateDisease($event, 'โรคไขมันในเลือดผิดปกติ')" v-model="d2">โรคไขมันในเลือดผิดปกติ</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="โรคหัวใจ" v-model="form.record.personal.underlyingDis">โรคหัวใจ</b-radio>
+          <b-checkbox @input="updateDisease($event, 'โรคหัวใจ')" v-model="d3">โรคหัวใจ</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="โรคความดันโลหิตสูง" v-model="form.record.personal.underlyingDis">ความดันโลหิตสูง</b-radio>
+          <b-checkbox @input="updateDisease($event, 'โรคความดันโลหิตสูง')" v-model="d4">ความดันโลหิตสูง</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="โรคปอดอุดกั้นเรื้อรัง" v-model="form.record.personal.underlyingDis">โรคปอดอุดกั้นเรื้อรัง</b-radio>
+          <b-checkbox @input="updateDisease($event, 'โรคปอดอุดกั้นเรื้อรัง')" v-model="d5">โรคปอดอุดกั้นเรื้อรัง</b-checkbox>
         </b-field>
         <b-field>
-          <b-radio native-value="อื่น ๆ" v-model="form.record.personal.underlyingDis">อื่น ๆ</b-radio>
+          <b-checkbox @input="updateDisease($event, 'อื่น ๆ')" v-model="d6">อื่น ๆ</b-checkbox>
         </b-field>
         <b-field label="โปรดระบุ">
           <b-input v-model="form.record.personal.underlyingDisOther"
@@ -366,10 +366,24 @@ import {mapState} from 'vuex';
 export default {
   name: "Personal",
   components: {Navigation},
+  data() {
+    return {
+      d0: null,
+      d1: null,
+      d2: null,
+      d3: null,
+      d4: null,
+      d5: null,
+      d6: null,
+    }
+  },
   computed: {
     ...mapState(['form'])
   },
   methods: {
+    updateDisease: function (event, disease) {
+      this.$store.commit('updateUnderlyingDisease', disease)
+    },
     saveData() {
       let self = this
       if (this.form.record.code == null) {
@@ -387,6 +401,38 @@ export default {
         this.$store.dispatch('saveForm')
       }
     }
+  },
+  mounted() {
+    if (this.form.record.personal.underlyingDis != null &&
+      this.form.record.personal.underlyingDiseases.indexOf(this.form.record.personal.underlyingDis) == -1) {
+      this.form.record.personal.underlyingDiseases.push(this.form.record.personal.underlyingDis)
+      this.form.record.personal.underlyingDis = null
+    }
+    this.form.record.personal.underlyingDiseases.forEach((d)=>{
+      switch (d) {
+        case "ไม่มี":
+          this.d0 = true;
+          break;
+        case "โรคเบาหวาน":
+          this.d1 = true;
+          break;
+        case "โรคไขมันในเลือดผิดปกติ":
+          this.d2 = true;
+          break;
+        case "โรคหัวใจ":
+          this.d3 = true;
+          break;
+        case "โรคความดันโลหิตสูง":
+          this.d4 = true;
+          break;
+        case "โรคปอดอุดกั้นเรื้อรัง":
+          this.d5 = true;
+          break;
+        case "อื่น ๆ":
+          this.d6 = true;
+          break;
+      }
+    })
   }
 }
 </script>
