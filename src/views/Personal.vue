@@ -58,6 +58,9 @@
         <b-field>
           <b-radio native-value="อื่น ๆ" v-model="form.record.personal.maritalStatus">อื่น ๆ</b-radio>
         </b-field>
+        <b-field v-if="form.record.personal.maritalStatus=='อื่น ๆ'">
+          <b-input placeholder="โปรดระบุ" v-model="form.record.personal.maritalStatusOther"></b-input>
+        </b-field>
         <b-field label="ระดับการศึกษา">
           <b-radio native-value="ไม่ได้รับการศึกษา" v-model="form.record.personal.education">
             ไม่ได้รับการศึกษา
@@ -98,6 +101,12 @@
             อื่น ๆ
           </b-radio>
         </b-field>
+        <b-field v-if="form.record.personal.education=='อื่น ๆ'">
+          <b-input placeholder="โปรดระบุ" v-model="form.record.personal.educationOther"></b-input>
+        </b-field>
+        <b-field label="จำนวนปีที่ได้รับการศึกษา" v-if="form.record.personal.education != 'ไม่ได้รับการศึกษา' && form.record.personal.education">
+          <b-input v-model="form.record.personal.educationYear"></b-input>
+        </b-field>
         <b-field label="การพักอาศัย">
           <b-radio native-value="คนเดียว" v-model="form.record.personal.living">คนเดียว</b-radio>
         </b-field>
@@ -112,6 +121,9 @@
         </b-field>
         <b-field>
           <b-radio native-value="อื่น ๆ" v-model="form.record.personal.living">อื่น ๆ</b-radio>
+        </b-field>
+        <b-field v-if="form.record.personal.living=='อื่น ๆ'">
+          <b-input placeholder="โปรดระบุ" v-model="form.record.personal.livingOther"></b-input>
         </b-field>
         <b-field label="ท่านคิดว่ามีรายได้เพียงพอในครอบครัว">
           <b-radio native-value="เหลือเก็บ" v-model="form.record.personal.saving">เหลือเก็บ</b-radio>
@@ -225,11 +237,13 @@
           <b-checkbox @input="updateDisease($event, 'โรคปอดอุดกั้นเรื้อรัง')" v-model="d5">โรคปอดอุดกั้นเรื้อรัง</b-checkbox>
         </b-field>
         <b-field>
+          <b-checkbox @input="updateDisease($event, 'โรคมะเร็ง')" v-model="d7">โรคมะเร็ง</b-checkbox>
+        </b-field>
+        <b-field>
           <b-checkbox @input="updateDisease($event, 'อื่น ๆ')" v-model="d6">อื่น ๆ</b-checkbox>
         </b-field>
-        <b-field label="โปรดระบุ">
-          <b-input v-model="form.record.personal.underlyingDisOther"
-            v-if="d6 === true"></b-input>
+        <b-field label="โปรดระบุ" v-if="d6 == true">
+          <b-input v-model="form.record.personal.underlyingDisOther" placeholder="โปรดระบุ"></b-input>
         </b-field>
         <b-field label="หลักประกันสุขภาพ">
           <b-checkbox @input="updateHealthCoverage($event, 'สิทธิรักษาสุขภาพถ้วนหน้า/30 บาท')" v-model="c1">สิทธิรักษาสุขภาพถ้วนหน้า / 30 บาท</b-checkbox>
@@ -378,6 +392,7 @@ export default {
       d4: null,
       d5: null,
       d6: null,
+      d7: null,
       c1: null,
       c2: null,
       c3: null,
@@ -458,6 +473,9 @@ export default {
           break;
         case "โรคปอดอุดกั้นเรื้อรัง":
           this.d5 = true;
+          break;
+        case "โรคมะเร็ง":
+          this.d7 = true;
           break;
         case "อื่น ๆ":
           this.d6 = true;
