@@ -54,6 +54,7 @@ function initializeForm() {
                 healthCoverages: [],
                 hospitalized: null,
                 hospitalizationDetail: null,
+                fell0: null,
                 fell: null,
                 medication: null,
                 medicationTypes: null,

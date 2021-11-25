@@ -269,7 +269,13 @@
         <b-field label="รายละเอียดเข้ารับการรักษา">
           <b-input v-if="form.record.personal.hospitalized === 'มี'" v-model="form.record.personal.hospitalizationDetail"></b-input>
         </b-field>
-        <b-field label="ประวัติการพลัดหกล้มในระยะ 1 ปีที่ผ่านมา">
+        <b-field label="ประวัติการพลัดหกล้มในระยะ 0-6 เดือนที่ผ่านมา">
+          <b-radio native-value="ไม่มี" v-model="form.record.personal.fell0">ไม่มี</b-radio>
+        </b-field>
+        <b-field>
+          <b-radio native-value="มี" v-model="form.record.personal.fell0">มี</b-radio>
+        </b-field>
+        <b-field label="ประวัติการพลัดหกล้มในระยะ 6 เดือนถึง 1 ปีที่ผ่านมา">
           <b-radio native-value="ไม่มี" v-model="form.record.personal.fell">ไม่มี</b-radio>
         </b-field>
         <b-field>
