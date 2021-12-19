@@ -9,6 +9,47 @@
         mobile-mode="minimalist"
     >
       <b-step-item step="14" label="แบบบันทึกการประเมิน" :clickable="true">
+        <b-field label="ผู้ป่วยมีประวัติต่อไปนี้หรือไม่">
+          <b-checkbox native-value="ประวัติหกล้มใน 1 ปีที่ผ่านมา" v-model="form.record.evaluation.stability">ประวัติหกล้มใน 1 ปีที่ผ่านมา</b-checkbox>
+        </b-field>
+        <b-field>
+          <b-checkbox native-value="รู้สึกว่าขณะยืน เดินไม่มั่นคง" v-model="form.record.evaluation.stability">รู้สึกว่าขณะยืนเดินไม่มั่นคง</b-checkbox>
+        </b-field>
+        <b-field>
+          <b-checkbox native-value="กังวลว่าจะหกล้ม" v-model="form.record.evaluation.stability">กังวลว่าจะหกล้ม</b-checkbox>
+        </b-field>
+        <br>
+        <h1 class="title is-size-5">Balance Test</h1>
+        <b-field label="Side-by-side stand">
+          <b-radio native-value="1" v-model="form.record.evaluation.sideBySide">Held for 10 seconds</b-radio>
+          <b-radio native-value="2" v-model="form.record.evaluation.sideBySide">Not held for 10 seconds</b-radio>
+          <b-radio native-value="3" v-model="form.record.evaluation.sideBySide">Not attempt</b-radio>
+        </b-field>
+        <b-field label="Semi-tandem stand">
+          <b-radio native-value="1" v-model="form.record.evaluation.semiTandemStand">Held for 10 seconds</b-radio>
+          <b-radio native-value="2" v-model="form.record.evaluation.semiTandemStand">Not held for 10 seconds</b-radio>
+          <b-radio native-value="3" v-model="form.record.evaluation.semiTandemStand">Not attempt</b-radio>
+        </b-field>
+        <b-field label="Tandem stand">
+          <b-radio native-value="1" v-model="form.record.evaluation.tandemStand">Held for 10 seconds</b-radio>
+          <b-radio native-value="2" v-model="form.record.evaluation.tandemStand">Not held for 10 seconds</b-radio>
+          <b-radio native-value="3" v-model="form.record.evaluation.tandemStand">Not attempt</b-radio>
+        </b-field>
+        <b-field label="One foot stand">
+          <b-radio native-value="1" v-model="form.record.evaluation.oneFootStand">Held for 10 seconds</b-radio>
+          <b-radio native-value="2" v-model="form.record.evaluation.oneFootStand">Not held for 10 seconds</b-radio>
+          <b-radio native-value="3" v-model="form.record.evaluation.oneFootStand">Not attempt</b-radio>
+        </b-field>
+        <br>
+        <b-field label="30s Chair Stand">
+          <b-numberinput placeholder="จำนวนครั้ง" step="1" v-model="form.record.evaluation.chairStand"></b-numberinput>
+        </b-field>
+        <br>
+        <b-field label="Timed Up and Go">
+          เวลาที่ใช้
+          <b-numberinput placeholder="วินาที" step="0.1" v-model="form.record.evaluation.tug"></b-numberinput>
+        </b-field>
+        <br>
         <b-field label="Gait speed">
           Walk time เวลาที่ใช้ในการเดิน 6 เมตร
           <b-numberinput placeholder="ครั้งที่ 1" step="0.1" v-model="form.record.evaluation.gait1"></b-numberinput>
@@ -139,6 +180,28 @@ export default {
     },
     bmi: function() {
         return this.form.record.personal.weight/(this.form.record.personal.height*0.01)**2.0
+    }
+  },
+  watch: {
+    "form.record.evaluation.sideBySide" (newValue) {
+      if (newValue !== null) {
+        this.form.record.evaluation.sideBySideScore = parseInt(newValue) > 1 ? 0 : 1
+      }
+    },
+    "form.record.evaluation.semiTandemStand" (newValue) {
+      if (newValue !== null) {
+        this.form.record.evaluation.semiTandemStandScore = parseInt(newValue) > 1 ? 0 : 1
+      }
+    },
+    "form.record.evaluation.tandemStand" (newValue) {
+      if (newValue !== null) {
+        this.form.record.evaluation.tandemStandScore = parseInt(newValue) > 1 ? 0 : 1
+      }
+    },
+    "form.record.evaluation.oneFootStand" (newValue) {
+      if (newValue !== null) {
+        this.form.record.evaluation.oneFootStandScore = parseInt(newValue) > 1 ? 0 : 1
+      }
     }
   },
   methods: {
