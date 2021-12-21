@@ -285,15 +285,18 @@ export default new Vuex.Store({
             let idx = state.form.record.minicog.items.indexOf(item)
             if (idx == -1) {
                 state.form.record.minicog.items.push(item)
+                if (item == 'None') {
+                    state.form.record.minicog.score = 0
+                    return
+                }
             } else {
                 state.form.record.minicog.items.splice(idx, 1)
+                if (item == 'None') {
+                    state.form.record.minicog.score = null
+                    return
+                }
             }
-            if (state.form.record.minicog.items.length == 3) {
-                state.form.record.minicog.score = 1
-            } else {
-                state.form.record.minicog.score = 0
-            }
-            console.log(state.form.record.minicog.items, state.form.record.minicog.score)
+            state.form.record.minicog.score = state.form.record.minicog.items.length
         },
         setLastUpdate(state) {
             state.form.record.lastUpdate.push({
