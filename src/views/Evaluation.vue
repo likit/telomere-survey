@@ -134,13 +134,32 @@
           <b-input type="number" step="0.1" placeholder="ซม." v-model="form.record.personal.height"></b-input>
         </b-field>
         <b-field label="BMI">
-          <b-input type="number" :readonly="true" :value="bmi.toFixed(2)"></b-input>
+          <b-input type="number" :readonly="true" :value="bmi"></b-input>
         </b-field>
-        <b-field label="Muscle mass">
-          <b-input type="number" step="0.1" v-model="form.record.evaluation.muscleMass"></b-input>
+        <b-field label="Skeletal Muscle Mass">
+          <b-input type="number" step="0.1" :value="form.record.evaluation.muscleMass"
+                   @input="updateMuscleMass"></b-input>
         </b-field>
-        <b-field label="Fat free mass">
+        <b-field label="Skeletal Muscle Mass Index">
+          <b-input type="number" :readonly="true" :value="form.record.evaluation.smmIndex"></b-input>
+        </b-field>
+        <b-field label="Soft Lean Mass">
+          <b-input type="number" step="0.1" v-model="form.record.evaluation.slm"></b-input>
+        </b-field>
+        <b-field label="Lean Body Mass">
+          <b-input type="number" step="0.1" v-model="form.record.evaluation.lbm"></b-input>
+        </b-field>
+        <b-field label="Total Body Water">
+          <b-input type="number" step="0.1" v-model="form.record.evaluation.tbw"></b-input>
+        </b-field>
+        <b-field label="Intracellular Water">
+          <b-input type="number" step="0.1" v-model="form.record.evaluation.icw"></b-input>
+        </b-field>
+        <b-field label="Fat free Mass">
           <b-input type="number" step="0.1" v-model="form.record.evaluation.fatFreeMass"></b-input>
+        </b-field>
+        <b-field label="Percentage Body Fat">
+          <b-input type="number" step="0.1" v-model="form.record.evaluation.pbf"></b-input>
         </b-field>
         <b-field label="หมายเหตุ">
           <b-input v-model="form.record.evaluation.note"></b-input>
@@ -179,8 +198,13 @@ export default {
         return (this.form.record.evaluation.gait1 + this.form.record.evaluation.gait2)/2.0
     },
     bmi: function() {
-        return this.form.record.personal.weight/(this.form.record.personal.height*0.01)**2.0
-    }
+      if (this.form.record.personal.weight > 0 && this.form.record.personal.height > 0) {
+        let bmi = this.form.record.personal.weight/(this.form.record.personal.height*0.01)**2.0
+        return bmi.toFixed(2)
+      } else {
+        return null
+      }
+    },
   },
   watch: {
     "form.record.evaluation.sideBySide" (newValue) {
@@ -221,8 +245,11 @@ export default {
       } else {
         this.$store.dispatch('saveForm')
       }
+    },
+    updateMuscleMass(value) {
+      this.$store.dispatch('updateSMMIndex', value)
     }
-  }
+  },
 }
 </script>
 

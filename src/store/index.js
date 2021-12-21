@@ -230,6 +230,12 @@ function initializeForm() {
                 weight: null,
                 height: null,
                 muscleMass: null,
+                smmIndex: 0,
+                slm: null,
+                pbf: null,
+                icw: null,
+                tbw: null,
+                lbm: null,
                 fatFreeMass: null,
                 note: null
             }
@@ -242,6 +248,11 @@ export default new Vuex.Store({
         form: initializeForm(),
         province: null,
         currCode: null,
+    },
+    getters: {
+        smIndex: state => {
+            return state.form.record.evaluation.smmIndex
+        },
     },
     mutations: {
         resetForm(state) {
@@ -297,6 +308,12 @@ export default new Vuex.Store({
                 }
             }
             state.form.record.minicog.score = state.form.record.minicog.items.length
+        },
+        setMuscleMass(state, payload) {
+            state.form.record.evaluation.muscleMass = payload.mass
+        },
+        setSMMIndex(state, payload) {
+            state.form.record.evaluation.smmIndex = payload.index
         },
         setLastUpdate(state) {
             state.form.record.lastUpdate.push({
@@ -394,6 +411,13 @@ export default new Vuex.Store({
         },
         setRecord({commit}, record) {
             commit('setUpRecord', record)
+        },
+        updateSMMIndex({ commit, state }, payload) {
+            if (state.form.record.personal.height > 0) {
+                let index = payload / (state.form.record.personal.height * 0.01)**2
+                commit('setMuscleMass', { mass: payload})
+                commit('setSMMIndex', { index: index })
+            }
         }
     }
 })
