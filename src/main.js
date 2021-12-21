@@ -9,6 +9,10 @@ import { auth } from './firebase'
 Vue.config.productionTip = false
 Vue.use(Buefy)
 
+Vue.filter('toFixed', function(value, digits=2) {
+    return value.toFixed(digits)
+})
+
 auth.onAuthStateChanged(user => {
     console.log(user)
 })
