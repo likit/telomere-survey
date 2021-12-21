@@ -18,14 +18,24 @@
           </ul>
         </b-field>
         <b-field label="ให้ตั้งใจฟังดี ๆ เดี๋ยวจะบอกคำ 3 คำ เมื่อพูดจบแล้วให้พูดตามและจำไว้เดี๋ยวจะกลับมาถามซ้ำ">
-          <b-checkbox @input="updateScore('หลานสาว')" v-model="q1">หลานสาว</b-checkbox>
+          <b-checkbox :disabled="q4 == true"
+                      @input="updateScore('หลานสาว')" v-model="q1">หลานสาว</b-checkbox>
         </b-field>
         <b-field>
-          <b-checkbox @input="updateScore('สวรรค์')" v-model="q2">สวรรค์</b-checkbox>
+          <b-checkbox :disabled="q4 == true"
+                      @input="updateScore('สวรรค์')" v-model="q2">สวรรค์</b-checkbox>
         </b-field>
         <b-field>
-          <b-checkbox @input="updateScore('ภูเขา')" v-model="q3">ภูเขา</b-checkbox>
+          <b-checkbox :disabled="q4 == true"
+                      @input="updateScore('ภูเขา')" v-model="q3">ภูเขา</b-checkbox>
         </b-field>
+        <b-field>
+          <b-checkbox :disabled="q1 == true || q2 == true || q3 == true"
+                      @input="updateScore('None')" v-model="q4">จำไม่ได้ทั้งหมด</b-checkbox>
+        </b-field>
+        <p>
+          คะแนน {{ form.record.minicog.score !== null ? form.record.minicog.score : 'N/A' }}
+        </p>
       </b-step-item>
     </b-steps>
     <div class="buttons is-centered">
@@ -62,6 +72,7 @@ export default {
       q1: null,
       q2: null,
       q3: null,
+      q4: null,
     }
   },
   computed: {
@@ -79,6 +90,9 @@ export default {
           break;
         case "ภูเขา":
           self.q3 = true;
+          break;
+        case "None":
+          self.q4 = true;
           break;
       }
     })
