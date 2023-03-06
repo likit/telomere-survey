@@ -121,13 +121,12 @@
 </template>
 
 <script>
-import Navigation from "@/components/navigation";
 import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from 'vuex';
 
 export default {
   name: "Personal",
-  components: {Navigation, NavigationTwo},
+  components: {NavigationTwo},
   data() {
     return {
       d1: null,
