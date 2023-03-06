@@ -208,6 +208,24 @@ const routes = [
         },
         component: () => import('../views/FollowUpPersonal.vue')
     },
+    {
+        path: '/form/follow-up/frail-scale',
+        name: 'FollowUpFRAILScale',
+        meta: {
+            title: 'Follow-Up FRAIL Scale Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/FrailScale.vue')
+    },
+    {
+        path: '/form/follow-up/bia',
+        name: 'FollowUpBIA',
+        meta: {
+            title: 'Follow-Up BIA Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/FollowUpBIA.vue')
+    },
 ]
 
 const router = new VueRouter({

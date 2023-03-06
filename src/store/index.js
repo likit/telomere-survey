@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {auth, records, followups} from '../firebase'
-import {DialogProgrammatic, ToastProgrammatic} from "buefy";
+import {DialogProgrammatic, ToastProgrammatic, LoadingProgrammatic} from "buefy";
 
 Vue.use(Vuex)
 
@@ -97,6 +97,17 @@ function initializeForm() {
             clock: {
                 score: 0,
                 file: null,
+            },
+            frail: {
+                fatigue: null,
+                resistance: null,
+                ambulation: null,
+                illness: [],
+                weightLoss: null,
+                pastYearWeight: null,
+                currentWeight: null,
+                percentWeightChange: null,
+                totalScore: null,
             },
             mna: {
                 one: null,
@@ -221,6 +232,7 @@ function initializeForm() {
                 stability: [],
                 tug: null,
                 chairStand: null,
+                ftsts: null,
                 oneFootStand: null,
                 oneFootStandScore: null,
                 sideBySide: null,
@@ -229,8 +241,16 @@ function initializeForm() {
                 sideBySideScore: null,
                 semiTandemStandScore: null,
                 tandemStandScore: null,
+                leftArmCircumference: null,
+                rightArmCircumference: null,
+                leftCalfCircumference: null,
+                rightCalfCircumference: null,
                 gait1: null,
                 gait2: null,
+                gait1_6min: null,
+                gait2_6min: null,
+                gait1_4min: null,
+                gait2_4min: null,
                 hand: null,
                 gripLeft1: null,
                 gripLeft2: null,
@@ -292,11 +312,32 @@ export default new Vuex.Store({
                 state.form.record.personal.underlyingDiseases.splice(idx, 1)
             }
         },
+        initFrail: function(state) {
+            state.form.record.frail = {
+                fatigue: null,
+                resistance: null,
+                ambulation: null,
+                illness: [],
+                weightLoss: null,
+                pastYearWeight: null,
+                currentWeight: null,
+                percentWeightChange: null,
+                totalScore: null,
+            }
+        },
         initFollowUpDiseases: function(state) {
             if (!("followUpDiseases" in state.form.record.personal)) {
                 state.form.record.personal.followUpDiseases = []
             }
             state.form.record.personal.followUpDisOther = null;
+        },
+        updateFrailIllness: function (state, disease) {
+            let idx = state.form.record.frail.illness.indexOf(disease)
+            if (idx == -1) {
+                state.form.record.frail.illness.push(disease)
+            } else {
+                state.form.record.frail.illness.splice(idx, 1)
+            }
         },
         updateFollowUpDiseases: function (state, disease) {
             let idx = state.form.record.personal.followUpDiseases.indexOf(disease)
@@ -401,7 +442,7 @@ export default new Vuex.Store({
         },
         setCurrCode(state, code) {
             state.currCode = code
-        }
+        },
     },
     actions: {
         addFollowUpForm({commit, state}) {
@@ -415,8 +456,10 @@ export default new Vuex.Store({
                 commit('setFollowUpRecordId', docRef.id)
             })
             commit('initFollowUpDiseases')
+            commit('initFrail')
         },
         async saveFollowUpForm({commit, state}) {
+            const loadingComponent = LoadingProgrammatic.open({ container: null })
             records.where('followUpId', '==', state.form.record.followUpId)
                 .get().then((snapshot) => {
                 // if the follow-up record does not exist, add it
@@ -448,6 +491,7 @@ export default new Vuex.Store({
                         })
                     })
                 }
+                loadingComponent.close()
             })
         },
         saveForm({commit, state}) {
