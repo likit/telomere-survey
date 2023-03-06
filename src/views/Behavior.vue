@@ -271,6 +271,9 @@
         </span>
           <span>Save</span>
         </button>
+        <button class="button is-success" @click="$router.push({name: 'RecordSearch'})">
+          <span>Done</span>
+        </button>
       </div>
     </div>
   </div>

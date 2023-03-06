@@ -24,28 +24,17 @@
         <b-radio native-value="all" v-model="createdBy">ทั้งหมด</b-radio>
         <b-radio native-value="yours" v-model="createdBy">สร้างโดยฉัน</b-radio>
       </b-field>
-      <b-field label="Search">
-        <b-input placeholder="research code" v-model="query" type="search" :expanded="true"></b-input>
-        <p class="control">
-          <b-button class="button is-primary" @click="fetch(query)">
-            <span class="icon">
-              <i class="fas fa-search"></i>
-            </span>
-            <span>Search</span>
-          </b-button>
-        </p>
-      </b-field>
-      <b-table :data="filteredItems"
+      <b-table :data="items"
                :paginated="true"
                :default-sort="['code', 'firstname']"
-               :debounce-search="1000">
-        <b-table-column field="code" label="Code" sortable v-slot="props">
+               :debounce-search="500">
+        <b-table-column field="code" searchable label="Code" sortable v-slot="props">
           {{ props.row.code }}
         </b-table-column>
-        <b-table-column field="firstname" label="First Name" sortable v-slot="props">
+        <b-table-column field="firstname" searchable label="First Name" sortable v-slot="props">
           {{ props.row.firstname }}
         </b-table-column>
-        <b-table-column field="lastname" label="Last Name" sortable v-slot="props">
+        <b-table-column field="lastname" searchable label="Last Name" sortable v-slot="props">
           {{ props.row.lastname }}
         </b-table-column>
         <b-table-column field="province" label="Province" sortable v-slot="props">
@@ -84,7 +73,7 @@
 
 <script>
 import Navigation from "@/components/navigation";
-import {records, auth} from '../firebase';
+import {records} from '../firebase';
 import {mapState} from "vuex";
 
 export default {
@@ -99,18 +88,6 @@ export default {
   },
   computed: {
     ...mapState(['province']),
-    filteredItems: function() {
-      let self = this
-      let fltItems;
-      fltItems = this.items.filter((d)=>{
-        if (self.createdBy !== 'all') {
-          return d.creator === auth.currentUser.email
-        } else {
-          return true
-        }
-      })
-      return fltItems
-    }
   },
   methods: {
     addRecord: function() {

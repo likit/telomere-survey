@@ -15,9 +15,6 @@
       <b-navbar-item>
         รหัสวิจัย {{ form.record.code }}
       </b-navbar-item>
-      <b-navbar-item :to="{ name: 'FollowUpRecordSearch' }" tag="router-link">
-        รายการทั้งหมด
-      </b-navbar-item>
       <b-navbar-dropdown label="Form">
         <b-navbar-item :to="{ name: 'FollowUpMain'}" tag="router-link">
           หน้าแรก
