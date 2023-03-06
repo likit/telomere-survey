@@ -1,6 +1,7 @@
 <template>
 <section class="section">
-  <Navigation></Navigation>
+  <Navigation v-if="form.record.followUpId == null"></Navigation>
+  <NavigationTwo v-else></NavigationTwo>
   <br>
   <div class="container">
     <b-steps
@@ -8,7 +9,10 @@
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="6" label="กิจวัตรประจำวัน (ADL)" :clickable="true">
+      <b-step-item :step="form.record.followUpId == null ? 6 : 4" label="กิจวัตรประจำวัน (ADL)" :clickable="true">
+        <div class="has-text-centered" v-if="form.record.followUpId != null">
+          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+        </div>
         <b-field label="Feeding (รับประทานอาหารเมื่อเตรียมสำรับไว้ให้เรียบร้อย)">
           <b-radio native-value=0 v-model="form.record.adl.one">ไม่สามารถตักอาหารเข้าปากได้ ต้องมีคนป้อนให้</b-radio>
         </b-field>
@@ -137,11 +141,12 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from "vuex";
 
 export default {
   name: "ADL",
-  components: {Navigation},
+  components: {Navigation, NavigationTwo},
   computed: {
     ...mapState(['form']),
     score: function() {
@@ -171,7 +176,11 @@ export default {
           ariaModal: true
         })
       } else {
-        this.$store.dispatch('saveForm')
+        if (this.form.record.followUpId != null) {
+          this.$store.dispatch('saveFollowUpForm')
+        } else {
+          this.$store.dispatch('saveForm')
+        }
       }
     }
   }

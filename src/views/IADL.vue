@@ -1,6 +1,7 @@
 <template>
 <section class="section">
-  <Navigation></Navigation>
+  <Navigation v-if="form.record.followUpId == null"></Navigation>
+  <NavigationTwo v-else></NavigationTwo>
   <br>
   <div class="container">
     <b-steps
@@ -8,7 +9,10 @@
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="7" label="กิจวัตรประจำวันอันซับซ้อน (IADL)" :clickable="true">
+      <b-step-item :step="form.record.followUpId == null ? 7 : 5" label="กิจวัตรประจำวันอันซับซ้อน (IADL)" :clickable="true">
+        <div class="has-text-centered" v-if="form.record.followUpId != null">
+          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+        </div>
         <b-field label="ในกรณีที่ท่านมีโทรศัพท์ ท่านสามารถใช้โทรศัพท์ได้เองหรือไม่">
           <b-radio native-value=0 v-model="form.record.iadl.one">ไม่สามารถใช้โทรศัพท์ได้เลย</b-radio>
         </b-field>
@@ -87,7 +91,12 @@
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{ name: '9Q' }" class="button is-success">
+      <router-link :to="{ name: '9Q' }" class="button is-success" v-if="form.record.followUpId == null">
+        <span class="icon">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </router-link>
+      <router-link :to="{ name: 'FollowUpMNA' }" class="button is-success" v-else>
         <span class="icon">
           <i class="fas fa-chevron-right"></i>
         </span>
@@ -100,11 +109,12 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from "vuex";
 
 export default {
   name: "IADL",
-  components: {Navigation},
+  components: {Navigation, NavigationTwo},
   computed: {
     ...mapState(['form']),
     score: function() {
@@ -136,7 +146,11 @@ export default {
           ariaModal: true
         })
       } else {
-        this.$store.dispatch('saveForm')
+        if (this.form.record.followUpId != null) {
+          this.$store.dispatch('saveFollowUpForm')
+        } else {
+          this.$store.dispatch('saveForm')
+        }
       }
     }
   }

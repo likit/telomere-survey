@@ -1,13 +1,17 @@
 <template>
 <section class="section">
-  <Navigation></Navigation>
+  <Navigation v-if="form.record.followUpId == null"></Navigation>
+  <NavigationTwo v-else></NavigationTwo>
   <div class="container">
     <b-steps
         :rounded="true"
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="12" label="Self-report exhaustion" :clickable="true">
+      <b-step-item :step="form.record.followUpId == null ? 12 : 9" label="Self-report exhaustion" :clickable="true">
+        <div class="has-text-centered" v-if="form.record.followUpId != null">
+          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+        </div>
         <b-field label="ฉันรู้สึกว่าทุก ๆ สิ่งที่ฉันกระทำต้องฝืนใจทำ">
           <b-radio native-value=0 v-model="form.record.exhaustion.one">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
         </b-field>
@@ -49,7 +53,12 @@
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{ name: 'SARCF' }" class="button is-success">
+      <router-link :to="{ name: 'SARCF' }" class="button is-success" v-if="form.record.followUpId == null">
+        <span class="icon">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </router-link>
+      <router-link :to="{ name: 'FollowUpGPAQ' }" class="button is-success" v-else>
         <span class="icon">
           <i class="fas fa-chevron-right"></i>
         </span>
@@ -62,11 +71,12 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from "vuex";
 
 export default {
   name: "Exhaustion",
-  components: {Navigation},
+  components: {Navigation, NavigationTwo},
   computed: {
     ...mapState(['form']),
     score: function() {
@@ -94,7 +104,11 @@ export default {
           ariaModal: true
         })
       } else {
-        this.$store.dispatch('saveForm')
+        if (this.form.record.followUpId != null) {
+          this.$store.dispatch('saveFollowUpForm')
+        } else {
+          this.$store.dispatch('saveForm')
+        }
       }
     }
   }

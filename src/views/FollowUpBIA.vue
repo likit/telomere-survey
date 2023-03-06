@@ -1,6 +1,6 @@
 <template>
 <section class="section">
-  <Navigation></Navigation>
+  <NavigationTwo></NavigationTwo>
   <br>
   <div class="container">
     <b-steps
@@ -9,6 +9,9 @@
         mobile-mode="minimalist"
     >
       <b-step-item step="3" label="แบบบันทึกการประเมิน" :clickable="true">
+        <div class="has-text-centered">
+          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+        </div>
         <h1 class="title">BIA</h1>
         <b-field label="น้ำหนัก">
           <b-input type="number" step="0.1" placeholder="กก." v-model="form.record.personal.weight"></b-input>
@@ -195,7 +198,7 @@
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{name: 'FollowUpFRAILScale'}" class="button is-success">
+      <router-link :to="{name: 'FollowUpBADL'}" class="button is-success">
         <span class="icon">
           <i class="fas fa-chevron-right"></i>
         </span>
@@ -207,12 +210,12 @@
 </template>
 
 <script>
-import Navigation from "@/components/navigation";
+import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from "vuex";
 
 export default {
   name: "Evaluation",
-  components: {Navigation},
+  components: {NavigationTwo},
   computed: {
     ...mapState(['form']),
     bmi: function() {

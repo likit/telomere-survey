@@ -1,6 +1,7 @@
 <template>
 <section class="section">
-  <Navigation></Navigation>
+  <Navigation v-if="form.record.followUpId == null"></Navigation>
+  <NavigationTwo v-else></NavigationTwo>
   <br>
   <div class="container">
     <b-steps
@@ -8,7 +9,10 @@
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="5" label="แบบประเมินภาวะโภชนาการ" :clickable="true">
+      <b-step-item :step="form.record.followUpId == null ? 5 : 6" label="แบบประเมินภาวะโภชนาการ" :clickable="true">
+        <div class="has-text-centered" v-if="form.record.followUpId != null">
+          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+        </div>
         <b-field label="ในช่วงสามเดือนที่ผ่านมารับประทานอาหารได้น้อยลง เนื่องจากความอยากอาหารลดลง มีปัญหาการย่อย การเคี้ยว หรือปัญหาการกลืนหรือไม่">
           <b-radio native-value=0 v-model="form.record.mna.one">ความอยากอาหารลดลงอย่างมาก</b-radio>
         </b-field>
@@ -87,7 +91,12 @@
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{ name: 'ADL' }" class="button is-success">
+      <router-link :to="{ name: 'ADL' }" class="button is-success" v-if="form.record.followUpId == null">
+        <span class="icon">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </router-link>
+      <router-link :to="{ name: 'FollowUpMiniCog' }" class="button is-success">
         <span class="icon">
           <i class="fas fa-chevron-right"></i>
         </span>
@@ -99,10 +108,11 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from "vuex";
 export default {
   name: "MNA",
-  components: {Navigation},
+  components: {Navigation, NavigationTwo},
   computed: {
     ...mapState(['form']),
     bmi: function() {
@@ -134,7 +144,11 @@ export default {
           ariaModal: true
         })
       } else {
-        this.$store.dispatch('saveForm')
+        if (this.form.record.followUpId != null) {
+          this.$store.dispatch('saveFollowUpForm')
+        } else {
+          this.$store.dispatch('saveForm')
+        }
       }
     }
   }

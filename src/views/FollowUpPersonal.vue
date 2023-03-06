@@ -1,6 +1,6 @@
 <template>
 <section class="section">
-  <Navigation></Navigation>
+  <NavigationTwo></NavigationTwo>
   <br>
   <div class="container">
     <b-steps
@@ -9,6 +9,9 @@
       mobile-mode="minimalist"
       >
       <b-step-item step="1" label="ข้อมูลส่วนบุคคล" :clickable="true">
+        <div class="has-text-centered">
+          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+        </div>
         <b-field label="ชื่อ">
           <b-input placeholder="ชื่อ" v-model="form.record.personal.firstname"></b-input>
         </b-field>
@@ -119,11 +122,12 @@
 
 <script>
 import Navigation from "@/components/navigation";
+import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from 'vuex';
 
 export default {
   name: "Personal",
-  components: {Navigation},
+  components: {Navigation, NavigationTwo},
   data() {
     return {
       d1: null,

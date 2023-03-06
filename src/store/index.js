@@ -228,6 +228,28 @@ function initializeForm() {
                 four: null,
                 five: null,
             },
+            behavior: {
+                one: null,
+                two: null,
+                three: null,
+                four: null,
+                five: null,
+                six: null,
+                seven: null,
+                eight: null,
+                nine: null,
+                ten: null,
+                eleven: null,
+                twelve: null,
+                thirteen: null,
+                fourteen: null,
+                fifteen: null,
+                sixteen: null,
+                seventeen: null,
+                eighteen: null,
+                nineteen: null,
+                twenty: null,
+            },
             evaluation: {
                 stability: [],
                 tug: null,
@@ -275,7 +297,7 @@ function initializeForm() {
                 tbw: null,
                 lbm: null,
                 fatFreeMass: null,
-                note: null
+                note: null,
             }
         }
     }
@@ -323,6 +345,30 @@ export default new Vuex.Store({
                 currentWeight: null,
                 percentWeightChange: null,
                 totalScore: null,
+            }
+        },
+        initBehavior: function(state) {
+            state.form.record.behavior = {
+                one: null,
+                two: null,
+                three: null,
+                four: null,
+                five: null,
+                six: null,
+                seven: null,
+                eight: null,
+                nine: null,
+                ten: null,
+                eleven: null,
+                twelve: null,
+                thirteen: null,
+                fourteen: null,
+                fifteen: null,
+                sixteen: null,
+                seventeen: null,
+                eighteen: null,
+                nineteen: null,
+                twenty: null,
             }
         },
         initFollowUpDiseases: function(state) {
@@ -457,6 +503,7 @@ export default new Vuex.Store({
             })
             commit('initFollowUpDiseases')
             commit('initFrail')
+            commit('initBehavior')
         },
         async saveFollowUpForm({commit, state}) {
             const loadingComponent = LoadingProgrammatic.open({ container: null })
@@ -497,6 +544,7 @@ export default new Vuex.Store({
         saveForm({commit, state}) {
             commit('setLastUpdate')
             commit('setFormProvince')
+            const loadingComponent = LoadingProgrammatic.open({ container: null })
             records.where('code', '==', state.form.record.code)
                 .where('province', '==', state.form.record.province)
                 .get().then((snapshot) => {
@@ -561,13 +609,14 @@ export default new Vuex.Store({
                         })
                     }
                 }
+                loadingComponent.close()
             })
         },
         setRecord({commit}, record) {
             commit('setUpRecord', record)
         },
-        toggleFollowUpMode({commit}) {
-            commit('setFollowUp', true)
+        toggleFollowUpMode({commit}, value) {
+            commit('setFollowUp', value)
         },
         initializeFollowUpForm({commit}) {
             commit('initFollowUpDiseases')

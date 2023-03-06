@@ -1,6 +1,7 @@
 <template>
 <section class="section">
-  <Navigation></Navigation>
+  <Navigation v-if="form.record.followUpId == null"></Navigation>
+  <Navigationtwo v-else></Navigationtwo>
   <br>
   <div class="container">
     <b-steps
@@ -8,7 +9,10 @@
         :has-navigation="false"
         mobile-mode="minimalist"
     >
-      <b-step-item step="3" label="สมรรถภาพเบื้องต้น" :clickable="true">
+      <b-step-item :step="form.record.followUpId == null ? 3 : 7" label="สมรรถภาพเบื้องต้น" :clickable="true">
+        <div class="has-text-centered" v-if="form.record.followUpId != null">
+          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+        </div>
         <label class="label">Three Word Registration</label>
         <b-field label="ให้ตั้งใจฟังดี ๆ เดี๋ยวจะบอกคำ 3 คำ เมื่อพูดจบแล้วให้พูดตามและจำไว้เดี๋ยวจะกลับมาถามซ้ำ">
           <ul>
@@ -63,10 +67,11 @@
 <script>
 import Navigation from "@/components/navigation";
 import {mapState} from "vuex";
+import Navigationtwo from "@/components/navigationTwo.vue";
 
 export default {
   name: "MiniCog",
-  components: {Navigation},
+  components: {Navigationtwo, Navigation},
   data() {
     return {
       q1: null,
@@ -115,7 +120,11 @@ export default {
           ariaModal: true
         })
       } else {
-        this.$store.dispatch('saveForm')
+        if (this.form.record.followUpId != null) {
+          this.$store.dispatch('saveFollowUpForm')
+        } else {
+          this.$store.dispatch('saveForm')
+        }
       }
     }
   }

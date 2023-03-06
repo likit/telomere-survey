@@ -1,6 +1,6 @@
 <template>
 <section class="section">
-  <Navigation></Navigation>
+  <NavigationTwo></NavigationTwo>
   <div class="container">
     <h1 class="title has-text-centered">แบบฟอร์มบันทึกข้อมูล (CASE REPORT FORM)</h1>
     <h1 class="subtitle has-text-centered">
@@ -60,13 +60,13 @@
 </template>
 
 <script>
-import Navigation from "@/components/navigation.vue";
+import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from "vuex";
 import {auth} from "@/firebase";
 
 export default {
   name: "FollowUpMain",
-  components: {Navigation},
+  components: {NavigationTwo},
   computed: {
     ...mapState(['form', 'currCode']),
     fullname: function() {

@@ -114,11 +114,13 @@ export default {
   },
   methods: {
     addRecord: function() {
+      this.$store.dispatch('toggleFollowUpMode', false)
       this.$store.commit('resetForm')
       this.$router.push({name: 'FormMain'})
     },
     setRecord: function(code) {
       let self = this
+      this.$store.dispatch('toggleFollowUpMode', false)
       records.where('code', '==', code)
           .where('province', '==', self.province.name)
           .get().then((snapshot) => {
@@ -177,7 +179,7 @@ export default {
           .then((snapshot) => {
             snapshot.forEach((r) => {
               let d = r.data()
-              if (!("followUpId" in d)) {
+              if (!("followUpId" in d) || d.followUpId == null) {
                 self.items.push({
                   id: r.id,
                   code: d.code,
@@ -202,7 +204,7 @@ export default {
             .then((snapshot) => {
               snapshot.forEach((r) => {
                 let d = r.data()
-                if (!("followUpId" in d)) {
+                if (!("followUpId" in d) || d.followUpId == null) {
                   self.items.push({
                     id: r.id,
                     code: d.code,

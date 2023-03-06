@@ -226,6 +226,87 @@ const routes = [
         },
         component: () => import('../views/FollowUpBIA.vue')
     },
+    {
+        path: '/form/follow-up/badl',
+        name: 'FollowUpBADL',
+        meta: {
+            title: 'Follow-Up BADL Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/ADL.vue')
+    },
+    {
+        path: '/form/follow-up/clock',
+        name: 'FollowUpClock',
+        meta: {
+            title: 'Follow-Up Clock Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Clock.vue')
+    },
+    {
+        path: '/form/follow-up/iadl',
+        name: 'FollowUpIADL',
+        meta: {
+            title: 'Follow-Up IADL Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/IADL.vue')
+    },
+    {
+        path: '/form/follow-up/mna',
+        name: 'FollowUpMNA',
+        meta: {
+            title: 'Follow-Up MNA Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/MNA.vue')
+    },
+    {
+        path: '/form/follow-up/minicog',
+        name: 'FollowUpMiniCog',
+        meta: {
+            title: 'Follow-Up Mini Cog Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/MiniCog.vue')
+    },
+    {
+        path: '/form/follow-up/exhaustion',
+        name: 'FollowUpExhaustion',
+        meta: {
+            title: 'Follow-Up Exhaustion Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Exhaustion.vue')
+    },
+    {
+        path: '/form/follow-up/GPAQ',
+        name: 'FollowUpGPAQ',
+        meta: {
+            title: 'Follow-Up GPAQ Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/GPAQ.vue')
+    },
+    {
+        path: '/form/follow-up/EQ-5D-5L',
+        name: 'FollowUpEQ-5D-5L',
+        meta: {
+            title: 'Follow-Up EQ-5D-5L Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/EQ-5D-5L.vue')
+    },
+    {
+        path: '/form/follow-up/Behavior',
+        name: 'FollowUpBehavior',
+        meta: {
+            title: 'Follow-Up Bahavior Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/Behavior.vue')
+    },
 ]
 
 const router = new VueRouter({
