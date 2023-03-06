@@ -177,7 +177,7 @@ export default {
           .then((snapshot) => {
             snapshot.forEach((r) => {
               let d = r.data()
-              if (d.personal.followUpId == null) {
+              if (!("followUpId" in d)) {
                 self.items.push({
                   id: r.id,
                   code: d.code,
@@ -202,7 +202,7 @@ export default {
             .then((snapshot) => {
               snapshot.forEach((r) => {
                 let d = r.data()
-                if (d.personal.followUpId == null) {
+                if (!("followUpId" in d)) {
                   self.items.push({
                     id: r.id,
                     code: d.code,

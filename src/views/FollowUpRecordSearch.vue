@@ -4,7 +4,8 @@
     <br>
     <div class="container">
       <div class="has-text-centered">
-        <h1 class="title">ณ จังหวัด{{ $store.state.province.name }}</h1>
+        <h1 class="title">รายการข้อมูลติดตาม</h1>
+        <h1 class="subtitle">จังหวัด{{ $store.state.province.name }}</h1>
         <div class="buttons is-centered">
           <button @click="setFollowUpRecord" class="button is-light is-success">
             <span class="icon">
@@ -12,7 +13,7 @@
             </span>
             <span>เพิ่มรายการ</span>
           </button>
-          <button @click="fetch(query)" class="button is-light">
+          <button @click="fetch(code)" class="button is-light">
             <span class="icon">
               <i class="fas fa-redo-alt"></i>
             </span>
@@ -105,7 +106,8 @@ export default {
           })
     },
     deleteRecord: function(id) {
-      this.$buefy.dialog.confirm({
+      let self = this
+      self.$buefy.dialog.confirm({
         type: 'is-warning',
         title: 'ยืนยันการลบรายการ',
         message: 'ท่านต้องการลบรายการนี้หรือไม่',
@@ -119,19 +121,20 @@ export default {
             if (!snapshot.empty) {
               let doc = snapshot.docs[0]
               records.doc(doc.id).delete().then(()=> {
-                this.$buefy.toast.open({
+                self.$buefy.toast.open({
                   message: 'The record has been deleted.',
                   type: 'is-success'})
-                this.items = this.items.filter((d)=>{
-                  return d.id != id
-                })
-              }).catch(()=>this.$buefy.toast.open({
+              }).catch(()=>self.$buefy.toast.open({
                 message: 'Oops, the error occurred.',
                 type: 'is-danger'
               }))
             }
           })
-          followups.doc(id).delete()
+          followups.doc(id).delete().then(() => {
+            self.items = self.items.filter((d)=>{
+              return d.id != id
+            })
+          })
         }
       })
     },
@@ -146,9 +149,9 @@ export default {
               self.items.push({
                 id: r.id,
                 code: d.recordCode,
-                updatedAt: d.updatedAt,
+                updatedAt: d.updatedAt.toDate().toLocaleString(),
                 creator: d.createdBy,
-                createdAt: d.createdAt,
+                createdAt: d.createdAt.toDate().toLocaleString(),
               })
             })
           })

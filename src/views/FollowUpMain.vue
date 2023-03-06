@@ -9,6 +9,9 @@
     <hr>
     <h1 class="title has-text-centered is-size-4">จังหวัด{{ $store.state.province.name }}</h1>
     <div class="has-text-centered">
+      <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+    </div>
+    <div class="has-text-centered">
       <b-field label="รหัสวิจัย" type="is-danger">
         <b-input v-model="form.record.code" :readonly="currCode != null"></b-input>
       </b-field>

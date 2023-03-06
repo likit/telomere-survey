@@ -292,10 +292,13 @@ export default new Vuex.Store({
                 state.form.record.personal.underlyingDiseases.splice(idx, 1)
             }
         },
-        updateFollowUpDiseases: function (state, disease) {
+        initFollowUpDiseases: function(state) {
             if (!("followUpDiseases" in state.form.record.personal)) {
                 state.form.record.personal.followUpDiseases = []
             }
+            state.form.record.personal.followUpDisOther = null;
+        },
+        updateFollowUpDiseases: function (state, disease) {
             let idx = state.form.record.personal.followUpDiseases.indexOf(disease)
             if (idx == -1) {
                 state.form.record.personal.followUpDiseases.push(disease)
@@ -411,6 +414,7 @@ export default new Vuex.Store({
             followups.add(state.form.followUpInfo).then(docRef => {
                 commit('setFollowUpRecordId', docRef.id)
             })
+            commit('initFollowUpDiseases')
         },
         async saveFollowUpForm({commit, state}) {
             records.where('followUpId', '==', state.form.record.followUpId)
@@ -520,6 +524,9 @@ export default new Vuex.Store({
         },
         toggleFollowUpMode({commit}) {
             commit('setFollowUp', true)
+        },
+        initializeFollowUpForm({commit}) {
+            commit('initFollowUpDiseases')
         },
         updateSMMIndex({ commit, state }, payload) {
             if (state.form.record.personal.height > 0) {
