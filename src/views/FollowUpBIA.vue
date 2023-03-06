@@ -27,7 +27,7 @@
                    @input="updateMuscleMass"></b-input>
         </b-field>
         <b-field label="Skeletal Muscle Mass Index">
-          <b-input type="number" :readonly="true" :value="form.record.evaluation.smmIndex | toFixed"></b-input>
+          <b-input type="number" :readonly="true" :value="form.record.evaluation.smmIndex"></b-input>
         </b-field>
         <b-field label="Soft Lean Mass">
           <b-input type="number" step="0.1" v-model="form.record.evaluation.slm"></b-input>

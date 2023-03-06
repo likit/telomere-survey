@@ -58,7 +58,7 @@
           <b-numberinput placeholder="ครั้งที่ 2" step="0.1" v-model="form.record.evaluation.gait2"></b-numberinput>
         </b-field>
         <b-field label="ค่าเฉลี่ย">
-          <b-input :readonly="true" placeholder="เฉลี่ย" :value="gait.toFixed(2)"></b-input>
+          <b-input :readonly="true" placeholder="เฉลี่ย" :value="gait"></b-input>
         </b-field>
         <b-field label="Grip strength">
           <b-radio v-model="form.record.evaluation.hand" native-value="ถนัดแขนซ้าย">ถนัดแขนซ้าย</b-radio>
@@ -141,7 +141,7 @@
                    @input="updateMuscleMass"></b-input>
         </b-field>
         <b-field label="Skeletal Muscle Mass Index">
-          <b-input type="number" :readonly="true" :value="form.record.evaluation.smmIndex | toFixed"></b-input>
+          <b-input type="number" :readonly="true" :value="form.record.evaluation.smmIndex"></b-input>
         </b-field>
         <b-field label="Soft Lean Mass">
           <b-input type="number" step="0.1" v-model="form.record.evaluation.slm"></b-input>
@@ -195,7 +195,12 @@ export default {
   computed: {
     ...mapState(['form']),
     gait: function() {
-        return (this.form.record.evaluation.gait1 + this.form.record.evaluation.gait2)/2.0
+      if (this.form.record.evaluation.gait1 != null && this.form.record.evaluation.gait2 != null) {
+        let value = (this.form.record.evaluation.gait1 + this.form.record.evaluation.gait2)/2.0
+        return value.toFixed(2)
+      } else {
+        return null
+      }
     },
     bmi: function() {
       if (this.form.record.personal.weight > 0 && this.form.record.personal.height > 0) {
