@@ -22,6 +22,7 @@ const db = firebase.firestore()
 const storage = firebase.storage()
 const records = db.collection('records')
 const provinces = db.collection('provinces')
+const followups = db.collection('followups')
 
 export {
     firebase as fb,
@@ -29,5 +30,6 @@ export {
     db,
     records,
     provinces,
+    followups,
     auth
 }

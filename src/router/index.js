@@ -180,7 +180,34 @@ const routes = [
         path: '/login',
         name: 'login',
         component: () => import('../views/Login.vue')
-    }
+    },
+    {
+        path: '/form/follow-up/records',
+        name: 'FollowUpRecordSearch',
+        meta: {
+            title: 'Follow-Up Index Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/FollowUpRecordSearch.vue')
+    },
+    {
+        path: '/form/follow-up',
+        name: 'FollowUpMain',
+        meta: {
+            title: 'Follow-Up Main Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/FollowUpMain.vue')
+    },
+    {
+        path: '/form/follow-up/personal',
+        name: 'FollowUpPersonal',
+        meta: {
+            title: 'Follow-Up Personal Page',
+            requiresAuth: true,
+        },
+        component: () => import('../views/FollowUpPersonal.vue')
+    },
 ]
 
 const router = new VueRouter({

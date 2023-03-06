@@ -1,13 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {auth, records} from '../firebase'
+import {auth, records, followups} from '../firebase'
 import {DialogProgrammatic, ToastProgrammatic} from "buefy";
 
 Vue.use(Vuex)
 
 function initializeForm() {
     return {
+        followUp: false,
+        followUpInfo: {
+            createdBy: null,
+            province: null,
+            recordCode: null,
+            createdAt: null,
+            updatedAt: null,
+            updatedBy: null,
+        },
         record: {
+            followUpId: null,
             province: null,
             creator: null,
             lastUpdate: [],
@@ -31,6 +41,7 @@ function initializeForm() {
                 livingOther: null,
                 saving: null,
                 club: null,
+                causeOfDeath: null,
                 healthStatus: null,
                 smoking: null,
                 pastYearWeight: null,
@@ -49,6 +60,8 @@ function initializeForm() {
                 underlyingDis: null,
                 underlyingDisOther: null,
                 underlyingDiseases: [],
+                followUpDisOther: null,
+                followUpDiseases: [],
                 healthCoverage: null,
                 healthCoverageOther: null,
                 healthCoverages: [],
@@ -56,6 +69,9 @@ function initializeForm() {
                 hospitalizationDetail: null,
                 fell0: null,
                 fell: null,
+                fellWithBrokenBone: null,
+                fellWithBrokenBoneTimes: null,
+                fellWithBrokenBoneWhere: null,
                 medication: null,
                 medicationTypes: null,
                 job: {
@@ -90,6 +106,8 @@ function initializeForm() {
                 five: null,
                 six: null,
             },
+            pastYearAdlScore: null,
+            currentAdlScore: null,
             adl: {
                 one: null,
                 two: null,
@@ -274,6 +292,17 @@ export default new Vuex.Store({
                 state.form.record.personal.underlyingDiseases.splice(idx, 1)
             }
         },
+        updateFollowUpDiseases: function (state, disease) {
+            if (!("followUpDiseases" in state.form.record.personal)) {
+                state.form.record.personal.followUpDiseases = []
+            }
+            let idx = state.form.record.personal.followUpDiseases.indexOf(disease)
+            if (idx == -1) {
+                state.form.record.personal.followUpDiseases.push(disease)
+            } else {
+                state.form.record.personal.followUpDiseases.splice(idx, 1)
+            }
+        },
         updateHealthCoverages (state, coverage) {
             let idx = state.form.record.personal.healthCoverages.indexOf(coverage)
             if (idx == -1) {
@@ -329,6 +358,38 @@ export default new Vuex.Store({
                 state.form.record.lastUpdate.datetime = new Date(record.lastUpdate.datetime.toDate())
             }
         },
+        setFollowUp(state, value) {
+            state.form.followUp = value
+            state.form.followUpInfo = {
+                createdBy: null,
+                province: null,
+                recordCode: null,
+                createdAt: null,
+                updatedAt: null,
+                updatedBy: null,
+            }
+        },
+        setFollowUpCreator(state) {
+            state.form.followUpInfo.createdBy = auth.currentUser.email
+        },
+        setFollowUpCreatedAt(state, datetime) {
+            state.form.followUpInfo.createdAt = datetime
+        },
+        setFollowUpUpdatedAt(state, datetime) {
+            state.form.followUpInfo.updatedAt = datetime
+        },
+        setFollowUpUpdater(state) {
+            state.form.followUpInfo.updatedBy = auth.currentUser.email
+        },
+        setFollowUpRecordCode(state) {
+            state.form.followUpInfo.recordCode = state.form.record.code
+        },
+        setFollowUpProvince(state) {
+            state.form.followUpInfo.province = state.form.record.province
+        },
+        setFollowUpRecordId(state, followUpId) {
+            state.form.record.followUpId = followUpId
+        },
         setCreator(state) {
             state.form.record.creator = auth.currentUser.email
         },
@@ -340,6 +401,51 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        addFollowUpForm({commit, state}) {
+            commit('setFollowUpCreator')
+            commit('setFollowUpUpdater')
+            commit('setFollowUpProvince')
+            commit('setFollowUpRecordCode')
+            commit('setFollowUpUpdatedAt', new Date())
+            commit('setFollowUpCreatedAt', new Date())
+            followups.add(state.form.followUpInfo).then(docRef => {
+                commit('setFollowUpRecordId', docRef.id)
+            })
+        },
+        async saveFollowUpForm({commit, state}) {
+            records.where('followUpId', '==', state.form.record.followUpId)
+                .get().then((snapshot) => {
+                // if the follow-up record does not exist, add it
+                if (snapshot.empty) {
+                    commit('setCreator')
+                    records.add(state.form.record).then(() => {
+                        ToastProgrammatic.open({
+                            type: 'is-success',
+                            message: 'บันทึกข้อมูลเรียบร้อยแล้ว'
+                        })
+                    }).catch((error) => {
+                        ToastProgrammatic.open({
+                            type: 'is-danger',
+                            message: error.toString()
+                        })
+                    })
+                } else {
+                    let formData = snapshot.docs[0]
+                    records.doc(formData.id).set(state.form.record).then(() => {
+                        ToastProgrammatic.open({
+                            type: 'is-success',
+                            message: 'บันทึกข้อมูลเรียบร้อยแล้ว'
+                        })
+                        //TODO: set current code
+                    }).catch((error) => {
+                        ToastProgrammatic.open({
+                            type: 'is-danger',
+                            message: error.toString()
+                        })
+                    })
+                }
+            })
+        },
         saveForm({commit, state}) {
             commit('setLastUpdate')
             commit('setFormProvince')
@@ -392,7 +498,7 @@ export default new Vuex.Store({
                             }
                         })
                     } else {
-                        // if the code exists but it is the same as the current code,
+                        // if the code exists, but it is the same as the current code,
                         // update the record. No need to confirm.
                         records.doc(formData.id).set(state.form.record).then(()=>{
                             ToastProgrammatic.open({
@@ -411,6 +517,9 @@ export default new Vuex.Store({
         },
         setRecord({commit}, record) {
             commit('setUpRecord', record)
+        },
+        toggleFollowUpMode({commit}) {
+            commit('setFollowUp', true)
         },
         updateSMMIndex({ commit, state }, payload) {
             if (state.form.record.personal.height > 0) {

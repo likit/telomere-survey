@@ -60,13 +60,20 @@
             <span class="icon">
               <i class="fas fa-pencil-alt"></i>
             </span>
-              <span>Edit</span>
+              <span>แก้ไข</span>
+            </button>
+            <button @click="$router.push({name: 'FollowUpRecordSearch', params: {query: props.row.code}})"
+                    class="button is-success is-light">
+              <span class="icon">
+                <i class="fas fa-plus"></i>
+              </span>
+              <span>เพิ่มข้อมูลการติดตาม</span>
             </button>
             <button @click="deleteRecord(props.row.id)" class="button is-danger is-light">
             <span class="icon">
               <i class="fas fa-trash"></i>
             </span>
-              <span>Delete</span>
+              <span>ลบรายการ</span>
             </button>
           </div>
         </b-table-column>
@@ -123,6 +130,21 @@ export default {
             }
       })
     },
+    setFollowUpRecord: function(code) {
+      let self = this
+      self.$store.dispatch('setNewFollowUp')
+      records.where('code', '==', code)
+          .where('province', '==', self.province.name)
+          .get().then((snapshot) => {
+            if (!snapshot.empty) {
+              let d = snapshot.docs[0]
+              this.$store.dispatch('setRecord', d.data()).then(()=>{
+                self.$store.dispatch('addFollowUpForm')
+                self.$router.push({ name: 'FollowUpMain'})
+              })
+            }
+          })
+    },
     deleteRecord: function(id) {
       this.$buefy.dialog.confirm({
         type: 'is-warning',
@@ -150,19 +172,22 @@ export default {
     },
     fetchAll: function() {
       let self = this
-      records.where('province', '==', self.$store.state.province.name).get()
+      records.where('province', '==', self.$store.state.province.name)
+          .get()
           .then((snapshot) => {
             snapshot.forEach((r) => {
               let d = r.data()
-              self.items.push({
-                id: r.id,
-                code: d.code,
-                firstname: d.personal.firstname,
-                lastname: d.personal.lastname,
-                province: d.province,
-                updatedAt: d.lastUpdate.datetime,
-                creator: d.creator,
-              })
+              if (d.personal.followUpId == null) {
+                self.items.push({
+                  id: r.id,
+                  code: d.code,
+                  firstname: d.personal.firstname,
+                  lastname: d.personal.lastname,
+                  province: d.province,
+                  updatedAt: d.lastUpdate.datetime,
+                  creator: d.creator,
+                })
+              }
             })
           })
     },
@@ -177,15 +202,17 @@ export default {
             .then((snapshot) => {
               snapshot.forEach((r) => {
                 let d = r.data()
-                self.items.push({
-                  id: r.id,
-                  code: d.code,
-                  firstname: d.personal.firstname,
-                  lastname: d.personal.lastname,
-                  province: d.province,
-                  updatedAt: d.lastUpdate.datetime,
-                  creator: d.creator,
-                })
+                if (d.personal.followUpId == null) {
+                  self.items.push({
+                    id: r.id,
+                    code: d.code,
+                    firstname: d.personal.firstname,
+                    lastname: d.personal.lastname,
+                    province: d.province,
+                    updatedAt: d.lastUpdate.datetime,
+                    creator: d.creator,
+                  })
+                }
               })
             })
       }
