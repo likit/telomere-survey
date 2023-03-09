@@ -156,7 +156,7 @@ export default {
           .then((snapshot) => {
             snapshot.forEach((r) => {
               let d = r.data()
-              if (!("followUpId" in d) || d.followUpId == null) {
+              if (!("followUpId" in d) || d.followUpId == null || d.followUpId === '') {
                 self.items.push({
                   id: r.id,
                   code: d.code,
@@ -181,7 +181,7 @@ export default {
             .then((snapshot) => {
               snapshot.forEach((r) => {
                 let d = r.data()
-                if (!("followUpId" in d) || d.followUpId == null) {
+                if (!("followUpId" in d) || d.followUpId == null || d.followUpId === '') {
                   self.items.push({
                     id: r.id,
                     code: d.code,

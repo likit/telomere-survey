@@ -385,6 +385,9 @@ export default new Vuex.Store({
                 state.form.record.frail.illness.splice(idx, 1)
             }
         },
+        setPastYearADL: function (state, value) {
+            state.form.record.pastYearAdlScore = value
+        },
         updateFollowUpDiseases: function (state, disease) {
             let idx = state.form.record.personal.followUpDiseases.indexOf(disease)
             if (idx == -1) {
@@ -448,6 +451,9 @@ export default new Vuex.Store({
                 state.form.record.lastUpdate.datetime = new Date(record.lastUpdate.datetime.toDate())
             }
         },
+        setRecordFollowUpId(state, value) {
+            state.form.record.followUpId = value
+        },
         setFollowUp(state, value) {
             state.form.followUp = value
             state.form.followUpInfo = {
@@ -491,6 +497,20 @@ export default new Vuex.Store({
         },
     },
     actions: {
+        setRecordFollowUpId({commit}, payload) {
+            commit('setRecordFollowUpId', payload)
+        },
+        addFollowUpRecord({commit}) {
+            commit('setFollowUpCreator')
+            commit('setFollowUpUpdater')
+            commit('setFollowUpProvince')
+            commit('setFollowUpRecordCode')
+            commit('setFollowUpUpdatedAt', new Date())
+            commit('setFollowUpCreatedAt', new Date())
+            commit('initFollowUpDiseases')
+            commit('initFrail')
+            commit('initBehavior')
+        },
         addFollowUpForm({commit, state}) {
             commit('setFollowUpCreator')
             commit('setFollowUpUpdater')
@@ -620,6 +640,9 @@ export default new Vuex.Store({
         },
         initializeFollowUpForm({commit}) {
             commit('initFollowUpDiseases')
+        },
+        setPastYearADL({commit}, value) {
+            commit('setPastYearADL', value)
         },
         updateSMMIndex({ commit, state }, payload) {
             if (state.form.record.personal.height > 0) {

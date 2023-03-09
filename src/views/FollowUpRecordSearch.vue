@@ -87,6 +87,19 @@ export default {
               this.$store.dispatch('setRecord', d.data()).then(()=>{
                 self.$router.push({ name: 'FollowUpMain'})
               })
+            } else {
+              records.where('code', '==', self.code)
+                  .where('province', '==', self.province.name)
+                  .get().then((snapshot) => {
+                if (!snapshot.empty) {
+                  let d = snapshot.docs[0]
+                  this.$store.dispatch('setRecord', d.data()).then(()=>{
+                    self.$store.dispatch('addFollowUpRecord')
+                    self.$store.dispatch('setRecordFollowUpId', id)
+                    self.$router.push({ name: 'FollowUpMain'})
+                  })
+                }
+              })
             }
       })
     },
