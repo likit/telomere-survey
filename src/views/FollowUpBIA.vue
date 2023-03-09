@@ -153,12 +153,18 @@
         <b-field>
           <b-numberinput placeholder="ครั้งที่ 2" step="0.1" v-model="form.record.evaluation.gait2_6min"></b-numberinput>
         </b-field>
+        <b-field>
+          <b-numberinput placeholder="เฉลี่ย" :readonly="true" step="0.1" v-model="gait_6min"></b-numberinput>
+        </b-field>
         <b-field label="Gait speed">
           Walk time เวลาที่ใช้ในการเดิน 4 เมตร
           <b-numberinput placeholder="ครั้งที่ 1" step="0.1" v-model="form.record.evaluation.gait1_4min"></b-numberinput>
         </b-field>
         <b-field>
           <b-numberinput placeholder="ครั้งที่ 2" step="0.1" v-model="form.record.evaluation.gait2_4min"></b-numberinput>
+        </b-field>
+        <b-field>
+          <b-numberinput placeholder="เฉลี่ย" :readonly="true" step="0.1" v-model="gait_4min"></b-numberinput>
         </b-field>
         <h1 class="title is-size-5">ทดสอบการทรงตัว ท่าละ 10 วินาที</h1>
         <b-field label="เท้าขนานกัน side-by-side">
@@ -226,8 +232,20 @@ export default {
         return null
       }
     },
+    gait_6min: function () {
+      return (this.form.record.evaluation.gait1_6min + this.form.record.evaluation.gait2_6min) / 2.0
+    },
+    gait_4min: function () {
+      return (this.form.record.evaluation.gait1_4min + this.form.record.evaluation.gait2_4min) / 2.0
+    }
   },
   watch: {
+    "gait_6min" () {
+      this.$store.dispatch('updateGaitSpeed6Min', this.gait_6min)
+    },
+    "gait_4min" () {
+      this.$store.dispatch('updateGaitSpeed4Min', this.gait_4min)
+    },
     "form.record.evaluation.sideBySide" (newValue) {
       if (newValue !== null) {
         this.form.record.evaluation.sideBySideScore = parseInt(newValue) > 1 ? 0 : 1

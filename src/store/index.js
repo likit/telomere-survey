@@ -271,8 +271,10 @@ function initializeForm() {
                 gait2: null,
                 gait1_6min: null,
                 gait2_6min: null,
+                gait_6min_avg: null,
                 gait1_4min: null,
                 gait2_4min: null,
+                gait_4min_avg: null,
                 hand: null,
                 gripLeft1: null,
                 gripLeft2: null,
@@ -430,6 +432,12 @@ export default new Vuex.Store({
                 }
             }
             state.form.record.minicog.score = state.form.record.minicog.items.length
+        },
+        updateGaitSpeed6Min(state, payload) {
+            state.form.record.evaluation.gait_6min_avg = payload
+        },
+        updateGaitSpeed4Min(state, payload) {
+            state.form.record.evaluation.gait_4min_avg = payload
         },
         setMuscleMass(state, payload) {
             state.form.record.evaluation.muscleMass = payload.mass
@@ -650,6 +658,12 @@ export default new Vuex.Store({
                 commit('setMuscleMass', { mass: payload})
                 commit('setSMMIndex', { index: index })
             }
+        },
+        updateGaitSpeed6Min({commit}, payload) {
+            commit('updateGaitSpeed6Min', payload)
+        },
+        updateGaitSpeed4Min({commit}, payload) {
+            commit('updateGaitSpeed4Min', payload)
         }
     }
 })
