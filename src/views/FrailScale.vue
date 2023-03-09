@@ -71,6 +71,10 @@
         <b-field>
           <b-checkbox @input="updateDisease($event, 'kidney disease')" v-model="d11">Kidney disease</b-checkbox>
         </b-field>
+        <b-field label="จำนวนโรค">
+          <b-radio native-value="0" :value="illnessScore" :disabled="true">0-4 โรค</b-radio>
+          <b-radio native-value="1" :value="illnessScore" :disabled="true">5-11 โรค </b-radio>
+        </b-field>
         <b-field label="น้ำหนัก 1 ปีที่ผ่านมาโดยไม่สวมรองเท้า">
           <b-input type="number" placeholder="กก." v-model="form.record.personal.weight"></b-input>
         </b-field>
@@ -80,6 +84,12 @@
         <b-field label="ร้อยละน้ำหนักที่เปลี่ยนไป">
           <b-input type="number" placeholder="กก." :readonly="true" v-model="percentWeightChange"></b-input>
         </b-field>
+      <b-notification v-if="totalScore > 2" type="is-danger is-light">
+        คะแนนรวม {{ totalScore }} คะแนน มีภาวะเปราะบาง
+      </b-notification>
+      <b-notification v-else type="is-success is-light">
+        คะแนนรวม {{ totalScore }} คะแนน มีภาวะเปราะบาง
+      </b-notification>
       <div class="buttons is-centered">
         <button class="button is-light" @click="$router.back()">
         <span class="icon">
