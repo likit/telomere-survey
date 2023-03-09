@@ -72,7 +72,7 @@
           <b-checkbox @input="updateDisease($event, 'kidney disease')" v-model="d11">Kidney disease</b-checkbox>
         </b-field>
         <b-field label="น้ำหนัก 1 ปีที่ผ่านมาโดยไม่สวมรองเท้า">
-          <b-input type="number" placeholder="กก." v-model="form.record.frail.pastYearWeight"></b-input>
+          <b-input type="number" placeholder="กก." v-model="form.record.personal.weight"></b-input>
         </b-field>
         <b-field label="น้ำหนักปัจจุบันโดยไม่สวมรองเท้า">
           <b-input type="number" placeholder="กก." v-model="form.record.frail.currentWeight"></b-input>
@@ -112,7 +112,7 @@ export default {
   computed: {
     ...mapState(['form']),
     percentWeightChange: function () {
-      let change = ((this.form.record.frail.pastYearWeight - this.form.record.frail.currentWeight) / this.form.record.frail.pastYearWeight) * 100.0
+      let change = ((this.form.record.personal.weight - this.form.record.frail.currentWeight) / this.form.record.personal.weight) * 100.0
       change = change.toFixed(2)
       return change
     },
