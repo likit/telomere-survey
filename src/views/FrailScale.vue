@@ -113,7 +113,8 @@ export default {
     ...mapState(['form']),
     percentWeightChange: function () {
       let change = ((this.form.record.frail.pastYearWeight - this.form.record.frail.currentWeight) / this.form.record.frail.pastYearWeight) * 100.0
-      return change.toFixed(2)
+      change = change.toFixed(2)
+      return change
     },
     fatigueScore: function () {
       let score
