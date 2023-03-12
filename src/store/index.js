@@ -69,6 +69,8 @@ function initializeForm() {
                 hospitalizationDetail: null,
                 fell0: null,
                 fell: null,
+                fellTimes: null,
+                fellCause: null,
                 fellWithBrokenBone: null,
                 fellWithBrokenBoneTimes: null,
                 fellWithBrokenBoneWhere: null,

@@ -57,6 +57,12 @@
           <b-radio native-value="ไม่มี" v-model="form.record.personal.fell">ไม่มี</b-radio>
           <b-radio native-value="มี" v-model="form.record.personal.fell">มี</b-radio>
         </b-field>
+        <b-field v-if="form.record.personal.fell=='มี'">
+          <b-numberinput placeholder="จำนวนครั้ง" v-model="form.record.personal.fellTimes"></b-numberinput>
+        </b-field>
+        <b-field v-if="form.record.personal.fell=='มี'">
+          <b-input placeholder="ระบุสาเหตุ" v-model="form.record.personal.fellCause"></b-input>
+        </b-field>
         <b-field label="ประวัติการพลัดหกล้มที่ทำให้กระดูกหักในระยะ 1 ปีที่ผ่านมา">
           <b-radio native-value="ไม่มี" v-model="form.record.personal.fellWithBrokenBone">ไม่มี</b-radio>
           <b-radio native-value="มี" v-model="form.record.personal.fellWithBrokenBone">มี</b-radio>
