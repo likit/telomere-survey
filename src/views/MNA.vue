@@ -50,7 +50,7 @@
           <b-radio native-value=0 v-model="form.record.mna.four">มี</b-radio>
         </b-field>
         <b-field>
-          <b-radio native-value=1 v-model="form.record.mna.four">ไม่มี</b-radio>
+          <b-radio native-value=2 v-model="form.record.mna.four">ไม่มี</b-radio>
         </b-field>
         <span class="tag is-light is-success">คะแนน {{ form.record.mna.four }}</span>
         <b-field label="มีปัญหาทางจิตประสาทหรือไม่">

@@ -69,7 +69,7 @@
         </b-field>
         <b-field label="คะแนน ADL">
           <b-field label="1 ปีย้อนหลัง">
-            <b-numberinput placeholder="1 ปีย้อนหลัง" :readonly="true" v-model="pastYearAdl"></b-numberinput>
+            <b-numberinput placeholder="1 ปีย้อนหลัง" :readonly="true" v-model="form.record.pastYearAdlScore"></b-numberinput>
           </b-field>
         </b-field>
         <b-field label="ปัจจุบัน">
@@ -123,6 +123,7 @@
 <script>
 import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from 'vuex';
+import {records} from "@/firebase";
 
 export default {
   name: "Personal",
@@ -134,7 +135,6 @@ export default {
       d3: null,
       d4: null,
       d5: null,
-      pastYearAdl: null
     }
   },
   computed: {
@@ -149,13 +149,26 @@ export default {
     }
   },
   mounted() {
-    this.pastYearAdl = parseInt(this.form.record.adl.one) + parseInt(this.form.record.adl.two) +
-        parseInt(this.form.record.adl.three) + parseInt(this.form.record.adl.four) +
-        parseInt(this.form.record.adl.five) + parseInt(this.form.record.adl.six) +
-        parseInt(this.form.record.adl.seven) + parseInt(this.form.record.adl.eight) +
-        parseInt(this.form.record.adl.nine) + parseInt(this.form.record.adl.ten)
-    this.form.record.pastYearAdlScore = this.pastYearAdl
-    console.log(this.form.record.adl)
+    let self = this
+    records.where('followUpId', '==', null)
+        .where('province', '==', self.form.record.province)
+        .where('code', '==', self.form.record.code)
+        .get().then((snapshot) => {
+      if (!snapshot.empty) {
+        let d = snapshot.docs[0]
+        let record = d.data()
+        let total = parseInt(record.adl.one) + parseInt(record.adl.two) +
+            parseInt(record.adl.three) + parseInt(record.adl.four) +
+            parseInt(record.adl.five) + parseInt(record.adl.six) +
+            parseInt(record.adl.seven) + parseInt(record.adl.eight) +
+            parseInt(record.adl.nine) + parseInt(record.adl.ten)
+        this.$store.dispatch('setPastYearADL', total)
+      } else {
+        console.log('record not found')
+        console.log(self.form.record.code)
+        console.log(self.form.record.province)
+      }
+    })
     this.form.record.personal.followUpDiseases.forEach((d)=>{
       switch (d) {
         case "โรคหลอดเลือดสมอง":

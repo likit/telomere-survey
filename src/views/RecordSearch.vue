@@ -99,10 +99,12 @@ export default {
       let self = this
       this.$store.dispatch('toggleFollowUpMode', false)
       records.where('code', '==', code)
+          .where('followUpId', '==', null)
           .where('province', '==', self.province.name)
           .get().then((snapshot) => {
             if (!snapshot.empty) {
               let d = snapshot.docs[0]
+              console.log(d.followUpId)
               this.$store.dispatch('setRecord', d.data()).then(()=>{
                 self.$router.push({ name: 'FormMain'})
               })

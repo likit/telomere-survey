@@ -150,6 +150,7 @@ export default {
   computed: {
     ...mapState(['form']),
     score: function() {
+      let self = this
       let total = parseInt(this.form.record.adl.one) + parseInt(this.form.record.adl.two) +
           parseInt(this.form.record.adl.three) + parseInt(this.form.record.adl.four) +
           parseInt(this.form.record.adl.five) + parseInt(this.form.record.adl.six) +
@@ -158,6 +159,7 @@ export default {
       if (isNaN(total)) {
         return "N/A"
       } else {
+        self.form.record.currentAdlScore = total
         return total
       }
     }
