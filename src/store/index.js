@@ -249,6 +249,8 @@ function initializeForm() {
                 eighteen: null,
                 nineteen: null,
                 twenty: null,
+                totalScore: null,
+                interpretation: null,
             },
             evaluation: {
                 stability: [],

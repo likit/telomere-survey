@@ -259,6 +259,12 @@
         </tr>
         </tbody>
       </table>
+      <p>
+        <strong>คะแนนทั้งหมด</strong> {{form.record.behavior.totalScore}}
+      </p>
+      <p>
+        <strong>แปลผล</strong> {{form.record.behavior.interpretation}}
+      </p>
       <div class="buttons is-centered">
         <button class="button is-light" @click="$router.back()">
         <span class="icon">
@@ -289,6 +295,44 @@ export default {
   components: {NavigationTwo},
   computed: {
     ...mapState(['form']),
+    score() {
+      let self = this
+      let s = parseInt(self.form.record.behavior.one) +
+          parseInt(self.form.record.behavior.two) +
+          parseInt(self.form.record.behavior.three) +
+          parseInt(self.form.record.behavior.four) +
+          parseInt(self.form.record.behavior.five) +
+          parseInt(self.form.record.behavior.six) +
+          parseInt(self.form.record.behavior.seven) +
+          parseInt(self.form.record.behavior.eight) +
+          parseInt(self.form.record.behavior.nine) +
+          parseInt(self.form.record.behavior.ten) +
+          parseInt(self.form.record.behavior.eleven) +
+          parseInt(self.form.record.behavior.twelve) +
+          parseInt(self.form.record.behavior.thirteen) +
+          parseInt(self.form.record.behavior.fourteen) +
+          parseInt(self.form.record.behavior.fifteen) +
+          parseInt(self.form.record.behavior.sixteen) +
+          parseInt(self.form.record.behavior.seventeen) +
+          parseInt(self.form.record.behavior.eighteen) +
+          parseInt(self.form.record.behavior.nineteen) +
+          parseInt(self.form.record.behavior.twenty)
+      return s
+    }
+  },
+  watch: {
+    "score"(newValue) {
+      this.form.record.behavior.totalScore = newValue
+      if (newValue == 100) {
+        this.form.record.behavior.interpretation = 'พฤติกรรมด้านสุขภาพดีมาก'
+      } else if (newValue >= 80) {
+        this.form.record.behavior.interpretation = 'พฤติกรรมด้านสุขภาพดี'
+      } else if (newValue >= 60) {
+        this.form.record.behavior.interpretation = 'พฤติกรรมด้านสุขภาพดีปานกลาง'
+      } else {
+        this.form.record.behavior.interpretation = 'ควรปรับเปลี่ยนพฤติกรรมให้ดีขึ้น'
+      }
+    }
   },
   methods: {
     saveData() {
