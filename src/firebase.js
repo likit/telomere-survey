@@ -6,13 +6,13 @@ import '@firebase/storage';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyBrYFOliWZFFFCCWHq2q6DTF52QIuhBTPU",
-    authDomain: "sarcopenia-servey-app.firebaseapp.com",
-    projectId: "sarcopenia-servey-app",
-    storageBucket: "sarcopenia-servey-app.appspot.com",
-    messagingSenderId: "270673028338",
-    appId: "1:270673028338:web:c2e68a5c97aee7cd309c6b",
-    measurementId: "G-Q5TYNW4BHT"
+    apiKey: "AIzaSyCmM6qR6aZGbc5naykHNvTtvaRBaUAekrU",
+    authDomain: "telomere-survey.firebaseapp.com",
+    projectId: "telomere-survey",
+    storageBucket: "telomere-survey.appspot.com",
+    messagingSenderId: "240965671226",
+    appId: "1:240965671226:web:605977faaaf2f4485d9803",
+    measurementId: "G-XN9CHMLT59"
 };
 
 firebase.initializeApp(firebaseConfig)
