@@ -4,12 +4,9 @@
   <NavigationTwo v-else></NavigationTwo>
   <br>
   <div class="container">
-    <b-steps
-        :rounded="true"
-        :has-navigation="false"
-        mobile-mode="minimalist"
-    >
-      <b-step-item :step="form.record.followUpId == null ? 7 : 5" label="กิจวัตรประจำวันอันซับซ้อน (IADL)" :clickable="true">
+    <div class="columns">
+      <div class="column is-two-thirds is-offset-2">
+        <h1 class="title has-text-centered">แบบประเมินความสามารถในการทำกิจวัตรประจำวันขั้นซับซ้อน (Instrumental Activity Daily Living: IADL)</h1>
         <div class="has-text-centered" v-if="form.record.followUpId != null">
           <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
         </div>
@@ -77,30 +74,15 @@
         </b-field>
         <span class="tag is-light is-success">คะแนน {{ form.record.iadl.six }}</span>
         <h1 class="title has-text-centered is-size-4">คะแนนรวม {{ score }}</h1>
-      </b-step-item>
-    </b-steps>
     <div class="buttons is-centered">
-      <button class="button is-light" @click="$router.back()">
-        <span class="icon">
-          <i class="fas fa-chevron-left"></i>
-        </span>
-      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{ name: '9Q' }" class="button is-success" v-if="form.record.followUpId == null">
-        <span class="icon">
-          <i class="fas fa-chevron-right"></i>
-        </span>
-      </router-link>
-      <router-link :to="{ name: 'FollowUpMNA' }" class="button is-success" v-else>
-        <span class="icon">
-          <i class="fas fa-chevron-right"></i>
-        </span>
-      </router-link>
+    </div>
+  </div>
     </div>
   </div>
 </section>

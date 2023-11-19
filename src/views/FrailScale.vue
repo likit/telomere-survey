@@ -1,112 +1,113 @@
 <template>
-<section class="section">
-  <Navigation></Navigation>
-  <br>
-  <div class="container">
-    <b-steps
-        :rounded="true"
-        :has-navigation="false"
-        mobile-mode="minimalist"
-    >
-      <b-step-item step="3" label="แบบบันทึกการประเมิน" :clickable="true"></b-step-item>
-    </b-steps>
-        <b-field label="ตลอดเวลา 4 สัปดาห์ที่ผ่านมาท่านรู้สึกเหนื่อยเพลียบ่อยมากแค่ไหน">
-          <b-radio native-value="1" v-model="form.record.frail.fatigue">
-            ตลอดเวลา
-          </b-radio>
-          <b-radio native-value="2" v-model="form.record.frail.fatigue">
-            เกือบตลอดเวลา
-          </b-radio>
-          <b-radio native-value="3" v-model="form.record.frail.fatigue">
-            บางเวลา
-          </b-radio>
-          <b-radio native-value="4" v-model="form.record.frail.fatigue">
-            ส่วนน้อย
-          </b-radio>
-          <b-radio native-value="5" v-model="form.record.frail.fatigue">
-            ไม่เคยเลย
-          </b-radio>
-        </b-field>
-        <b-field label="เวลาท่านขึ้นบันได 10 ขั้นด้วยตนเองโดยไม่ใช้อุปกรณ์ช่วยเดินท่านต้องพักระหว่างเดินขึ้นบันได">
-          <b-radio native-value="ไม่ใช่" v-model="form.record.frail.resistance">ไม่ใช่</b-radio>
-          <b-radio native-value="ใช่" v-model="form.record.frail.resistance">ใช่</b-radio>
-        </b-field>
-        <b-field label="เวลาท่านเดินไปมาเอง โดยไม่ใช้อุปกรณ์ช่วยเดินท่านมีปัญหาเวลาเดินไกลเป็นระยะทางหลายร้อยเมตร">
-          <b-radio native-value="ไม่ใช่" v-model="form.record.frail.ambulation">ไม่ใช่</b-radio>
-          <b-radio native-value="ใช่" v-model="form.record.frail.ambulation">ใช่</b-radio>
-        </b-field>
-        <b-field label="หมอที่ดูแลท่านได้บอกว่าท่านมีโรคต่าง ๆ เหล่านี้">
-          <b-checkbox @input="updateDisease($event, 'hypertension')" v-model="d1">Hypertension</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'diabetes mellitus')" v-model="d2">Diabetes mellitus</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'cancer')" v-model="d3">Cancer ไม่รวมมะเร็งผิวหนัง</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'chronic lung disease')" v-model="d4">Chronic lung disease</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'heart attack')" v-model="d5">Heart attacke</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'congestive heart failure')" v-model="d6">Congestive heart failure</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'angina')" v-model="d7">Angina</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'asthma')" v-model="d8">Asthma</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'arthritis')" v-model="d9">Arthritis</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'stroke')" v-model="d10">Stroke</b-checkbox>
-        </b-field>
-        <b-field>
-          <b-checkbox @input="updateDisease($event, 'kidney disease')" v-model="d11">Kidney disease</b-checkbox>
-        </b-field>
-        <b-field label="จำนวนโรค">
-          <b-radio native-value="0" :value="illnessScore" :disabled="true">0-4 โรค</b-radio>
-          <b-radio native-value="1" :value="illnessScore" :disabled="true">5-11 โรค </b-radio>
-        </b-field>
-        <b-field label="น้ำหนัก 1 ปีที่ผ่านมาโดยไม่สวมรองเท้า">
-          <b-input type="number" placeholder="กก." v-model="form.record.personal.weight"></b-input>
-        </b-field>
-        <b-field label="น้ำหนักปัจจุบันโดยไม่สวมรองเท้า">
-          <b-input type="number" placeholder="กก." v-model="form.record.frail.currentWeight"></b-input>
-        </b-field>
-        <b-field label="ร้อยละน้ำหนักที่เปลี่ยนไป">
-          <b-input type="number" placeholder="กก." :readonly="true" v-model="percentWeightChange"></b-input>
-        </b-field>
-      <b-notification v-if="totalScore > 2" type="is-danger is-light">
-        คะแนนรวม {{ totalScore }} คะแนน มีภาวะเปราะบาง
-      </b-notification>
-      <b-notification v-else type="is-success is-light">
-        คะแนนรวม {{ totalScore }} คะแนน มีภาวะเปราะบาง
-      </b-notification>
-      <div class="buttons is-centered">
-        <button class="button is-light" @click="$router.back()">
+  <section class="section">
+    <Navigation></Navigation>
+    <br>
+    <div class="container">
+      <div class="columns">
+        <div class="column is-two-thirds is-offset-2">
+          <h1 class="title has-text-centered">แบบประเมินภาวะเปราะบางตามเกณฑ์ FRAIL Scale</h1>
+          <b-field label="ตลอดเวลา 4 สัปดาห์ที่ผ่านมาท่านรู้สึกเหนื่อยเพลียบ่อยมากแค่ไหน">
+            <b-radio native-value="1" v-model="form.record.frail.fatigue">
+              ตลอดเวลา
+            </b-radio>
+            <b-radio native-value="2" v-model="form.record.frail.fatigue">
+              เกือบตลอดเวลา
+            </b-radio>
+            <b-radio native-value="3" v-model="form.record.frail.fatigue">
+              บางเวลา
+            </b-radio>
+            <b-radio native-value="4" v-model="form.record.frail.fatigue">
+              ส่วนน้อย
+            </b-radio>
+            <b-radio native-value="5" v-model="form.record.frail.fatigue">
+              ไม่เคยเลย
+            </b-radio>
+          </b-field>
+          <b-field label="เวลาท่านขึ้นบันได 10 ขั้นด้วยตนเองโดยไม่ใช้อุปกรณ์ช่วยเดินท่านต้องพักระหว่างเดินขึ้นบันได">
+            <b-radio native-value="ไม่ใช่" v-model="form.record.frail.resistance">ไม่ใช่</b-radio>
+            <b-radio native-value="ใช่" v-model="form.record.frail.resistance">ใช่</b-radio>
+          </b-field>
+          <b-field label="เวลาท่านเดินไปมาเอง โดยไม่ใช้อุปกรณ์ช่วยเดินท่านมีปัญหาเวลาเดินไกลเป็นระยะทางหลายร้อยเมตร">
+            <b-radio native-value="ไม่ใช่" v-model="form.record.frail.ambulation">ไม่ใช่</b-radio>
+            <b-radio native-value="ใช่" v-model="form.record.frail.ambulation">ใช่</b-radio>
+          </b-field>
+          <b-field label="หมอที่ดูแลท่านได้บอกว่าท่านมีโรคต่าง ๆ เหล่านี้">
+            <b-checkbox @input="updateDisease($event, 'hypertension')" v-model="d1">Hypertension</b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'diabetes mellitus')" v-model="d2">Diabetes mellitus</b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'cancer')" v-model="d3">Cancer ไม่รวมมะเร็งผิวหนัง</b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'chronic lung disease')" v-model="d4">Chronic lung disease
+            </b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'heart attack')" v-model="d5">Heart attacke</b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'congestive heart failure')" v-model="d6">Congestive heart
+              failure
+            </b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'angina')" v-model="d7">Angina</b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'asthma')" v-model="d8">Asthma</b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'arthritis')" v-model="d9">Arthritis</b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'stroke')" v-model="d10">Stroke</b-checkbox>
+          </b-field>
+          <b-field>
+            <b-checkbox @input="updateDisease($event, 'kidney disease')" v-model="d11">Kidney disease</b-checkbox>
+          </b-field>
+          <b-field label="จำนวนโรค">
+            <b-radio native-value="0" :value="illnessScore" :disabled="true">0-4 โรค</b-radio>
+            <b-radio native-value="1" :value="illnessScore" :disabled="true">5-11 โรค</b-radio>
+          </b-field>
+          <b-field label="น้ำหนัก 1 ปีที่ผ่านมาโดยไม่สวมรองเท้า">
+            <b-input type="number" placeholder="กก." v-model="form.record.personal.weight"></b-input>
+          </b-field>
+          <b-field label="น้ำหนักปัจจุบันโดยไม่สวมรองเท้า">
+            <b-input type="number" placeholder="กก." v-model="form.record.frail.currentWeight"></b-input>
+          </b-field>
+          <b-field label="ร้อยละน้ำหนักที่เปลี่ยนไป">
+            <b-input type="number" placeholder="กก." :readonly="true" v-model="percentWeightChange"></b-input>
+          </b-field>
+          <b-notification v-if="totalScore > 2" type="is-danger is-light">
+            คะแนนรวม {{ totalScore }} คะแนน มีภาวะเปราะบาง
+          </b-notification>
+          <b-notification v-else type="is-success is-light">
+            คะแนนรวม {{ totalScore }} คะแนน มีภาวะเปราะบาง
+          </b-notification>
+          <div class="buttons is-centered">
+            <button class="button is-light" @click="$router.back()">
         <span class="icon">
           <i class="fas fa-chevron-left"></i>
         </span>
-        </button>
-        <b-button type="is-primary" @click="saveData">
+            </button>
+            <b-button type="is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
-          <span>Save</span>
-        </b-button>
-        <router-link :to="{name: 'FollowUpBIA'}" class="button is-success">
+              <span>Save</span>
+            </b-button>
+            <router-link :to="{name: 'FollowUpBIA'}" class="button is-success">
         <span class="icon">
           <i class="fas fa-chevron-right"></i>
         </span>
-        </router-link>
+            </router-link>
+          </div>
+        </div>
       </div>
-  </div>
-</section>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -148,7 +149,7 @@ export default {
       return this.fatigueScore + this.resistanceScore + this.illnessScore + this.ambulationScore + this.percentWeightChangeScore
     }
   },
-  data () {
+  data() {
     return {
       d1: null,
       d2: null,
@@ -172,7 +173,7 @@ export default {
     }
   },
   mounted() {
-    this.form.record.frail.illness.forEach((d)=>{
+    this.form.record.frail.illness.forEach((d) => {
       switch (d) {
         case "hypertension":
           this.d1 = true;
