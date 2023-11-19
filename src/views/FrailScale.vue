@@ -1,6 +1,6 @@
 <template>
 <section class="section">
-  <NavigationTwo></NavigationTwo>
+  <Navigation></Navigation>
   <br>
   <div class="container">
     <b-steps
@@ -111,11 +111,11 @@
 
 <script>
 import {mapState} from "vuex";
-import NavigationTwo from "@/components/navigationTwo.vue";
+import Navigation from "@/components/navigation";
 
 export default {
   name: "FrailScale",
-  components: {NavigationTwo},
+  components: {Navigation},
   computed: {
     ...mapState(['form']),
     percentWeightChange: function () {
