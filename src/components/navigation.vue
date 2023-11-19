@@ -64,6 +64,9 @@
         <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
           แบบบันทึกการประเมิน Gait speed, grip strength
         </b-navbar-item>
+        <b-navbar-item :to="{ name: 'FRAILScale' }" tag="router-link">
+          FRAIL Scale
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
   </b-navbar>
