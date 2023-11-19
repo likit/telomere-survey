@@ -218,13 +218,22 @@ const routes = [
         component: () => import('../views/FrailScale.vue')
     },
     {
-        path: '/form/follow-up/frail-scale',
+        path: '/form/follow-up/vital-signs',
         name: 'VitalSigns',
         meta: {
             title: 'Vital Signs',
             requiresAuth: true,
         },
         component: () => import('../views/VitalSigns.vue')
+    },
+    {
+        path: '/form/follow-up/lab-result',
+        name: 'LabResult',
+        meta: {
+            title: 'Lab Result',
+            requiresAuth: true,
+        },
+        component: () => import('../views/LabResult.vue')
     },
     {
         path: '/form/follow-up/bia',

@@ -339,6 +339,24 @@ function initializeForm() {
                 respiration: null,
                 rhythm: null,
                 respResult: null
+            },
+            lab: {
+                lh: null,
+                lhAge: null,
+                fsh: null,
+                fshAge: null,
+                testosterone: null,
+                testosteroneAge: null,
+                estradiol: null,
+                estradiolAge: null,
+                cholesterol: null,
+                cholesterolAge: null,
+                ldl: null,
+                ldlAge: null,
+                hba1c: null,
+                hba1cAge: null,
+                telomere: null,
+                telomereAge: null,
             }
         }
     }

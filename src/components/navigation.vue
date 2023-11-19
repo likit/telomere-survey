@@ -70,6 +70,9 @@
         <b-navbar-item :to="{ name: 'VitalSigns' }" tag="router-link">
           Vital Signs
         </b-navbar-item>
+        <b-navbar-item :to="{ name: 'LabResult' }" tag="router-link">
+          แบบบันทึกการตรวจทางห้องปฏิบัติการ
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
   </b-navbar>
