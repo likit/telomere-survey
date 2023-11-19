@@ -67,6 +67,9 @@
         <b-navbar-item :to="{ name: 'FRAILScale' }" tag="router-link">
           FRAIL Scale
         </b-navbar-item>
+        <b-navbar-item :to="{ name: 'VitalSigns' }" tag="router-link">
+          Vital Signs
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
   </b-navbar>

@@ -218,6 +218,15 @@ const routes = [
         component: () => import('../views/FrailScale.vue')
     },
     {
+        path: '/form/follow-up/frail-scale',
+        name: 'VitalSigns',
+        meta: {
+            title: 'Vital Signs',
+            requiresAuth: true,
+        },
+        component: () => import('../views/VitalSigns.vue')
+    },
+    {
         path: '/form/follow-up/bia',
         name: 'FollowUpBIA',
         meta: {

@@ -304,6 +304,18 @@ function initializeForm() {
                 lbm: null,
                 fatFreeMass: null,
                 note: null,
+            },
+            vital: {
+                systolic: null,
+                diastolic: null,
+                bpResult: null,
+                temperature: null,
+                tempResult: null,
+                pulse: null,
+                pulseResult: null,
+                respiration: null,
+                rhythm: null,
+                respResult: null
             }
         }
     }
