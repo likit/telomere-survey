@@ -10,9 +10,6 @@
     >
       <b-step-item step="3" label="แบบบันทึกการประเมิน" :clickable="true"></b-step-item>
     </b-steps>
-        <div class="has-text-centered">
-          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
-        </div>
         <b-field label="ตลอดเวลา 4 สัปดาห์ที่ผ่านมาท่านรู้สึกเหนื่อยเพลียบ่อยมากแค่ไหน">
           <b-radio native-value="1" v-model="form.record.frail.fatigue">
             ตลอดเวลา
