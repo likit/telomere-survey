@@ -345,19 +345,21 @@
         <b-field label="งานอื่น ๆ" v-if="form.record.personal.job.jobAfterRetirement=='อื่น ๆ'">
           <b-input v-model="form.record.personal.job.jobAfterRetirementOther"></b-input>
         </b-field>
-        <b-field label="ยังทำงานอยู่">
-          <b-field label="ทำมาแล้วกี่ปี">
-            <b-numberinput placeholder="ทำมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.duration"></b-numberinput>
+        <div v-if="form.record.personal.job.jobAfterRetirement!=='อื่น ๆ'">
+          <b-field label="ยังทำงานอยู่">
+            <b-field label="ทำมาแล้วกี่ปี">
+              <b-numberinput placeholder="ทำมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.duration"></b-numberinput>
+            </b-field>
           </b-field>
-        </b-field>
-        <b-field label="ทำงานอยู่">
-          <b-field label="หยุดมาแล้วกี่ปี">
-            <b-numberinput placeholder="หยุดมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.quit"></b-numberinput>
+          <b-field label="ทำงานอยู่">
+            <b-field label="หยุดมาแล้วกี่ปี">
+              <b-numberinput placeholder="หยุดมาแล้วกี่ปี" v-model="form.record.personal.job.currentJob.quit"></b-numberinput>
+            </b-field>
           </b-field>
-        </b-field>
-        <b-field label="เพราะ">
-          <b-input placeholder="เหตุผลที่หยุดงาน" v-model="form.record.personal.job.currentJob.quitReason"></b-input>
-        </b-field>
+          <b-field label="เพราะ">
+            <b-input placeholder="เหตุผลที่หยุดงาน" v-model="form.record.personal.job.currentJob.quitReason"></b-input>
+          </b-field>
+        </div>
       </b-step-item>
     </b-steps>
     <div class="buttons is-centered">
@@ -417,7 +419,7 @@ export default {
     },
     saveData() {
       let self = this
-      if (this.form.record.code == null) {
+      if (self.form.record.code == null) {
         self.$buefy.dialog.alert({
           title: 'Error!',
           message: 'กรุณาระบุหมายเลขรหัสวิจัย',
@@ -429,7 +431,29 @@ export default {
           ariaModal: true
         })
       } else {
-        this.$store.dispatch('saveForm')
+        if (self.form.record.personal.job.jobAfterRetirement == 'อื่น ๆ') {
+          self.form.record.personal.job.currentJob.duration = null
+          self.form.record.personal.job.currentJob.quit = null
+          self.form.record.personal.job.currentJob.quitReason = null
+        } else {
+          self.form.record.personal.job.jobAfterRetirementOther = null
+        }
+        if (self.form.record.personal.maritalStatus !== 'อื่น ๆ') {
+          self.form.record.personal.maritalStatusOther = null
+        }
+        if (self.form.record.personal.education !== 'อื่น ๆ') {
+          self.form.record.personal.educationOther = null
+        }
+        if (self.form.record.personal.living !== 'อื่น ๆ') {
+          self.form.record.personal.livingOther = null
+        }
+        if (self.form.record.personal.underlyingDis !== 'อื่น ๆ') {
+          self.form.record.personal.underlyingDisOther = null
+        }
+        if (self.form.record.personal.medication !== 'มี') {
+          self.form.record.personal.medicationTypes = null
+        }
+        self.$store.dispatch('saveForm')
       }
     }
   },

@@ -3,10 +3,10 @@
   <div class="columns">
     <div class="column has-text-centered is-one-third is-offset-4">
       <h1 class="title">ระบบบันทึกข้อมูล</h1>
-      <h1 class="subtitle">โครงการวิจัยเรื่องระบบการจัดการโรคไม่ติดต่อเรื้อรังในกลุ่มผู้สูงอายุเปราะบางร่วมกับภาวะมวลกล้ามเนื้อน้อย</h1>
+      <h1 class="subtitle">โครงการวิจัยเรื่องการประเมินอายุชีวภาพด้วยความยาวเทโลเมียร์และสมรรถภาพทางการของประชากรไทยที่มีอายุ 50 ปีขึ้นไปในเขตบริการสุขภาพที่ 6 จังหวัดชลบุรี</h1>
       <br>
       <h1 class="title is-size-4"><strong>พื้นที่</strong> {{ province.name }}</h1>
-      <h1 class="subtitle is-size-6" v-if="user != null"><strong>ผู้จัดเก็บข้อมูล</strong> {{ user.displayName }}</h1>
+      <h1 class="subtitle is-size-6" v-if="user != null"><strong>ผู้จัดเก็บข้อมูล</strong> {{ user.displayName || user.email }}</h1>
       <br>
       <b-field label="Search Records">
         <b-input placeholder="research code" v-model="query" type="search" :expanded="true"></b-input>
