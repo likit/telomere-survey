@@ -210,7 +210,7 @@ const routes = [
     },
     {
         path: '/form/follow-up/frail-scale',
-        name: 'FollowUpFRAILScale',
+        name: 'FRAILScale',
         meta: {
             title: 'Follow-Up FRAIL Scale Page',
             requiresAuth: true,
