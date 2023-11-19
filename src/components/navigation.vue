@@ -62,7 +62,7 @@
           แบบประเมิน SARC-F
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'Evaluation' }" tag="router-link">
-          แบบบันทึกการประเมิน Gait speed, grip strength
+          แบบบันทึกการประเมินองค์ประกอบสัดส่วนของร่างกาย
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'FRAILScale' }" tag="router-link">
           FRAIL Scale
