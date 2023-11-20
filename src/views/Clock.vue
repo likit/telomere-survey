@@ -4,15 +4,9 @@
   <NavigationTwo v-else></NavigationTwo>
   <br>
   <div class="container">
-    <b-steps
-        :rounded="true"
-        :has-navigation="false"
-        mobile-mode="minimalist"
-    >
-      <b-step-item :step="form.record.followUpId == null ? 4 : 8" label="วาดรูปหน้าปัดนาฬิกา" :clickable="true">
-        <div class="has-text-centered" v-if="form.record.followUpId != null">
-          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
-        </div>
+    <div class="columns">
+      <div class="column is-two-thirds is-offset-2">
+        <h1 class="title has-text-centered">Upload ภาพวาดรูปนาฬิกา</h1>
         <div class="notification">
           <label class="label">
             ให้ผู้ถูกทดสอบวาดรูปนาฬิกาโดยใส่ตัวเลขและเข็มนาฬิกาที่เวลา 11.10 น.
@@ -32,37 +26,16 @@
           </b-field>
         </div>
       <div class="buttons is-centered">
-        <button class="button is-light" @click="$router.back()">
-          <span class="icon">
-            <i class="fas fa-chevron-left"></i>
-          </span>
-        </button>
         <button class="button is-primary" @click="saveData" v-if="form.record.followUpId == null">
           <span class="icon">
             <i class="far fa-save"></i>
           </span>
           <span>Save</span>
         </button>
-        <button class="button is-primary" @click="saveFollowUpData" v-else>
-          <span class="icon">
-            <i class="far fa-save"></i>
-          </span>
-          <span>Save</span>
-        </button>
-        <router-link :to="{ name: 'MNA' }" class="button is-success" v-if="form.record.followUpId == null">
-          <span class="icon">
-            <i class="fas fa-chevron-right"></i>
-          </span>
-        </router-link>
-        <router-link :to="{ name: 'FollowUpExhaustion' }" class="button is-success" v-else>
-          <span class="icon">
-            <i class="fas fa-chevron-right"></i>
-          </span>
-        </router-link>
       </div>
         <b-image v-if="imageUrl" :src="imageUrl" alt="Clock Photo"></b-image>
-      </b-step-item>
-    </b-steps>
+  </div>
+    </div>
   </div>
 </section>
 </template>

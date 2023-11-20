@@ -4,15 +4,7 @@
   <NavigationTwo v-else></NavigationTwo>
   <br>
   <div class="container">
-    <b-steps
-        :rounded="true"
-        :has-navigation="false"
-        mobile-mode="minimalist"
-    >
-      <b-step-item :step="form.record.followUpId == null ? 11 : 10" label="กิจกรรมทางกาย GPAQ" :clickable="true">
-        <div class="has-text-centered" v-if="form.record.followUpId != null">
-          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
-        </div>
+    <h1 class="title has-text-centered">แบบสอบถามกิจกรรมทางกายภาพระดับโลก (Global Physical Activity Questionnaire: GPAQ)</h1>
         <div class="notification is-light is-primary label">1. กิจกรรมทางกายภาพในการทำงาน</div>
         <span class="tag is-warning">P1</span>
         <b-field label="ท่านมีกิจกรรมทางกายระดับหนักซึ่งทำให้หายใจแรงและเร็วกว่าปกติมากหรือหอบติดต่อกัน
@@ -129,30 +121,13 @@
           <b-radio v-model="form.record.gpaq.sedentary" native-value="นั่งหรือเอนกายเฉย ๆ ไม่เกิน 2 ชั่วโมงต่อวัน">นั่งหรือเอนกายเฉย ๆ นานไม่เกิน 2 ชั่วโมงต่อวัน</b-radio>
           <span class="tag is-warning">P18</span>
         </b-field>
-      </b-step-item>
-    </b-steps>
     <div class="buttons is-centered">
-      <button class="button is-light" @click="$router.back()">
-        <span class="icon">
-          <i class="fas fa-chevron-left"></i>
-        </span>
-      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
         <span>Save</span>
       </button>
-      <router-link :to="{ name: 'Exhaustion' }" class="button is-success" v-if="form.record.followUpId == null">
-        <span class="icon">
-          <i class="fas fa-chevron-right"></i>
-        </span>
-      </router-link>
-      <router-link :to="{ name: 'FollowUpEQ-5D-5L' }" class="button is-success" v-else>
-        <span class="icon">
-          <i class="fas fa-chevron-right"></i>
-        </span>
-      </router-link>
     </div>
   </div>
 </section>

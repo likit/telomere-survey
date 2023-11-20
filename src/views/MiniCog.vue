@@ -4,15 +4,9 @@
   <Navigationtwo v-else></Navigationtwo>
   <br>
   <div class="container">
-    <b-steps
-        :rounded="true"
-        :has-navigation="false"
-        mobile-mode="minimalist"
-    >
-      <b-step-item :step="form.record.followUpId == null ? 3 : 7" label="สมรรถภาพเบื้องต้น" :clickable="true">
-        <div class="has-text-centered" v-if="form.record.followUpId != null">
-          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
-        </div>
+    <div class="columns">
+      <div class="column is-two-thirds is-offset-2">
+        <h1 class="title has-text-centered">แบบประเมินสมรรถภาพสมองเบื้องต้น (Mini Cog)</h1>
         <label class="label">Three Word Registration</label>
         <b-field label="ให้ตั้งใจฟังดี ๆ เดี๋ยวจะบอกคำ 3 คำ เมื่อพูดจบแล้วให้พูดตามและจำไว้เดี๋ยวจะกลับมาถามซ้ำ">
           <ul>
@@ -40,25 +34,16 @@
         <p>
           คะแนน {{ form.record.minicog.score !== null ? form.record.minicog.score : 'N/A' }}
         </p>
-      </b-step-item>
-    </b-steps>
-    <div class="buttons is-centered">
-      <button class="button is-light" @click="$router.back()">
-        <span class="icon">
-          <i class="fas fa-chevron-left"></i>
-        </span>
-      </button>
-      <button class="button is-primary" @click="saveData">
+        <div class="buttons is-centered">
+          <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
-        <span>Save</span>
-      </button>
-      <router-link :to="{ name: 'Clock' }" class="button is-success">
-        <span class="icon">
-          <i class="fas fa-chevron-right"></i>
-        </span>
-      </router-link>
+            <span>Save</span>
+          </button>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>

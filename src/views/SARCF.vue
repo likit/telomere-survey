@@ -3,12 +3,9 @@
     <Navigation></Navigation>
     <br>
     <div class="container">
-      <b-steps
-          :rounded="true"
-          :has-navigation="false"
-          mobile-mode="minimalist"
-      >
-        <b-step-item step="13" label="แบบประเมิน SARC-F" :clickable="true">
+      <div class="columns">
+        <div class="column is-two-thirds is-offset-2">
+          <h1 class="title has-text-centered">แบบประเมิน SARC-F</h1>
           <b-field label="คุณลำบากแค่ไหนในการยกของหนัก 10 ปอนด์ (4.5 กิโลกรัม)">
             <b-radio native-value="0" v-model="form.record.sarcf.one">ไม่ลำบาก</b-radio>
           </b-field>
@@ -26,7 +23,8 @@
             <b-radio native-value=1 v-model="form.record.sarcf.two">ค่อนข้างลำบาก</b-radio>
           </b-field>
           <b-field>
-            <b-radio native-value=2 v-model="form.record.sarcf.two">ลำบากมากต้องใช้อุปกรณ์ช่วยเดินหรือไม่สามารถทำได้</b-radio>
+            <b-radio native-value=2 v-model="form.record.sarcf.two">ลำบากมากต้องใช้อุปกรณ์ช่วยเดินหรือไม่สามารถทำได้
+            </b-radio>
           </b-field>
           <span class="tag is-light is-success">คะแนน {{ form.record.sarcf.two }}</span>
           <b-field label="คุณลำบากแค่ไหนในการลุกจากเก้าอี้หรือเตียงนอน">
@@ -36,7 +34,8 @@
             <b-radio native-value=1 v-model="form.record.sarcf.three">ค่อนข้างลำบาก</b-radio>
           </b-field>
           <b-field>
-            <b-radio native-value=2 v-model="form.record.sarcf.three">ลำบากมากหรือไม่สามารถทำได้โดยไม่มีความช่วยเหลือ</b-radio>
+            <b-radio native-value=2 v-model="form.record.sarcf.three">ลำบากมากหรือไม่สามารถทำได้โดยไม่มีความช่วยเหลือ
+            </b-radio>
           </b-field>
           <span class="tag is-light is-success">คะแนน {{ form.record.sarcf.three }}</span>
           <b-field label="คุณลำบากมากแค่ไหนในการเดินขึ้นบันได 10 ขั้น">
@@ -60,25 +59,15 @@
           </b-field>
           <span class="tag is-light is-success">คะแนน {{ form.record.sarcf.five }}</span>
           <h1 class="title has-text-centered is-size-4">คะแนนรวม {{ score }}</h1>
-        </b-step-item>
-      </b-steps>
-      <div class="buttons is-centered">
-        <button class="button is-light" @click="$router.back()">
-          <span class="icon">
-            <i class="fas fa-chevron-left"></i>
-          </span>
-        </button>
-        <button class="button is-primary" @click="saveData">
-        <span class="icon">
-          <i class="far fa-save"></i>
-        </span>
-          <span>Save</span>
-        </button>
-        <router-link :to="{ name: 'Evaluation' }" class="button is-success">
-          <span class="icon">
-            <i class="fas fa-chevron-right"></i>
-          </span>
-        </router-link>
+          <div class="buttons is-centered">
+            <button class="button is-primary" @click="saveData">
+              <span class="icon">
+                <i class="far fa-save"></i>
+              </span>
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -93,7 +82,7 @@ export default {
   components: {Navigation},
   computed: {
     ...mapState(['form']),
-    score: function() {
+    score: function () {
       let total = parseInt(this.form.record.sarcf.one) + parseInt(this.form.record.sarcf.two) +
           parseInt(this.form.record.sarcf.three) + parseInt(this.form.record.sarcf.four) +
           parseInt(this.form.record.sarcf.five)

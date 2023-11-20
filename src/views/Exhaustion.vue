@@ -1,85 +1,63 @@
 <template>
-<section class="section">
-  <Navigation v-if="form.record.followUpId == null"></Navigation>
-  <NavigationTwo v-else></NavigationTwo>
-  <div class="container">
-    <b-steps
-        :rounded="true"
-        :has-navigation="false"
-        mobile-mode="minimalist"
-    >
-      <b-step-item :step="form.record.followUpId == null ? 12 : 9" label="Self-report exhaustion" :clickable="true">
-        <div class="has-text-centered" v-if="form.record.followUpId != null">
-          <b-tag rounded type="is-danger">เพิ่มการติดตามผล</b-tag>
+  <section class="section">
+    <Navigation></Navigation>
+    <br>
+    <div class="container">
+      <div class="columns">
+        <div class="column is-two-thirds is-offset-2">
+          <h1 class="title has-text-centered">แบบประเมิน Self-report Exhaustion</h1>
+          <b-field label="ฉันรู้สึกว่าทุก ๆ สิ่งที่ฉันกระทำต้องฝืนใจทำ">
+            <b-radio native-value=0 v-model="form.record.exhaustion.one">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
+          </b-field>
+          <b-field>
+            <b-radio native-value=1 v-model="form.record.exhaustion.one">นาน ๆ ครั้งน้อยกว่า 1-2 วัน/สัปดาห์</b-radio>
+          </b-field>
+          <b-field>
+            <b-radio native-value=2 v-model="form.record.exhaustion.one">ค่อนข้างบ่อย น้อยกว่า 3-4 วัน/สัปดาห์</b-radio>
+          </b-field>
+          <b-field>
+            <b-radio native-value=3 v-model="form.record.exhaustion.one">บ่อยครั้ง น้อยกว่า 5-7 วัน/สัปดาห์</b-radio>
+          </b-field>
+          <span class="tag is-light is-success">คะแนน {{ form.record.exhaustion.one }}</span>
+          <b-field label="ฉันรู้สึกท้อถอยในชีวิต">
+            <b-radio native-value=0 v-model="form.record.exhaustion.two">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
+          </b-field>
+          <b-field>
+            <b-radio native-value=1 v-model="form.record.exhaustion.two">นาน ๆ ครั้งน้อยกว่า 1-2 วัน/สัปดาห์</b-radio>
+          </b-field>
+          <b-field>
+            <b-radio native-value=2 v-model="form.record.exhaustion.two">ค่อนข้างบ่อย น้อยกว่า 3-4 วัน/สัปดาห์</b-radio>
+          </b-field>
+          <b-field>
+            <b-radio native-value=3 v-model="form.record.exhaustion.two">บ่อยครั้ง น้อยกว่า 5-7 วัน/สัปดาห์</b-radio>
+          </b-field>
+          <span class="tag is-light is-success">คะแนน {{ form.record.exhaustion.two }}</span>
+          <h1 class="title has-text-centered is-size-4">คะแนนรวม {{ score }}</h1>
+          <div class="buttons is-centered">
+            <button class="button is-primary" @click="saveData">
+              <span class="icon">
+                <i class="far fa-save"></i>
+              </span>
+              <span>Save</span>
+            </button>
+          </div>
         </div>
-        <b-field label="ฉันรู้สึกว่าทุก ๆ สิ่งที่ฉันกระทำต้องฝืนใจทำ">
-          <b-radio native-value=0 v-model="form.record.exhaustion.one">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
-        </b-field>
-        <b-field>
-          <b-radio native-value=1 v-model="form.record.exhaustion.one">นาน ๆ ครั้งน้อยกว่า 1-2 วัน/สัปดาห์</b-radio>
-        </b-field>
-        <b-field>
-          <b-radio native-value=2 v-model="form.record.exhaustion.one">ค่อนข้างบ่อย น้อยกว่า 3-4 วัน/สัปดาห์</b-radio>
-        </b-field>
-        <b-field>
-          <b-radio native-value=3 v-model="form.record.exhaustion.one">บ่อยครั้ง น้อยกว่า 5-7 วัน/สัปดาห์</b-radio>
-        </b-field>
-        <span class="tag is-light is-success">คะแนน {{ form.record.exhaustion.one }}</span>
-        <b-field label="ฉันรู้สึกท้อถอยในชีวิต">
-          <b-radio native-value=0 v-model="form.record.exhaustion.two">ไม่เลยน้อยกว่า 1 วัน/สัปดาห์</b-radio>
-        </b-field>
-        <b-field>
-          <b-radio native-value=1 v-model="form.record.exhaustion.two">นาน ๆ ครั้งน้อยกว่า 1-2 วัน/สัปดาห์</b-radio>
-        </b-field>
-        <b-field>
-          <b-radio native-value=2 v-model="form.record.exhaustion.two">ค่อนข้างบ่อย น้อยกว่า 3-4 วัน/สัปดาห์</b-radio>
-        </b-field>
-        <b-field>
-          <b-radio native-value=3 v-model="form.record.exhaustion.two">บ่อยครั้ง น้อยกว่า 5-7 วัน/สัปดาห์</b-radio>
-        </b-field>
-        <span class="tag is-light is-success">คะแนน {{ form.record.exhaustion.two }}</span>
-        <h1 class="title has-text-centered is-size-4">คะแนนรวม {{ score }}</h1>
-      </b-step-item>
-    </b-steps>
-    <div class="buttons is-centered">
-      <button class="button is-light" @click="$router.back()">
-        <span class="icon">
-          <i class="fas fa-chevron-left"></i>
-        </span>
-      </button>
-      <button class="button is-primary" @click="saveData">
-        <span class="icon">
-          <i class="far fa-save"></i>
-        </span>
-        <span>Save</span>
-      </button>
-      <router-link :to="{ name: 'SARCF' }" class="button is-success" v-if="form.record.followUpId == null">
-        <span class="icon">
-          <i class="fas fa-chevron-right"></i>
-        </span>
-      </router-link>
-      <router-link :to="{ name: 'FollowUpGPAQ' }" class="button is-success" v-else>
-        <span class="icon">
-          <i class="fas fa-chevron-right"></i>
-        </span>
-      </router-link>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 </template>
 
 <script>
 import Navigation from "@/components/navigation";
-import NavigationTwo from "@/components/navigationTwo.vue";
 import {mapState} from "vuex";
 
 export default {
   name: "Exhaustion",
-  components: {Navigation, NavigationTwo},
+  components: {Navigation},
   computed: {
     ...mapState(['form']),
-    score: function() {
+    score: function () {
       let total = parseInt(this.form.record.exhaustion.one) +
           parseInt(this.form.record.exhaustion.two)
       if (isNaN(total)) {
