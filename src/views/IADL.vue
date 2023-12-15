@@ -75,12 +75,22 @@
         <span class="tag is-light is-success">คะแนน {{ form.record.iadl.six }}</span>
         <h1 class="title has-text-centered is-size-4">คะแนนรวม {{ score }}</h1>
     <div class="buttons is-centered">
+      <button class="button is-light" @click="$router.back()">
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
         <span>Save</span>
       </button>
+      <router-link :to="{name: 'MNA'}" class="button is-success">
+              <span class="icon">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+      </router-link>
     </div>
   </div>
     </div>

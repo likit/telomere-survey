@@ -122,12 +122,22 @@
           <span class="tag is-warning">P18</span>
         </b-field>
     <div class="buttons is-centered">
+      <button class="button is-light" @click="$router.back()">
+              <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+              </span>
+      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
         <span>Save</span>
       </button>
+      <router-link :to="{name: 'SARCF'}" class="button is-success">
+        <span class="icon">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </router-link>
     </div>
   </div>
 </section>

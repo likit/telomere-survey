@@ -394,7 +394,7 @@
         </span>
               <span>Save</span>
             </button>
-            <router-link :to="{name: 'Charlson'}" class="button is-success">
+            <router-link :to="{name: 'FRAILScale'}" class="button is-success">
         <span class="icon">
           <i class="fas fa-chevron-right"></i>
         </span>

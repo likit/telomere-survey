@@ -88,17 +88,17 @@
           </b-notification>
           <div class="buttons is-centered">
             <button class="button is-light" @click="$router.back()">
-        <span class="icon">
-          <i class="fas fa-chevron-left"></i>
-        </span>
+              <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+              </span>
             </button>
             <b-button type="is-primary" @click="saveData">
-        <span class="icon">
-          <i class="far fa-save"></i>
-        </span>
+              <span class="icon">
+                <i class="far fa-save"></i>
+              </span>
               <span>Save</span>
             </b-button>
-            <router-link :to="{name: 'FollowUpBIA'}" class="button is-success">
+            <router-link :to="{name: 'Evaluation'}" class="button is-success">
         <span class="icon">
           <i class="fas fa-chevron-right"></i>
         </span>

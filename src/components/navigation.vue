@@ -25,9 +25,6 @@
         <b-navbar-item :to="{ name: 'Personal'}" tag="router-link">
           ข้อมูลส่วนตัว
         </b-navbar-item>
-        <b-navbar-item :to="{ name: 'Charlson'}" tag="router-link">
-          ดัชนีโรคร่วมชาร์ลสัน
-        </b-navbar-item>
         <b-navbar-item :to="{ name: 'MiniCog'}" tag="router-link">
           สมรรถภาพเบื้องต้น (Mini Cog)
         </b-navbar-item>
@@ -45,12 +42,6 @@
         </b-navbar-item>
         <b-navbar-item :to="{ name: '9Q'}" tag="router-link">
           9Q
-        </b-navbar-item>
-        <b-navbar-item :to="{ name: 'Kihon'}" tag="router-link">
-          Kihon
-        </b-navbar-item>
-        <b-navbar-item :to="{ name: 'EQ-5D-5L'}" tag="router-link">
-          EQ-5D-5L
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'GPAQ'}" tag="router-link">
           GPAQ

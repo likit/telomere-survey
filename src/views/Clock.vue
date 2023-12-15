@@ -26,12 +26,22 @@
           </b-field>
         </div>
       <div class="buttons is-centered">
+        <button class="button is-light" @click="$router.back()">
+              <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+              </span>
+        </button>
         <button class="button is-primary" @click="saveData" v-if="form.record.followUpId == null">
           <span class="icon">
             <i class="far fa-save"></i>
           </span>
           <span>Save</span>
         </button>
+        <router-link :to="{name: '9Q'}" class="button is-success">
+              <span class="icon">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+        </router-link>
       </div>
         <b-image v-if="imageUrl" :src="imageUrl" alt="Clock Photo"></b-image>
   </div>

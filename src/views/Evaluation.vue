@@ -221,12 +221,16 @@
         </span>
             </button>
             <button class="button is-primary" @click="saveData">
-        <span class="icon">
-          <i class="far fa-save"></i>
-        </span>
+              <span class="icon">
+                <i class="far fa-save"></i>
+              </span>
               <span>Save</span>
             </button>
-            <router-link :to="{ name: 'MainPage' }" class="button is-success">Done</router-link>
+            <router-link :to="{name: 'ADL'}" class="button is-success">
+              <span class="icon">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </router-link>
           </div>
         </div>
       </div>

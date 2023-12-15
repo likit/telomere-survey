@@ -35,12 +35,22 @@
           คะแนน {{ form.record.minicog.score !== null ? form.record.minicog.score : 'N/A' }}
         </p>
         <div class="buttons is-centered">
+          <button class="button is-light" @click="$router.back()">
+              <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+              </span>
+          </button>
           <button class="button is-primary" @click="saveData">
-        <span class="icon">
-          <i class="far fa-save"></i>
-        </span>
+            <span class="icon">
+              <i class="far fa-save"></i>
+            </span>
             <span>Save</span>
           </button>
+          <router-link :to="{name: 'Clock'}" class="button is-success">
+              <span class="icon">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+          </router-link>
         </div>
 
       </div>
