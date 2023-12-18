@@ -35,7 +35,49 @@
             <b-radio native-value="ปกติ" v-model="form.record.vital.waistResult">ปกติ</b-radio>
             <b-radio native-value="ผิดปกติ" v-model="form.record.vital.waistResult">ผิดปกติ</b-radio>
           </b-field>
-          <b-field>
+          <b-field label="เส้นรอบวงแขน Mid Arm Circumference">
+          </b-field>
+          <div class="notification">
+            <b-field label="แขนซ้าย">
+              <b-input type="number" step="0.1" placeholder="ครั้งที่ 1 (ซม.)"
+                       v-model="form.record.evaluation.leftArmCircumference1"></b-input>
+            </b-field>
+            <b-field>
+              <b-input type="number" step="0.1" placeholder="ครั้งที่ 2 (ซม.)"
+                       v-model="form.record.evaluation.leftArmCircumference2"></b-input>
+            </b-field>
+            <b-field label="แขนขวา">
+              <b-input type="number" step="0.1" placeholder="ครั้งที่ 1 (ซม.)"
+                       v-model="form.record.evaluation.rightArmCircumference1"></b-input>
+            </b-field>
+            <b-field>
+              <b-input type="number" step="0.1" placeholder="ครั้งที่ 2 (ซม.)"
+                       v-model="form.record.evaluation.rightArmCircumference2"></b-input>
+            </b-field>
+          </div>
+          <b-field label="เส้นรอบวงน่อง Mid Calf Circumference">
+          </b-field>
+          <div class="notification">
+            <b-field label="น่องซ้าย">
+              <b-input type="number" step="0.1" placeholder="ครั้งที่ 1 (ซม.)"
+                       v-model="form.record.evaluation.leftCalfCircumference1"></b-input>
+            </b-field>
+            <b-field>
+              <b-input type="number" step="0.1" placeholder="ครั้งที่ 2 (ซม.)"
+                       v-model="form.record.evaluation.leftCalfCircumference2"></b-input>
+            </b-field>
+            <b-field label="น่องขวา">
+              <b-input type="number" step="0.1" placeholder="ครั้งที่ 1 (ซม.)"
+                       v-model="form.record.evaluation.rightCalfCircumference1"></b-input>
+            </b-field>
+            <b-field>
+              <b-input type="number" step="0.1" placeholder="ครั้งที่ 2 (ซม.)"
+                       v-model="form.record.evaluation.rightCalfCircumference2"></b-input>
+            </b-field>
+          </div>
+          <b-field label="ผลการประเมิน">
+            <b-radio native-value="ปกติ" v-model="form.record.vital.circumferenceResult">ปกติ</b-radio>
+            <b-radio native-value="ผิดปกติ" v-model="form.record.vital.circumferenceResult">ผิดปกติ</b-radio>
           </b-field>
           <h1 class="title is-size-5">Physical Fitness</h1>
           <h1 class="subtitle is-size-5">ความแข็งแรงของกล้ามเนื้อ (muscle strength)</h1>
