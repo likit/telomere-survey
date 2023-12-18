@@ -51,13 +51,6 @@
             </span>
               <span>แก้ไข</span>
             </button>
-            <button @click="$router.push({name: 'FollowUpRecordSearch', params: {query: props.row.code}})"
-                    class="button is-success is-light">
-              <span class="icon">
-                <i class="fas fa-plus"></i>
-              </span>
-              <span>เพิ่มข้อมูลการติดตาม</span>
-            </button>
             <button @click="deleteRecord(props.row.id)" class="button is-danger is-light">
             <span class="icon">
               <i class="fas fa-trash"></i>
