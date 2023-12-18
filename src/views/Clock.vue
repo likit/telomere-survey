@@ -73,11 +73,7 @@ export default {
   },
   mounted() {
     let self = this
-    if (self.form.record.followUpId == null) {
-      this.imageFileRef = storageRef.child(this.form.record.code + '/' + this.form.record.clock.file)
-    } else {
-      this.imageFileRef = storageRef.child(this.form.record.followUpId + '/' + this.form.record.clock.file)
-    }
+    this.imageFileRef = storageRef.child(this.form.province + '/' + this.form.record.code + '/' + this.form.record.clock.file)
     this.imageFileRef.getDownloadURL().then((url)=>{
       self.imageUrl = url
     })
@@ -86,7 +82,7 @@ export default {
     saveData: function () {
       let self = this
       if (self.imageFile) {
-        storageRef.child(self.form.record.code + '/' + self.imageFile.name)
+        storageRef.child(self.form.province + '/' + self.form.record.code + '/' + self.imageFile.name)
             .put(self.imageFile).then(function() {
               self.$store.commit('setClockFileName', self.imageFile.name)
               self.imageFileRef = storageRef.child(self.form.record.code + '/' + self.form.record.clock.file)
