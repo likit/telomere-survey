@@ -161,6 +161,16 @@
           </b-field>
           <h1 class="title is-size-5">Short Physical Performance Battery Test (SPPB)</h1>
           <b-field label="Gait speed">
+            Walk time เวลาที่ใช้ในการเดิน 4 เมตร
+            <b-numberinput placeholder="ครั้งที่ 1" step="0.1" v-model="form.record.evaluation.gait1_4min"></b-numberinput>
+          </b-field>
+          <b-field>
+            <b-numberinput placeholder="ครั้งที่ 2" step="0.1" v-model="form.record.evaluation.gait2_4min"></b-numberinput>
+          </b-field>
+          <b-field label="ค่าเฉลี่ย">
+            <b-input :readonly="true" placeholder="เฉลี่ย" :value="gait4m"></b-input>
+          </b-field>
+          <b-field label="Gait speed">
             Walk time เวลาที่ใช้ในการเดิน 6 เมตร
             <b-numberinput placeholder="ครั้งที่ 1" step="0.1" v-model="form.record.evaluation.gait1"></b-numberinput>
           </b-field>
@@ -293,6 +303,14 @@ export default {
     gait: function () {
       if (this.form.record.evaluation.gait1 != null && this.form.record.evaluation.gait2 != null) {
         let value = (this.form.record.evaluation.gait1 + this.form.record.evaluation.gait2) / 2.0
+        return value.toFixed(2)
+      } else {
+        return null
+      }
+    },
+    gait4m: function () {
+      if (this.form.record.evaluation.gait1_4min != null && this.form.record.evaluation.gait2_4min != null) {
+        let value = (this.form.record.evaluation.gait1_4min + this.form.record.evaluation.gait2_4min) / 2.0
         return value.toFixed(2)
       } else {
         return null
