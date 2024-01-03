@@ -19,10 +19,10 @@
             <b-numberinput v-model="form.record.personal.age"></b-numberinput>
           </b-field>
           <b-field label="น้ำหนัก">
-            <b-input type="number" step="any" placeholder="กก." v-model="form.record.personal.weight"></b-input>
+            <b-input type="number" step="0.1" placeholder="กก." v-model="form.record.personal.weight"></b-input>
           </b-field>
           <b-field label="ส่วนสูง">
-            <b-input type="number" step="any" placeholder="ซม." v-model="form.record.personal.height"></b-input>
+            <b-input type="number" step="0.1" placeholder="ซม." v-model="form.record.personal.height"></b-input>
           </b-field>
           <b-field label="เพศ">
             <b-radio native-value="ชาย" v-model="form.record.personal.gender">

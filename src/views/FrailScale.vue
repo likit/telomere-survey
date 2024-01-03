@@ -72,10 +72,10 @@
             <b-radio native-value="1" :value="illnessScore" :disabled="true">5-11 โรค</b-radio>
           </b-field>
           <b-field label="น้ำหนัก 1 ปีที่ผ่านมาโดยไม่สวมรองเท้า">
-            <b-input type="number" placeholder="กก." step="any" v-model="form.record.frail.pastYearWeight"></b-input>
+            <b-input type="number" placeholder="กก." step="0.1" v-model="form.record.frail.pastYearWeight"></b-input>
           </b-field>
           <b-field label="น้ำหนักปัจจุบันโดยไม่สวมรองเท้า">
-            <b-input type="number" placeholder="กก." step="any" v-model="form.record.frail.currentWeight"></b-input>
+            <b-input type="number" placeholder="กก." step="0.1" v-model="form.record.frail.currentWeight"></b-input>
           </b-field>
           <b-field label="ร้อยละน้ำหนักที่เปลี่ยนไป">
             <b-input type="number" placeholder="กก." :readonly="true" v-model="percentWeightChange"></b-input>
