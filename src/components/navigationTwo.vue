@@ -22,7 +22,7 @@
         <b-navbar-item :to="{ name: 'FollowUpPersonal'}" tag="router-link">
           ข้อมูลส่วนตัว
         </b-navbar-item>
-        <b-navbar-item :to="{ name: 'FollowUpFRAILScale'}" tag="router-link">
+        <b-navbar-item :to="{ name: 'FRAILScale'}" tag="router-link">
           FRAIL
         </b-navbar-item>
         <b-navbar-item :to="{ name: 'FollowUpBIA' }" tag="router-link">

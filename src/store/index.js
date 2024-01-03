@@ -565,6 +565,11 @@ export default new Vuex.Store({
         setCurrCode(state, code) {
             state.currCode = code
         },
+        setFrailCurrentWeight(state) {
+            if (state.form.record.personal.weight) {
+                state.form.record.frail.currentWeight = state.form.record.personal.weight
+            }
+        }
     },
     actions: {
         setRecordFollowUpId({commit}, payload) {
@@ -634,6 +639,7 @@ export default new Vuex.Store({
         saveForm({commit, state}) {
             commit('setLastUpdate')
             commit('setFormProvince')
+            commit('setFrailCurrentWeight')
             const loadingComponent = LoadingProgrammatic.open({ container: null })
             records.where('code', '==', state.form.record.code)
                 .where('province', '==', state.form.record.province)

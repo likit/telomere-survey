@@ -13,7 +13,7 @@
         <b-radio native-value="ผิดปกติ" v-model="form.record.vital.bpResult">ผิดปกติ</b-radio>
       </b-field>
       <b-field grouped label="อุณหภูมิร่างกาย (Temperature)">
-        <b-input type="number" placeholder="องศาเซลเซียส" v-model="form.record.vital.temperature"></b-input>
+        <b-input type="number" placeholder="องศาเซลเซียส" step="any" v-model="form.record.vital.temperature"></b-input>
       </b-field>
       <b-field>
         <b-radio native-value="ปกติ" v-model="form.record.vital.tempResult">ปกติ</b-radio>
@@ -36,12 +36,22 @@
       </b-field>
     </div>
     <div class="buttons is-centered">
+      <button class="button is-light" @click="$router.back()">
+              <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+              </span>
+      </button>
       <button class="button is-primary" @click="saveData">
         <span class="icon">
           <i class="far fa-save"></i>
         </span>
         <span>Save</span>
       </button>
+      <router-link :to="{name: 'Evaluation'}" class="button is-success">
+        <span class="icon">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </router-link>
     </div>
   </section>
 </template>
@@ -58,6 +68,7 @@ export default {
   },
   methods: {
     saveData: function () {
+      this.$store.dispatch('saveForm')
     }
   }
 }

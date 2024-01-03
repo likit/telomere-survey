@@ -140,67 +140,6 @@ export default {
         }
       }
     },
-    saveFollowUpData: function () {
-      let self = this
-      if (self.imageFile) {
-        storageRef.child(self.form.record.followUpId + '/' + self.imageFile.name)
-            .put(self.imageFile).then(function() {
-          self.$store.commit('setClockFileName', self.imageFile.name)
-          self.imageFileRef = storageRef.child(self.form.record.followUpId + '/' + self.form.record.clock.file)
-          self.imageFileRef.getDownloadURL().then((url)=>{
-            self.imageUrl = url
-          })
-          if (self.form.record.code == null) {
-            self.$buefy.dialog.alert({
-              title: 'Error!',
-              message: 'กรุณาระบุหมายเลขรหัสวิจัย',
-              type: 'is-danger',
-              hasIcon: true,
-              icon: 'times-circle',
-              iconPack: 'fa',
-              ariaRole: 'alertdialog',
-              ariaModal: true
-            })
-          } else {
-            self.$store.dispatch('saveFollowUpForm').then(() => {
-              self.$buefy.toast.open({
-                message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
-                type: 'is-success',
-              })
-            }).catch((error) => {
-              self.$buefy.toast.open({
-                message: error.toString(),
-                type: 'is-danger',
-              })
-            })
-          }
-          self.$buefy.toast.open({
-            message: 'Upload finished.',
-            type: 'is-success'
-          })
-        }).catch((error)=>{
-          self.$buefy.toast.open({
-            message: error.toString(),
-            type: 'is-danger'
-          })
-        })
-      } else {
-        if (self.form.record.code == null) {
-          self.$buefy.dialog.alert({
-            title: 'Error!',
-            message: 'กรุณาระบุหมายเลขรหัสวิจัย',
-            type: 'is-danger',
-            hasIcon: true,
-            icon: 'times-circle',
-            iconPack: 'fa',
-            ariaRole: 'alertdialog',
-            ariaModal: true
-          })
-        } else {
-          self.$store.dispatch('saveFollowUpForm')
-        }
-      }
-    }
   }
 }
 </script>

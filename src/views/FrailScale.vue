@@ -72,10 +72,10 @@
             <b-radio native-value="1" :value="illnessScore" :disabled="true">5-11 โรค</b-radio>
           </b-field>
           <b-field label="น้ำหนัก 1 ปีที่ผ่านมาโดยไม่สวมรองเท้า">
-            <b-input type="number" placeholder="กก." v-model="form.record.personal.weight"></b-input>
+            <b-input type="number" placeholder="กก." step="any" v-model="form.record.frail.pastYearWeight"></b-input>
           </b-field>
           <b-field label="น้ำหนักปัจจุบันโดยไม่สวมรองเท้า">
-            <b-input type="number" placeholder="กก." v-model="form.record.frail.currentWeight"></b-input>
+            <b-input type="number" placeholder="กก." step="any" v-model="form.record.frail.currentWeight"></b-input>
           </b-field>
           <b-field label="ร้อยละน้ำหนักที่เปลี่ยนไป">
             <b-input type="number" placeholder="กก." :readonly="true" v-model="percentWeightChange"></b-input>
@@ -98,10 +98,10 @@
               </span>
               <span>Save</span>
             </b-button>
-            <router-link :to="{name: 'Evaluation'}" class="button is-success">
-        <span class="icon">
-          <i class="fas fa-chevron-right"></i>
-        </span>
+            <router-link :to="{name: 'VitalSigns'}" class="button is-success">
+              <span class="icon">
+                <i class="fas fa-chevron-right"></i>
+              </span>
             </router-link>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default {
   computed: {
     ...mapState(['form']),
     percentWeightChange: function () {
-      let change = ((this.form.record.personal.weight - this.form.record.frail.currentWeight) / this.form.record.personal.weight) * 100.0
+      let change = ((this.form.record.frail.pastYearWeight - this.form.record.frail.currentWeight) / this.form.record.personal.weight) * 100.0
       change = change.toFixed(2)
       return change
     },
@@ -169,7 +169,7 @@ export default {
       this.$store.commit('updateFrailIllness', disease)
     },
     saveData() {
-      this.$store.dispatch('saveFollowUpForm')
+      this.$store.dispatch('saveForm')
     }
   },
   mounted() {
