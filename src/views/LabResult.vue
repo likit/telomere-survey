@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     saveData() {
-      this.$store.dispatch('saveFollowUpForm')
+      this.$store.dispatch('saveForm')
     }
   },
 }
