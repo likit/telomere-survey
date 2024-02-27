@@ -175,11 +175,7 @@ export default {
           ariaModal: true
         })
       } else {
-        if (this.form.record.followUpId != null) {
-          this.$store.dispatch('saveFollowUpForm')
-        } else {
           this.$store.dispatch('saveForm')
-        }
       }
     }
   }
